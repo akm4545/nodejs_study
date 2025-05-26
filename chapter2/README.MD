@@ -194,4 +194,9 @@ CI/CD와 같은 업무를 전담하는 데브옵스(DevOps) 업무도 있다. �
 유명한 데이터베이스로는 Oracle, MySQL / MariaDB, SQLServer, PostgreSQL, SQLite, MongoDB, Cassandra, NynamoDB, Neo4j, CockroachDB 등이 
 있다. 앞서 열거한 것은 모두 국외에서 만든 데이터베이스다. 국산 데이터베이스 소프트웨어로는 알티베이스, 큐브리드, 티베로 등이 있다.  
   
+# **RDB**  
+데이터베이스는 여러 가지로 구분할 수 있는데 RDB와 RDB가 아닌 것으로 보통 구분한다. RDB는 Relational Database의 약자로 관계형 데이터베이스라는 뜻이다. 
+RDB가 아닌 데이터베이스를 NoSQL 또는 NewSQL로 구분한다. 관계형 데이터베이스는 데이터를 행과 열로 이루어진 테이블로 관리하며 기본 키를 사용해 각 행을 
+식별한다. 또한 각 테이블 간에 관계를 지을 수 있다.  
+  
 
