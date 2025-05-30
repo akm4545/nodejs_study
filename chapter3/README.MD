@@ -149,4 +149,14 @@ Node.js에서는 이벤트 기반 아키텍처를 구축하는 데 반응자 패
 6. 검사(check) 단계에서는 setImmediate()를 처리한다.  
 7. 종료 콜백 단계에서는 콜백의 종료 처리(파일 디스크립터 닫기 등)를 한다.  
   
+여기서 nextTickQueue와 microTaskQueue는 조금 특별한 장치다. 번호를 매겨놓지 않은 이유는 각 단계의 사이마다 nextTickQueue와 microTaskQueue에 
+있는 작업을 먼저 실행하기 떄문이다. 즉 타이머 단계가 끝나면 nextTickQueue와 microTaskQueue를 실행한다. 또한 펜딩 I/O 콜백 단계가 끝나면 그 사이에 
+쌓인 nextTickQueue와 microTaskQueue를 실행한다. 따라서 nextTickQueue와 microTaskQueue에 코드를 추가하면 조금은 우선 순위가 올라간다. Node.js
+의 process.nextTick() 함수로 nextTickQueue에 작업을 추가할 수 있다. microTaskQueue에는 Promise로 만든 콜백 함수가 추가된다. Promise는 
+비동기 함수를 동기 함수처럼 사용하는 객체이다. nextTickQueue가 microTaskQueue보다 우선순위가 높다. 즉 process.nextTick()으로 작성된 코드가 
+Promise로 작성된 코드보다 먼저 실행된다.  
+  
+이벤트 루프에서 운영체제의 비동기 I/O 기능을 사용하거나 또는 스레드 풀을 사용해서 모든 작업을 비동기로 처리했다. 이벤트 루프에서는 여러 큐를 사용해 
+특정 우선순위대로 작업들을 처리해준다.  
+  
 
