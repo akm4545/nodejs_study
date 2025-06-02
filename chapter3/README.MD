@@ -172,4 +172,40 @@ CPU 사용량이 많은 작업을 하는 서버가 아니라면 굉장히 적은
   
 ![img.png](image2/img4.png)  
   
+# **나의 첫 Node.js 서버 프로그램**  
+# **hello.js 파일 생성 및 실행**  
+hello.js 파일  
+  
+비주얼 스튜디오 코드에서 실행은 Ctrl + F5를 누른 후 Node.js를 선택하면 된다.  
+  
+- const http = require("http");
+require() 함수는 모듈을 읽어노느 함수다. http 모듈을 불러와서 http 변수에 할당했다. 모듈명과 변수명은 다르게 해도 문제는 없지만 특별한 경우가 
+아니라면 위와 같이 이름 짓는 것이 관행이다.  
+  
+- const server = http.createServer(callback);  
+createServer()는 서버 인스턴스를 만드는 함수다. 인수로는 콜백 함수를 받는데 콜백 함수에서는 http 서버로 요청이 들어오면 해당 요청을 처리할 
+함수를 설정한다. 콜백 함수는 요청 처리에 사용할 요청(req)와 응답(res) 객체를 인수로 받는다.  
+  
+- log(count);  
+전역 변수 count를 사용해 요청에 대한 로그를 간단하게 남긴다.  
+  
+- res.statusCode = 200  
+요청에 대한 상태 코드를 200으로 설정한다.  
+  
+- res.setHeader("Content-Type", "text/plain")
+HTTP header 설정  
+  
+- res.write("hello\n")  
+응답 설정  
+  
+- setTimeout(() => {res.end("Node.js")}, 2000)  
+여기서는 2초 후 Node.js를 응답으로 주고 http 커넥션(연결)을 끝내는 동작을 한다. setTimeout(), setInterval()과 같은 함수는 타이머를 사용한다. 
+타이머는 libuv에서 제공하는 기능을 사용하며 이벤트 루프에서 콜 스택을 모니터링하면서 실행할 시점을 정한다.  
+  
+- server.listen(8000, () => console.log("Hello Node.js"));  
+사용할 포트 번호를 8000번으로 지정. 또한 IP가 생략되었으므로 기본값인 localhost 혹은 127.0.0.1로 서버에 접근할 수 있다.  
+  
+![img.png](image2/img5.png)  
+  
+
 
