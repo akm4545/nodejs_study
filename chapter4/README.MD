@@ -1,0 +1,23 @@
+# **Node.js와 익스프레스로 웹 애플리케이션 서버 구현하기**  
+# **OK를 반환하는 서버 만들기**  
+1. 모든 요청에 "OK"를 반환해주는 서버를 다음과 같이 구현한다.  
+code3-1-ok-server.js  
+  
+예제에서는 server에 값을 할당한 다음 listen()을 했지만 res.end("OK").listen() 같은 형태로 연결해서 사용할 수 있다.   
+  
+2. 서버를 실행 후 브라우저로 접속해서 OK가 나오면 성공이다.  
+  
+# **라우터 만들기**  
+모든 요청에 OK로 응답하는 서버도 좋지만 일반적인 웹 서버는 URL 경로에 따라서 다른 응답을 준다. 이러한 기능을 라우팅이라고 한다. URL의 경로를 읽어서 
+다른 응답을 주도록 코드를 수정한다.  
+  
+url 모듈을 사용하면 URL 경로를 간단하게 읽어올 수 있다.  
+  
+1. localhost:3000/user와 localhost:3000/feed라는 두 URL이 있다고 가정하고 두 요청에 대해 다른 응답을 주는 코드를 작성한다.  
+code3-2-implement-router.js  
+  
+url 모듀을 사용해 요청으로 받은 url의 pathname을 얻을 수 있다. parse() 함수의 두 번째 인수로 있는 true는 쿼리 스트링도 함께 파싱할지 여부를 
+설정하는 변수다.  
+  
+한글을 쓰면 출력된 값이 깨진다. 이는 charset이 설정되지 않아서이다. res.setHeader에 charset=utf-8을 추가해주면 한글이 깨지지 않는다.  
+res.setHeader("Content-Type", "text/html; charset=utf-8");
