@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
     // 결괏값 200
     res.statusCode = 200;
     // 헤더 설정
-    res.setHeader("Content-Type", "text/plain");
+    res.setHeader("Content-Type", "text/plkain");
     // 응답값 설정
     res.write("hello\n");
 
