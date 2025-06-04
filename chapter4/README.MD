@@ -34,3 +34,13 @@ code3-3-implement-router.js
   
 라우터 내부의 로직을 함수로 분리했다. 이제 메인 루틴을 깔끔히 유지하면서도 요청별 함수만 요구사항에 알맞게 변경하면 되는 코드가 되었다.  
   
+# **동적으로 응답하기**  
+앞에서 작성한 서버는 브라우저에서 localhost:3000/user에 접속하면 언제나 같은 결과를 보여 준다. user() 함수를 수정해서 매개변수에 따라 동적으로 
+응답이 변경되도록 한다. url의 query 부분에 name과 age 정보를 추가한다.  
+  
+1. 먼저 user() 함수만 변경한다.  
+code3-4-implement-router2.js  
+  
+url의 query 부분을 user라는 매개변수로 받는다. 응답을 줄 때 user.name, user.age를 사용한다. query를 사용해서 url을 요청하면 동적으로 
+변하는 값을 볼 수 있다.  
+  
