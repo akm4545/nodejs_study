@@ -20,4 +20,8 @@ url 모듀을 사용해 요청으로 받은 url의 pathname을 얻을 수 있다
 설정하는 변수다.  
   
 한글을 쓰면 출력된 값이 깨진다. 이는 charset이 설정되지 않아서이다. res.setHeader에 charset=utf-8을 추가해주면 한글이 깨지지 않는다.  
-res.setHeader("Content-Type", "text/html; charset=utf-8");
+res.setHeader("Content-Type", "text/html; charset=utf-8");  
+  
+만든 url로 접속하면 응답을 받을 수 있다. 실제로 프로덕션 레벨에서 사용하는 라우터는 이보다 훨씬 복잡하다. 그렇지만 요청으로 들어온 정보를 
+분석해서 라우팅하는 방법 자체는 같다.  
+  
