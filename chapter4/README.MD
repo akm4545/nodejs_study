@@ -117,4 +117,19 @@ _ 기호를 넣었는데, 사용하지 않는 변수는 빼는 것이 원칙이�
 # **게시판 API 코드 작성하기**  
 1. API는 REST API의 원칙을 따라서 만든다.  
   
-API 규칙에 맞게 서버 구현하기
+# **API 규칙에 맞게 서버 구현하기**  
+express-server/board.js  
+  
+express.json() 미들웨어를 활성화한다. app.use()는 미들웨어를 사용할 때 사용하는 함수다. 익스프레스에서 미들웨어는 요청과 응답 사이에 로직을 
+추가할 수 있는 함수를 제공한다. 요청이 들어오고 나갈 때 전후 처리를 지원하는 역할을 한다. 예를 들어 HTTP 요청 시마다 로그를 남기는 작업을 하고 
+싶을 떄 API 코드에 로그를 남기는 코드를 추가하는 대신에 로그를 남기는 미들웨어를 추가하면 된다.express.json() 미들웨어는 HTTP 요청의 body를 
+사용하도록 해준다. app.use(express.json())을 실행하지 않으면 req.body값이 undefined로 나오게 된다.  
+  
+express.urlencoded({ extended: true })는 컨텐츠 타입이 application/x-www-form-urlencoded인 경우 파싱해준다. POST 요청은 대부분이
+application/x-www-form-urlencoded 타입이라서 express.json()과 함께 사용한다. application/x-www-form-urlencoded 타입이란 body에 
+키=값&키2=값2 같은 키=값 조합 형태를 가진 데이터를 말한다.  
+  
+응답 코드로 이전에는 res.end()를 사용했다. res.end() 함수의 인수로는 문자열과 바이트 버퍼 형식만 넣을 수 있다. 이번에는 리스트로 된 데이터를 
+전달해야 하므로 res.end() 함수를 사용할 수 없다. 그래서 리스트와 JSON 데이터를 처리할 수 있는 res.json() 함수를 사용한다.  
+  
++id는 문자열인 id를 숫자형으로 변경한다는 뜻이다. 문자열을 숫자로 변경할 떄 사용하는 함수인 parseInt를 사용하는 것과 같다.
