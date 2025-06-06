@@ -83,6 +83,16 @@ package.json 파일이 보이면 성공이다.
 4. node_modeuls 디렉토리에는 익스프레스를 실행하는 데 필요한 의존성 패키지가 설치된다. 의존성 패키지 정보는 package.json에 들어 있다. 
 npm ls 명령어를 입력해 확인한다.  
   
+# **나의 첫 익스프레스서버 만들기**  
+1. 간단한 익스프레스 서버를 작성한다. localhost:3000으로 접근하면 헬로 express를 반환하는 서버다.  
+  
+express-server/hello-express.js  
+  
+express 패키지를 로딩해 express에 할당한다. express()를 실행해 express 인스턴스를 만들고 app에 할당한다. app.get을 사용해 url의 path가 
+/ 이면서 http 메서드가 get()인 경우 콜백 함수를 실행한다. listen() 함수를 사용해 클라이언트의 요청을 기다린다.  
+  
+2. 서버를 실행 후 브라우저에서 접근해서 정상 작동하는지 확인한다.  
+  
 
 
 
