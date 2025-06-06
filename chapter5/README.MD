@@ -76,3 +76,5 @@ Node.js 패키지들은 시맨틱 버전을 사용한다. 시맨틱 버전을 �
 ![img.png](image/img.png)  
 ![img.png](image/img2.png)  
   
+# **패키지 설치, 업데이트, 삭제**  
+# **패키지 설치하기**  
