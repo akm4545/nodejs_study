@@ -141,3 +141,13 @@ curl은 많은 옵션을 제공한다.
   
 ![img.png](image/img4.png)  
   
+- curl로 GET 호출하기  
+curl -X GET http://localhost:3000  
+  
+- curl로 POST 호출해 게시글 등록하기  
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "title=제목1&name=andy&text=안녕하세요~" http://localhost:3000/
+posts  
+  
+- curl로 DELETE를 호출해 게시글 삭제하기  
+curl -X DELETE localhost:3000/posts/1  
+  
