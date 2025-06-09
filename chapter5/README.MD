@@ -78,3 +78,58 @@ Node.js 패키지들은 시맨틱 버전을 사용한다. 시맨틱 버전을 �
   
 # **패키지 설치, 업데이트, 삭제**  
 # **패키지 설치하기**  
+npm을 사용해 가장 많이 사용하는 기능은 패키지 설치다. npm install 명령으로 패키지를 설치할 수 있다.  
+  
+![img.png](image/img3.png)  
+  
+npm install 대신 npm i 또는 npm add를 사용할 수도 있다. 단순히 별칭 기능이므로 셋 중에서 뭘 사용해도 결과는 같다.  
+  
+npm은 세계 최대의 패키지 저장소다. 180만 개가 넘는 패키지가 있어서 패키지명이 중복되는 문제가 있다. 패키지 스코프를 사용하면 이 문제를 피할 수 
+있다. 패키지 스코프는 일종의 네임스페이스다. @로 이름이 시작하는데 가장 유명한 스코프로 @types가 있다. 타입스크립트의 타입 정의 패키지는 거의 
+대부분이 @types 스코프로 시작한다. 스코프를 사용해서 패키지명이 같더라도 안전하게 사용할 수 있게 되었다. 예를 들어 test라는 패키지가 있다고 한다면 
+@cat 스코프 밑에 test를 넣고 @rabbit 스코프 밑에 test를 각각 넣으면 패키지명은 같지만 스코프다 다르다. 결국 @cat/test, @rabbit/test로 각각 
+사용할수 있기 떄문에 충돌이 발생하지 않는다.  
+  
+name은 패키지명이다. 패키지명 외에도 태그, 버전, 버전 범위가 필요하다. 없는 경우는 latest 태그를 기본값으로 사용한다.  
+  
+![img.png](image/img4.png)  
+  
+-g 옵션으로 설치된 node_modules 디렉터리는 npm root -g 명령으로 찾을 수 있다.  
+  
+1. 태그 외에 버전, 버전 범위도 붙일 수 있다. 버전 범위에서 사장 최신 버전을 설치한다.  
+터미널에서 lodash(함수형 프로그래밍 함수를 모아놓은 모듈)를 설치한다.  
+  
+![img.png](image/img5.png)  
+  
+package.json 파일과 package-lock.json 파일을 보면 설치한 라이브러리와 버전 정보가 보인다.  
+  
+2. 개발 환경에서만 사용하는 패키지는 -D 옵션 혹은 --save-dev 옵션을 사용한다. 가장 많이 사용하는 테스트 패키지 중 하나인 jest를 devDependency에 
+추가한다.  
+  
+npm install jest -D  
+  
+실행하고 나면 package.json의 devDependencies에 jest가 포함되었다. 버전 정보에 ^기호가 있다. ^는 캐럿이라고 읽는다. devDependencies는 개발 
+시에만 사용하는 패키지를 정의하는 곳이다. 다른 곳에서 해당 패키지를 설치할 때는 의존성에 포함되지 않는다.  
+  
+## **npm install 명령만 사용하기**  
+아무 옵션도 없으면 해당 디렉터리의 package-lock.json에 정의되어 있는 패키지들을 설치한다. package.json에 있는 것을 설치한다고 생각하기 쉽지만 
+package.json 없이 package-lock.json 파일만 있어도 설치가 된다.  
+  
+조금 더 정확하게 하면 다음의 순위를 따른다.  
+1. npm-shrinkwrap.json  
+2. package-lock.json  
+3. yarn.lock  
+
+npm-shrinkwrap.json과 package-lock.json은 파일 내부의 포맷은 같으며 npm-shrinkwrap.json은 오래된 npm 버전(npm1.1.2에서 npm4까지)에서 
+사용했고 package-lock.json은 npm5 이상에서 사용한다.  
+  
+## **git 저장소 URL을 설정해 설치하기**  
+npm install <git 저장소 주소>  
+npm install <git 저장소 주소>#버전  
+  
+이때 package.json에도 버전 정보가 아니라 깃허브 URL 정보를 기입한다. 해시태그로 버전을 명시하지 않으면 master 혹은 main의 최신 버전을 설치한다.  
+  
+![img.png](image/img6.png)  
+  
+
+
