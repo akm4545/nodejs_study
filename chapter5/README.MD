@@ -167,5 +167,11 @@ npm install <git 저장소 주소>#버전
 그 외 옵션으로는 json 포맷으로 출력을 하는 json, 더 많은 정보를 주는 long, dependency 항목만 보여주는 prod, devDependency 항목만 보여주는 
 dev, dev와 prod를 값으로 넣을 수 있도록 한 only가 있다.  
   
+# **패키지 삭제하기**  
+설피한 패키지의 삭제는 uninstall 명령을 사용한다. 삭제 명령 또한 remove, rm, r, un, unlink를 별칭으로 제공한다. 삭제 시 package.json의 
+의존성 설정도 함께 삭제되고 package-lock.json 정보도 함께 갱신된다.  
+  
+- npm uninstall [@스코프/] 패키지명[@버전] [-S|--save|-D|--save-dev|-O|--save-optional]  
+  
 
 
