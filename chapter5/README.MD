@@ -196,7 +196,44 @@ package.json을 수정한다.
 5. npm test, npm stop, npm start, npm restart를 각각 터미널에서 실행한다.  
 6. 스크립트 실행 전과 후에 실행될 스크립트를 지정할 수도 있다. 명령어 앞에 pre 혹은 post를 붙이면 된다. 앞서 만든 json 파일에 prehello, 
 posthello 명령어를 정의한다.  
-7. npm run hello를 실행한다. scripts에 등록하는 모든 명령어는 같은 원리로 만들 수 있다.
+7. npm run hello를 실행한다. scripts에 등록하는 모든 명령어는 같은 원리로 만들 수 있다.  
   
+# **NPX로 코드 포매팅 명령어 prettier 실행하기**  
+NPX는 Node Package eXecute의 약자다. Node 패키지 실행자(Node Package Runner)라고도 한다. Node.js 패키지는 대부분 프로젝트에 임포트해서 
+사용하지만 개발할 떄는 프로젝트 실행, 관리, 테스트 등에 명령행 패키지를 다수 사용한다. 대표적으로 prettier, eslint, jest 같은 포매팅, 문법 검사, 
+단위 테스트 도구들이 있다. 이러한 패키지들을 실행하려면 node_modules/.bin/{패키지명} 경로로 명령어를 실행해야 한다. npx를 사용하면 npx {패키지명}처럼 
+경로를 생략해 실행할 수 있다.  
+  
+1. test-npx 디렉터리를 만들고 이동하여 prettier를 설치한다. prettier는 자바스크립트를 자동으로 포매팅하는 CLI 명령어다.  
+npm install prettier  
+  
+2. 설치가 완료되면 test-npx/node_modules/prettier/package.json을 확인한다.  
+prettier 프로젝트의 package.json에 있는 bin 설정이 바로 npx 명령어에서 실행하는 파일이다.  
+  
+3. index.js 파일을 만들고 작성한다. 포매팅 전후를 비교해야 하므로 코딩 규칙을 엉망으로 적용해 작성한다.  
+`function getRandomInt(  
+ min,  
+ max) /* 주석도 포매팅해줍니다. */
+{
+ return Math.floor(
+ Math.random()
+ * (max - min)) + min;
+}
+
+console.log(
+ getRandomInt
+ (10, 20));`  
+  
+4. 터미널에서 npx 명령어로 prettier를 실행한다.  
+node_moduels/prettier/bin-prettier.js를 실행  
+npx prettier index.js  
+  
+prettier를 실행해 포매팅된 결과를 index.js에 반영  
+npx prettier -w index.js  
+  
+같은 포매팅을 사용해야 가독성이 높아지므로 파일 저장 시 혹은 저장소에 커미이나 푸시하기 전에 자동으로 적용되도록 하면 유용하다. package.json에 
+bin 설정이 있고 실행 파일이 있다면 모두 npx 명령어로 실행할 수 있다. Nods.js로 작성한 패키지 중 {패키지명}-cli 프로젝트들은 대부분 npx로 실행할 수 있다.  
+
+
 
 
