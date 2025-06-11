@@ -178,5 +178,25 @@ npm은 명령어를 지정해 실행하는 스크립트 기능도 제공한다. 
 등의 명령어를 터미널에 매번 입력하지 않고 package.json에 정의함으로써 조금 더 간편하게 명령어를 실행하는 기능이다. 보통 스크립트는 node_modules 
 디렉터리 아래에 설치된 패키지에 있기 떄문에 경로를 지정해야 하지만 npx를 이용하면 경로를 지정하지 않고 간편하게 사용할 수 있다.  
   
+# **npm 스크립트 파일을 정의하기**  
+Node.js 프로젝트의 package.json에는 scripts 항목이 있다. scripts에 등록된 항목들은 npm run 명령으로 실행할 수 있다.  
+  
+1. test-scripts 디렉터리를 생성한다.  
+2. test-scripts 디렉터리 안에 package.json 파일을 만든다.  
+test-scripts/package.json 참고  
+  
+3. 터미널에서 해당 디렉터리로 이동 후 npm run hello를 실행한다.  
+npm run hello  
+  
+scripts에 hello로 등록된 명령이 실행된다. 이렇게 npm을 사용해 package.json의 scripts에 선언되어 있는 스크립트들을 실행할 수 있다.  
+  
+4. scripts에 정의하는 명령 중 start, stop, test, restart는 run 없이 바로 실행할 수 있다.  
+package.json을 수정한다.  
+   
+5. npm test, npm stop, npm start, npm restart를 각각 터미널에서 실행한다.  
+6. 스크립트 실행 전과 후에 실행될 스크립트를 지정할 수도 있다. 명령어 앞에 pre 혹은 post를 붙이면 된다. 앞서 만든 json 파일에 prehello, 
+posthello 명령어를 정의한다.  
+7. npm run hello를 실행한다. scripts에 등록하는 모든 명령어는 같은 원리로 만들 수 있다.
+  
 
 
