@@ -297,3 +297,39 @@ ora는 굉장히 간단한 구조의 패키지를 가지고 있다. 그런데 �
 될 것이 자명하다. 그러므로 Node.js 개발 시에는 꼭 필요한 패키지가 아니라면 설치하지 않는 것이 좋고 너무 많은 의존성을 가진 패키지는 꼭 필요하지 
 않다면 사용하지 않는 것이 좋다. 패키지 의존성을 최소화하는 것도 Node.js 개발에서는 중요하다.  
   
+package.json에서는 ora^6.0.1을 설치했다고 나온다. ^기호를 사용했으니 6.x.x 버전까지는 npm update를 사용하거나 다른 머신에 새로 설치할 때 버전이 
+변경될 것을 예상할 수 있다.  
+  
+npm install을 하면 package-lock.json 파일이 생긴다.  
+  
+![img.png](image/img10.png)  
+  
+name은 package.json에 있는 것과 같다. lockfileVersion은 주로 1 아니면 2가 나온다. 1은 npm 버전 5, 6에서 사용한다. npm 버전 7 이후에는 
+2 또는 3이 나온다. 의존성 설정 부분은 크게 package 부분과 dependencies 부분으로 나뉜다. npm 버전 7에서는 package 부분만 필요하다. 
+dependencies는 npm5와 6에서의 호환성을 지키기 위해 남아 있다.  
+  
+또한 lockfileVersion이 3인 경우도 있는데 npm 버전이 7 이상이고 하위 호환이 필요 없는 경우 사용한다. 아직까지 많이 사용되고 있지는 않다. 
+또한 npm 버전이 7 이상인 경우 숨겨진 잠금 파일인 .package-lock.json 파일이 node_modeuls 디렉터리 밑에 있다. 기존 package-lock.json과 
+구성이 거의 같으나 하위 호환을 고려하지 않아도 되므로 dependencies 부분이 삭제되어 있다.  
+  
+큰 구성은 다음과 같다.  
+  
+![img.png](image/img11.png)  
+  
+npm 7 이상에서 참조하는 의존성 패키지 정보다. node_modules/{패키지명}으로 되어 있는 부분은 node_modules 디렉터리 구조와 동일하며 각 패키지 
+설치를 위한 정보를 제공한다. 추가 정보로 engines(Node.js 호환 버전 설정), funding(프로젝트 펀딩 정보) 정보가 있다.  
+  
+dependencies는 npm5, 6에서 사용하는 의존성 패키지 정보다. engines, funding 이외의 정보는 같다.  
+  
+npm install은 package.json 정보를 참고하여 의존성 패키지를 설치한다. npm install 실행 시 package.json을 참고하여 package-lock.json 파일을 
+생성한다. package-lock.json 파일의 생성 시점에 따라 마이너 버전이 업데이트되는 등의 이유로 의도한 바와는 다른 패키지 버전이 설치되는 경우가 있다. 
+이런 문제가 생기지 않게 하려면 package.json이 아니라 package-lock.json 파일만 참고해서 의존성 패키지를 설치하면 된다. npm ci는 정확하게 
+이러한 용도로 사용하는 명령어다. ci는 clean install의 약자다. 사용법은 다음과 같다.  
+  
+npm ci  
+  
+npm ci 명령어 사용 시 package.json과 package-lock.json 버전이 일치하는지 확인한다. 맞지 않으면 에러를 발생시킨다. 또한 의존성 패키지 모듈이 
+저장되어 있는 node_modules 디렉터리를 삭제 후 모든 의존성 패키지를 다시 설치한다. 그러므로 개별 의존성 패키지를 설치하는 용도로는 맞지 않다. 
+npm install, update는 package.json을 변경하는 경우가 있지만 npm ci는 절대로 package.json을 변경하지 않는다. npm ci 명령이 적합한 곳은 
+개발에서 사용한 패키지 그대로 테스트 서버나 프로덕션 환경에 사용할 때이다.  
+  
