@@ -333,3 +333,87 @@ npm ci 명령어 사용 시 package.json과 package-lock.json 버전이 일치�
 npm install, update는 package.json을 변경하는 경우가 있지만 npm ci는 절대로 package.json을 변경하지 않는다. npm ci 명령이 적합한 곳은 
 개발에서 사용한 패키지 그대로 테스트 서버나 프로덕션 환경에 사용할 때이다.  
   
+# **npm의 대안 yarn**  
+npm을 사용한 패키지 관리가 쉬운 일은 아니다. 추가로 npm은 용량 문제, 패키지 내려받기 속도 문제, 보안 문제를 갖고 있다. yarn은 이러한 문제들을 
+해결할 목적으로 2016년에 페이스북에서 만든 패키지 관리 프로그램이다.  
+  
+yarn은 버전 1과 yarn berry라고 부르는 버전 2가 있다. 버전 1은 npm과 거의 유사하며 패키지 설치가 조금 더 빠른 정도다. 반면 버전 2는 PnP(Plug'n'Play) 
+전략을 사용하며 node_modules를 사용하지 않고 의존성 패키지를 관리한다. PnP 전략은 패키지를 적절한 위치에 꽂으면(Plug) 바로 실행(Play)하도록 
+단순화하는 데 있다. 이를 위해 node_modules 디렉터리를 사용하지 않고 의존성 찾기는 .pnp.cjs에 정리하고 실제 의존성 패키지 파일은 압축 파일의 
+형태로 .yarn 디렉터리 아래의 cache 디렉터리에 저장한다. cache 디렉터리 안에 있는 패키지들은 트리 구조가 아니라 모두 끌어올림되어 평평하게 
+저장된다. PnP 전략을 사용해 의존성 패키지를 코드 저장소에 바로 저장하면 추후에 서버 배포 시 패키지 설치를 하지 않아도 된다. 이것을 제로 인스톨(zero install) 
+이라고 한다. 제로 인스톨을 하면 서버에 소스 코드를 배포할 때 패키지도 같이 설치가 된다. 그러면 패키지 설치 시점에 따라 버전이 달라져서 버그가 
+발생하는 일도 없어지게 된다.  
+  
+PnP를 사용함으로써 얻는 이점이 또 하나 있는데 서버의 기동 속도가 빨라진다는 점이다. 애플리케이션이 동작하려면 require로 불러오는 의존성 
+패키지가 어디 있는지 다 파악을 해야 해서 많은 파일 탐색 동작이 일어난다. PnP를 사용하는 yarn2에서는 기동할 때 의존성 패키지가 어디에 있는지 
+파일시스템을 순회하면서 찾을 필요가 없으니 의존성 패키지 위치를 찾는 시간 만큼 빨리 기동된다.  
+  
+1. test-yarn 디렉터리를 만들고 yarn2를 활성화한다.  
+  
+![img.png](image/img12.png)  
+  
+코어팩(corepack)을 활성화헀다. 코어팩은 Node.js 프로젝트에 npm 이외의 패키지 매니저를 사용하는 기능이다. yarn과 pnpm을 지원한다. 혹시나 
+Node.js 버전이 낮아서 에러가 난다면 npm i -g corepack으로 설치한다.  
+  
+코어팩 활성화 후 yarn2 버전으로 초기화한다. 결과로 나오는 부분은 자동으로 생성된 package.json이다. 디렉터리명을 프로젝트명으로 사용했고 
+packageManager 값으로 yarn@4.0.1을 지정했다.  
+  
+사람들이 yarn2라고 말하는 것은 버전을 의미하는 것이 아니라 새로운 코드베이스를 사용한 버전을 의미한다. yarn2는 yarn berry라는 코드명으로 
+새로운 저장소에 저장되어 있으며 이것은 yarn2.x와 yarn3.x를 포함한다.  
+  
+2. test-yarn 디렉터리에 어떤 파일들이 생성되었는지 확인한다.  
+  
+결과로 .editorconfig, .git, .gitignore, .yarn, .yarnrc.yml, README.md, package.json, yarn.lock 파일이 생성되었다. .yarnrc.yml은 
+yarn에 관리된 환경 설정이 들어있는 파일이고 .yarn은 의존성 패키지의 압축 파일을 저장하는 디렉터리다. package.json은 프로젝트와 패키지 관리를 
+위한 파일이며 yarn.lock은 package-lock.json과 같이 패키지 잠금을 위해 생성하는 파일이다.  
+  
+yarn의 패키지 설치 명령어는 yarn add다.  
+  
+![img.png](image/img13.png)  
+![img.png](image/img14.png)  
+  
+3. yarn으로 터미널에 색을 표시하는 chalk 패키지를 설치한다. 실행 후에는 package.json이 업데이트되고 .yarn 아래의 cache 디렉터리에 chalk 
+패키지의 압축 파일이 추가된다.  
+  
+yarn add chalk  
+  
+.yarn 아래의 cache 디렉터리를 확인해보면 디렉터리 하나 없이 아주 깔끔하게 확장자가 zip인 압축 파일들로만 구성되어 있음을 확인할 수 있다.  
+  
+4. chalk를 테스트할 main.js 파일을 만들고 실행한다.  
+test-yarn/main.js  
+  
+5. yarn2로 생성한 프로젝트는 node_module이 없으므로 node 명령어로 실행되지 않는다. yarn node 명령어로 실행할 수 있다. 실행하면 에러가 나온다.  
+yarn node main.js  
+  
+6. 에러가 난 이유는 chalk에서 모듈 시스템으로 ES module을 사용했기 떄문에 pacakge.json에 type을 module로 설정해야 한다. 설정한 뒤 다시 
+실행하면 또 에러가 발생한다(yarn 4.0에서 문제가 해결되었다).  
+  
+![img.png](image2/img.png)  
+  
+7. 모듈 설정을 제대로 했는데도 다시 에러가 난다. 이유는 chalk가 yarn에서 지원하지 않는 기능을 사용하고 있기 때문이다. chalk의 저장소의 package.json을 
+보면 imports라는 속성이 있다.  
+  
+imports는 다른 패키지의 소스를 포함시키는 설정이다. 이 설정은 yarn2에서 지원을 하지 않는다. 왜냐하면 의존성 패키지의 버전을 정확하게 알 수 있는 
+방법이 없기 떄문이다. 해결을 하려면 imports를 삭제하고 imports에 있는 패키지들을 포함하는 소스도 같이 수정해야 한다.  
+  
+![img.png](image2/img2.png)  
+  
+8. 깃허브에서 chalk를 포크(fork)받아서 나의 저장소에 chalk 프로젝트를 생성한다. package.json에 있는 imports 설정을 삭제하고 dependencies에 
+ansi-styles와 supports-color 의존성을 추가한다.  
+  
+![img.png](image2/img3.png)  
+![img.png](image2/img4.png)  
+  
+9. source/index.js에서 #ansi-styles와 #supports-color를 가져오는 부분도 수정한다.  
+  
+![img.png](image2/img5.png)  
+  
+10. 이렇게 고친 다음 chalk로 PR을 보내서 수정을 요청할 수 있지만 github 주소만 있으면 패키지 설치가 가능하다. 수정된 버전의 chalk을 설치한다.  
+  
+![img.png](image2/img6.png)  
+  
+11. 이제 다시 yarn node로 main.js를 실행하면 정상적으로 출력된다.  
+  
+yarn을 사용하면 매우 깔끔하게 패키지 관리를 할 수 있다. 다만 chalk의 사례에서 보듯이 yarn에서 지원하지 않는 기능을 사용하는 패키지도 있으므로 이 
+부분을 잘 확인해야 한다.
