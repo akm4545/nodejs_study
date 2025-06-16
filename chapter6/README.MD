@@ -27,4 +27,26 @@ DB 저장, 이메일 전송, 성공 메시지 출력 순
   
 매우 간단한 코드인데도 콜백을 사용하는 경우 다소 복잡해진다. 콜백의 깊은 곳에서 데이터를 주고받을 때 에러가 발생하면 에러를 추척하기 어렵다.  
   
-프로미스(프라미스로도 읽음)는 콜백의 문제를 해결할 목적으로 ES6에 도입.
+프로미스(프라미스로도 읽음)는 콜백의 문제를 해결할 목적으로 ES6에 도입.  
+  
+# **Promise 객체**  
+Promise는 자바스크립에서 비동기 실행을 동기화하는 구문으로 사용. 이행, 거절, 대기 세 가지의 상태를 가질 수 있다.    
+  
+자바스크립에서 '이 코드는 미래의 어느 시점에 실행할 거야'라고 약속하는 객체로 사용. Promise는 객체이므로 new 연산자로 인스턴스를 생성할 수 있다.  
+  
+Promise 객체가 생성되면 대기 상태. resolve() 함수가 실행되면 이행 상태로 변경. 실패해 reject() 함수가 실행되면 거절로 변경.  
+  
+1. 콜백으로 만든 회원 가입 예제를 프로미스로 변경  
+callback-promise-async-await/promise-test.js  
+  
+Promise에는 then(Promise) 메서드가 있어서 비동기 호출이지만 promise1.then(promise2).then(promise3) 이런 식으로 순서대로 함수를 호출할 수 
+있다.  
+  
+Promise 객체의 실행 결과로 실패를 주어야 하는 경우 reject() 함수를 사용한다.  
+then(onFulfilled, onRejected)  
+  
+Promise에서 발생하는 에러에는 .catch()를 사용한다.  
+then().catch(error => new Error(error)  
+  
+# **동시에 여러 Promise 객체 호출하기**  
+Promise.all([Promise1, Promise2...]) 처럼 사용하면 된다. 결과는 배열로 반환된다.
