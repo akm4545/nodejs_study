@@ -49,4 +49,8 @@ Promise에서 발생하는 에러에는 .catch()를 사용한다.
 then().catch(error => new Error(error)  
   
 # **동시에 여러 Promise 객체 호출하기**  
-Promise.all([Promise1, Promise2...]) 처럼 사용하면 된다. 결과는 배열로 반환된다.
+Promise.all([Promise1, Promise2...]) 처럼 사용하면 된다. 결과는 배열로 반환된다.  
+  
+# **Promise 에외 처리하기**  
+.catch()와 .finally를 사용한다.  
+  
