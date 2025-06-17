@@ -58,3 +58,32 @@ Promise.all([Promise1, Promise2...]) 처럼 사용하면 된다. 결과는 배�
 콜백보단 편리하지만 then과 catch 함수를 연결하는 체이닝 방식을 사용하기가 만만하지는 않다. 거기에 더 복잡한 로직을 추가하고 예외 처리까지 해야 
 되는 상황이면 더욱 힘들다.  
   
+이상적인 상황의 Promise 코드는 다음과 같다.  
+callback-promise-async-await/ideal-promise-code.js  
+  
+아쉽게도 이렇게 깔끔한 Promise 코드는 실전에서는 거의 없다. 실전에서는 더욱 복잡하고 더욱 까다로운 로직을 수행해야 하는 경우가 많으므로 로직이 
+복잡해진다.  
+  
+## **복잡한 프로미스 예제**  
+1. 조금 더 복잡한 예제를 다루기 위해 영화 API를 호출해 영화 상위 20위까지 출력하는 코드를 작성한다. 예제를 실행하기 위해 axios라는 http 클라이언트 
+패키지가 필요하다. callback-promise-aync-await 폴더에 axios 설치를 진행한다.  
+  
+npm install axios  
+  
+2. 현재 상영 영화 순위를 20위까지 보여주는 코드를 구현한다.  
+callback-promise-async-await/top20-movie-promise-code.js  
+  
+## **문제점 및 대안 찾기**  
+프로미스가 콜백보다는 깔끔한 코드를 유지할 수 있지만 잘못 사용될 수 있는 여지가 남아 있다. 첫 번째 예로는 프로미스의 then() 함수에 성공 시와 실패 시 
+처리할 함수를 둘 다 넘기는 경우를 들 수 있다. 이렇게 둘 다 넘기면 프로미스는 장식에 불과하며 기존의 콜백 함수에 결과와 에러를 동시에 넘기는 myWork(function(result, error)) 
+형태와 다를 바가 없다. 좋은 방법은 catch() 함수로 예외 처리를 하는 것이다.  
+  
+callback-promise-async-await/promise-anti-pattern1.js  
+  
+프로미스를 사용하긴 했지만 콜백 방식에서 사용하던 습관이 그대로 들어 있다. 이런 식으로 then을 사용하면 에러가 나는 경우 확인해야 할 곳이 많아진다.  
+  
+두 번째는 프로미스를 중첩해서 사용하는 경우다. 콜백에는 익숙한데 프로미스에 익숙하지 않은 때 이런 실수를 할 수 있다.  
+  
+callback-promise-aync-await/promise-anti-pattern2.js  
+  
+위 코드는 프로미스를 중첩해서 사용했다. 이것은 콜백보다 가독성이 더 나쁘다.
