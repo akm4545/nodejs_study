@@ -86,4 +86,27 @@ callback-promise-async-await/promise-anti-pattern1.js
   
 callback-promise-aync-await/promise-anti-pattern2.js  
   
-위 코드는 프로미스를 중첩해서 사용했다. 이것은 콜백보다 가독성이 더 나쁘다.
+위 코드는 프로미스를 중첩해서 사용했다. 이것은 콜백보다 가독성이 더 나쁘다.  
+  
+# **async await 구문**  
+기존의 비동기 처리 방식인 콜백 함수와 프로미스의 단점을 보완, 가독성 높은 코드를 작성할 수 있다. async가 붙은 함수는 프로미스를 반환한다.  
+  
+1. 간단한 async 코드를 작성  
+callback-promise-async-await/async-await.js  
+  
+결괏값이 Promise로 나온다.  
+  
+2. await은 Promise 객체의 실행이 완료되기를 기다린다.  
+callback-promise-async-await/async-await.js  
+  
+3. async await, setTimeout()을 사용해서 1부터 10까지 1초에 하나씩 출력하는 코드를 작성한다.  
+callback-promise-async-await/async-await.js  
+  
+4. Promise로 만든 영화 랭킹 예제를 async await로 변경한다.  
+callback-promise-async-await/top20-movie-async-await.js  
+  
+Promise가 필요한 경우(setTimeout(), 여러 태스크를 동시에 실행해야 하는 경우) 이외에는 async await를 사용한다. 읽기 편한 코드는 디버깅에 유리하기 
+때문이다. async, await는 내부적으로는 제네레이터를 활용해 동작한다.  
+  
+
+  
