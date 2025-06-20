@@ -184,6 +184,48 @@ test-mongoose/person-model.js
 mongoose.model(이름, 스키마) 함수는 이름 그대로 mongoose 모델 객체를 만드는 함수이며 mongoose 모델은 몽고디비 컬렉션과 연동되어 CRUD를 수행할 
 수 있다. module.exports로 내보내기를 했기 떄문에 다른 파일에서 require() 함수로 불러오기를 할 수 있다.  
   
+# **몽구스와 익스프레스로 CRUD API 만들기**  
+1. CRUD를 테스트할 익스페리스 API 코드를 작성한다.  
+test-mongoose/mongoose-crud.js  
+  
+몽구스에서 쿼리에 필터를빈 객체인 {}로 넣으면 모든 값을 불러오게 되어서 문제가 되는 경우가 있다. 이 경우 에러를 내도록 하는 설정이 strictQuery 설정이다. 
+Mongoose6에서는 기본값이 true이며 7에서는 false이다. 명시적으로 설정해주지 않으면 서버 기동 시 경고가 발생하므로 설정한다.  
+  
+bodyParser.json() 미들웨어를 추가해야만 HTTP에서 Body를 파싱할 수 있다.  
+  
+mongoose에서 몽고디비와 커넥션을 맺을 때 connect(uri, option)함수를 사용한다. 몽고디비 아틀라스를 사용할 때는 useNewUrlParser 옵션을 사용하는 것이 
+좋다. 사용하지 않아도 서버 기동에는 문제가 없다.  
+  
+find() 메서드 시그니처는 find(filter, projection, option)으로 filter는 json 형식으로 키값을 넣는다. find()로 비어 있으면 필터링 없이 모든 
+데이터를 가져온다. projection은 결과에 표시할 데이터 필드를 명시한다. find({}, {name: 1}) 형식이며 1은 포함시킨다는 의미이고 0을 넣으면 해당 필드를 
+제외한 필드들을 결괏값으로 사용한다는 의미다. option으로 sort, limit, skip을 사용할 수 있다. 다른 인수들과 마찬가지로 JSON 형식으로 넣으면 된다.  
+  
+1. sort: 결과 문서를 정렬할 필드와 정렬 순서(1은 오름차순, -1은 내림차순)를 지정한다.  
+JSON 형식 예: Person.find({}, {sort: {name: 1}});  
+2. limit: 결과 문서 수를 지정한다.  
+JSON 형식 예: Person.find({}, {limit: 10});  
+3. skip: 결과 문서 중 앞에서 제외할 문서 수를 지정한다.  
+JSON 형식 예: Person.find({}, {skip: 5});  
+  
+모델의 메서드 중 findOne() 메서드는 find()와 인수로 받는 값들이 같다.  
+  
+문서 추가 시에는 new 키워드로 모델을 생성한 다음 save() 메서드를 호출하면 DB에 저장한다. 다음과 같이 create() 메서드를 사용해도 된다.  
+  
+const result = await Person.create(req.body);  
+  
+문서 수정 시 하나만 수정하는 경우 findOneAndUpdate()를 사용하거나 updateOne()을 사용할 수 있다.인수가 findOneAndUpdate()와 거의 같다. 
+option 부분이 조금 다르고 결괏값이 문서가 아니라 update 동작의 결괏값이 나오는 부분이 다르다. 다음은 updateOne을 사용한 코드다.  
+  
+Person.updateOne({ email: req.params.email }, { $set: req.body })  
+  
+여러 개를 동시에 수정할 때는 updateMany()를 사용한다. 인수는 updateOne()과 동일하다.  
+  
+데이터를 삭제하는 함수도 3가지다. 하나만 삭제하고 문서를 결괏값으로 받고 싶을 때는 findOneAndDelete(), 하나만 삭제할 때는 deleteOne(), 여러 개를 
+삭제할 때는 deleteMany()를 사용한다. 인수로는 문서를 찾아서 삭제하는 필터만 JSON 형식으로 넣어주면 된다. 예제에서는 이메일에 해당하는 모든 문서를 삭제한다.  
+  
+2. 터미널에서 몽구스 CRUD 로직이 있는 익스프레스 서버를 실행한다.  
+node mongoose-crud.js  
+  
 
 
   
