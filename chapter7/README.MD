@@ -226,6 +226,17 @@ Person.updateOne({ email: req.params.email }, { $set: req.body })
 2. 터미널에서 몽구스 CRUD 로직이 있는 익스프레스 서버를 실행한다.  
 node mongoose-crud.js  
   
+# **REST 클라이언트로 API 테스트하기**  
+기존까지 curl로 테스트를 했지만 이번에는 VSCode의 REST 클라이언트를 사용해 테스트를 진행한다. .http 파일로 코드를 작성하면 테스트에 사용한 코드가 
+남아 있게 된다. 그러면 코드 저장소에 저장해 다시 재활용할 수 있어 편리하다. 또한 VSCode 이외의 편집기에서도 동작하므로 익혀두면 유용하다.  
+  
+1. VSCode의 EXTENSIONS에서 rest client를 검색하고 install을 눌러서 설치한다.  
+  
+2. 설치가 되었으면 test-mongoose 디렉터리 아래에 person.http 파일을 하나 생성하고 다음과 같이 mongoose crud 테스트 코드를 작성한다. 파일 하나에 하나 
+이상의 테스트 요청을 작성할 수 있고 각 요청은 3개 이상의 #으로 구분한다.  
+  
+test-mongoose/person.http  
+  
 
 
   
