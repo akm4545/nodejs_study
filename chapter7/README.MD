@@ -133,3 +133,27 @@ client.db('test')는 test 데이터베이스를 사용한다는 뜻이고 collec
   
 2. 터미널에서 코드를 실행해본다.  
   
+# **몽고디비 콤파스로 데이터 확인하기**  
+GUI 프로그램을 사용하면 더 간편하게 데이터를 확인할 수 있다.  
+  
+1. https://www.mongodb.com/try/download/compass에 접속한다. 좌측 메뉴에서 MongoDB Compass를 클릭한 후 stable 버전을 선택하고 Platform은 
+맞는 OS를 선택한 후 Download 버튼을 눌러서 콤파스 패키지를 설치한다.  
+  
+2. 몽고디비에 접속하려면 몽고디비 서버의 주소가 필요하다. 몽고디비 아틀라스에서 Connect -> Connect using MongoDB Compass -> 복사 아이콘을 눌러 
+서버 주소를 복사한다.  
+  
+3. 몽고디비 콤파스 프로그램을 켜서 접속한다. 키면 New Connection이라고 쓰여진 박스가 보인다. 몽고디비 아틀라스 주소를 붙여넣고 password 부분을 실제 
+패스워드로 변경한다. Connect 버튼을 클릭한다.  
+  
+그러면 다음과 같은 화면이 나온다.  
+  
+![img.png](image/img11.png)  
+  
+번 항목에서 데이터베이스 및 컬렉션을 볼 수 있고 2번 항목 Databases를 선택하면 데이터베이스별 정보를 볼 수 있다. 데이터 크기, 컬렉션 개수, 인덱스 
+개수 등을 확인할 수 있다. 하단에 있는 MONGOSH를 선택하면 CLI로 몽고디비를 조작할 수 있는 mongosh을 사용할 수 있다. test를 클릭한다. 다음으로 
+컬렉션(person)을 선택한다.  
+  
+그러면 Document 데이터가 다음과 같이 보인다.  
+  
+![img.png](image/img12.png)  
+  
