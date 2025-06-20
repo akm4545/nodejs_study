@@ -167,3 +167,8 @@ Node.js와 몽고디비를 사용할 때 네이티브 몽고디비 드라이브�
 1. test-mongoose 디렉터리를 만들고 npm install을 사용하여 설치한다.  
 npm install mongoose  
   
+# **몽구스로 스키마 만들기**  
+1. 스키마는 Schema의 인스턴스로 만들게 된다. 기존 몽고디비 예제에서 사용했던 Person 객체를 스키마로 만든다. 스키마는 컬렉션과 매핑된다.  
+  
+test-mongoose/person-model.js  
+  
