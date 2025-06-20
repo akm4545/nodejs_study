@@ -172,3 +172,18 @@ npm install mongoose
   
 test-mongoose/person-model.js  
   
+![img.png](image/img13.png)  
+![img.png](image/img14.png)  
+  
+타입만 주는 경우는 name: String과 같이 바로 사용할 수 있으며 타입 이외에 부가적인 속성(예를 들어 필수 속성인지 여부를 나타내는 required)는 
+다음 표를 참고하라.  
+  
+![img.png](image/img15.png)  
+![img.png](image2/img.png)  
+  
+mongoose.model(이름, 스키마) 함수는 이름 그대로 mongoose 모델 객체를 만드는 함수이며 mongoose 모델은 몽고디비 컬렉션과 연동되어 CRUD를 수행할 
+수 있다. module.exports로 내보내기를 했기 떄문에 다른 파일에서 require() 함수로 불러오기를 할 수 있다.  
+  
+
+
+  
