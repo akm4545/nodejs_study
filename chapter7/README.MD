@@ -104,3 +104,14 @@ node test-connection.js
 npm i mongodb  
 node test-connection.js  
   
+결과에는 아무것도 나오지 않는다. 몽고비디와 커넥션은 맺었지만 아무런 정보도 호출하지 않았기 때문이다.  
+  
+13. 데이터베이스 정보를 출력하도록 소스 코드를 수정한다.  
+try-mongo/test-connection.js  
+  
+admin() 함수는 admin DB의 인스턴스를 가져 올 수 있게 해준다. admin DB 인스턴스에는 listDatabases() 함수가 있고 해당 함수를 실행하면 데이터베이스들의 
+정보를 반환해준다. 아직은 아무런 데이터가 없어서 데이터베이스에는 admin과 local만 있다. admin, local은 기본적으로 생성되어 있는 데이터베이스다. run() 
+함수에서는 데이터베이스 목록을 출력한 다음 마지막에 몽고디비 커넥션을 닫도록 코드를 작성했다.  
+  
+14. 다시 실행하여 결과를 확인한다.  
+  
