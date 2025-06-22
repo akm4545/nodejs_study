@@ -237,6 +237,17 @@ node mongoose-crud.js
   
 test-mongoose/person.http  
   
+변수명 = 값으로 변수 선언이 가능하며 {{변수명}}으로 변수를 사용한다. 여기에서는 server에 http://localhost:3000값을 할당했다. 요청은 메서드를 
+쓰고 URL을 쓰면 된다. 그러면 바로 위에 Send Request 버튼이 나타난다. Send Request를 클릭하면 결괏값을 VSCode의 새 창과 서버가 실행 중인 터미널에서 
+확인할 수 있다.  
+  
+![img.png](image2/img2.png)  
+  
+헤더 정보 다음에 바디가 있는 경우 반드시 둘 사이에 빈 줄이 들어가야 한다. 헤더 정보인 content-type에 application/json이라고 되어 있으므로 
+HTTP 요청의 body에는 JSON 형식의 문자열이 들어간다.  
 
+젯브레인스 계열의 IDE를 사용하는 경우 내장된 REST 클라이언트를 사용하면 된다. 설치되어 있지 않으면 REST 클라이언트를 검색해 젯브레인스에서 제작한 
+것을 설치하면 된다. VS Code의 REST 클라이언트와 대부분 기능이 호환되며 변수의 경우만 파일로 따로 지정해주면 된다.  
+  
 
   
