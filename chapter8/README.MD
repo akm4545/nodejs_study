@@ -102,3 +102,7 @@ board/views/home.handlebars
   
 5. node app.js를 실행 후 테스트를 진행한다.  
   
+# **화면 기획하기**  
+# **리스트 화면 기획**  
+![img.png](image/img6.png)  
+  
