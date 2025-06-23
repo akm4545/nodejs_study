@@ -112,3 +112,8 @@ board/views/home.handlebars
 # **상세 화면 기획**  
 ![img.png](image/img8.png)  
   
+# **UI 화면 만들기**  
+# **리스트 UI 만들기**  
+1. 리스트 페이지는 상단의 타이틀, 검색어, 글쓰기 버튼, 글 목록, 페이징 영역으로 나누어 구현한다.  
+board/views/home.handlebars  
+  
