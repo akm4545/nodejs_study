@@ -106,3 +106,6 @@ board/views/home.handlebars
 # **리스트 화면 기획**  
 ![img.png](image/img6.png)  
   
+# **글쓰기 화면 기획**  
+![img.png](image/img7.png)  
+  
