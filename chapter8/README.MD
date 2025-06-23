@@ -57,3 +57,48 @@ API만 만드는 것이라면 템플릿 엔진이 필요 없다. 뷰로 웹페�
 제외한다. EJS는 표션식이 좀 지저분하다. 머스태시는 다양한 언어에서 사용되는 템플릿 엔진과 유사하지만 핸들바에 비해 기능이 적다. 핸들바는 머스태시와 
 호환되면서 추가 기능을 제공하므로 핸들바를 사용한다.  
   
+1. 핸드바 express-handlebars를 설치한다. 익스프레스용 핸들바 패키지는 express-handlebars와 express-hbs 두 가지가 있다. express-hbs가 조금 
+더 많은 기능을 제공하지만 2023년 시점으로 마지막 버전이 2년 전에 공개되었다. 이에 기능은 조금 더 적더라도 관리가 잘되고 있는 express-handlebars를 
+사용한다. 많은 차이는 없으므로 둘 중 어느 것을 사용해도 크게 문제는 없다.  
+  
+npm i express-handlebars@6.0.3  
+  
+2. 설치가 잘되었으면 설정을 진행한다. app.js 파일을 생성하고 작성한다.  
+board/app.js  
+  
+app.engine은 익스프레스에서 사용할 템플릿 엔진을 등록하는 코드다. handlebars는 파일의 확장자로 사용할 이름이다. hbs 등의 다른 이름으로 변경할 수 있지만 
+핸들바 엔진 내부에서 handlebars로 사용하고 있으므로 변경하지 않는다. 파일이 많아지면 변경하는 것도 좋다.  
+  
+엔진을 설정했지만 웹페이지에서 사용할 템플릿 엔진도 설정해야 한다. 설정 시에는 엔진 설정 시의 이름 "handlebars"로 설정해 준다. 이름을 hbs로 했다면 여기서
+도 hbs로 해야한다.  
+  
+views는 뷰로 사용할 파일들의 디렉터리를 설정하는 코드다. 기본적으로 views로 되어 있지만 node를 실행하는 디렉터리의 상대 경로로 지정된다. 상대 경로로 
+되어 있을 때 다른 디렉터리에서 node를 실행하면 문제가 생길 수 있으므로 __dirname을 사용해 절대 경로로 지정한다. __dirname은 node를 실행하는 
+디렉터리 경로다.  
+  
+라우팅 코드의 home은 템플릿 파일의 이름이다. views가 기본 경로이고 handlebars가 확장자이므로 views/home.handlebars 파일에 데이터를 렌더링한다. 
+렌더링 시에 title과 message 값이 객체로 들어가게 된다.  
+  
+3. views 안에 layouts를 만들고 그 안에 main.handlebars 템플릿 파일을 생성한다. 핸들바 템플릿 엔진에서는 기본 형태가 되는 템플릿 파일을 선언하고 다른 
+템플릿에서는 내용(body 태그 부분)만 변경하는 것이 기본 설정이다. main 템플릿을 사용하지 않으려면 결괏값의 json의 속성에 layout:false를 추가하면 
+된다.  
+  
+board/views/layouts/main.handlebars  
+  
+{{{body}}}에 다른 핸들바 템플릿의 코드가 그대로 들어가게 된다.  
+  
+handlebars.engine에 layoutsDir 항목을 추가하면 기본 레이아웃 디렉터리를 변경할 수 있다.  
+app.engine("handlebars", handlebars.engine({ layoutsDir: "views" ));  
+  
+혹은 기본 레이아웃을 사용하고 싶지 않으면 라우터의 결과 객체에 layout:false를 추가하면 된다.  
+res.render("home", { title: "aa", message: "aa", layout: false });  
+  
+4. body에 삽입할 템플릿을 views 디렉터리 아래에 만든다.  
+board/views/home.handlebars  
+  
+핸들바는 렌더링 시 {{ 변수명 }}으로 되어 있는 부분에 변수의 값을 넣어준다.  
+  
+![img.png](image/img5.png)  
+  
+5. node app.js를 실행 후 테스트를 진행한다.  
+  
