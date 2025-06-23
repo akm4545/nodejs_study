@@ -109,3 +109,6 @@ board/views/home.handlebars
 # **글쓰기 화면 기획**  
 ![img.png](image/img7.png)  
   
+# **상세 화면 기획**  
+![img.png](image/img8.png)  
+  
