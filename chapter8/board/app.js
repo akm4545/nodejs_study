@@ -20,4 +20,8 @@ app.get("/", (req, res) => {
     });
 });
 
+app.get("/write", (req, res) => {
+    res.render("write", { title: "테스트 게시판" });
+});
+
 app.listen(3000);
