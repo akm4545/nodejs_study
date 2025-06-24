@@ -146,3 +146,21 @@ board/app.js
 # **API 만들기**  
 몽고디비를 데이터 저장소로 사용한다. 모든 API는 ascyn await를 사용해 구현한다.  
   
+# **몽고디비 연결을 위한 유틸리티 만들기**  
+API 호출 시 데이터를 저장, 조회, 삭제하려면 데이터베이스와 연결해야 한다. 몽고디비 커넥션을 반환하는 유틸리티 함수를 만들어서 사용한다.  
+  
+1. configs/mongodb-connection.js 파일을 만들고 다음과 같이 작성한다. 아이디, 패스워드, 아틀라스 서버 주소는 본인의 것으로 적절하게 변경한다.  
+board/configs/mongodb-connection.js  
+  
+주소 마지막에 board가 있는데 기본값으로 선택하는 데이터베이스를 의미한다. 데이터베이스를 명시적으로 생성하지 않으면 첫 데이터가 추가될 때 지정한 데이터베이스도 
+자동으로 생성된다.  
+  
+커넥션 연결 함수는 함수를 호출하는 사람이 몽고디비의 uri값을 몰라도 사용할 수 있게 함수를 한 번 감쌌다. 함수의 결괏값으로 uri와 콜백 함수를 받는 
+MongoDB.connection() 함수를 반환한다. 원래는 MongoClient.connect(uri, callback)을 실행해야 하지만 mongodb-conncetion(callback)으로 
+감싸서 실행할 수 있다.  
+  
+MongoClient.connect() 함수는 두 번째 인수로 콜백 함수를 받는다. 콜백 함수의 두 번째 인수로 mongodb에 연결된 MongoClient 객체가 주어진다.  
+  
+2. mongodb-conncetion.js 코드를 app.js에 추가한다. 마지막 줄의 app.listen()의 경우 기존의 코드를 표시한 부분을 따라 수정하면 된다.  
+board/app.js  
+  
