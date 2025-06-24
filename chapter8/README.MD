@@ -143,3 +143,6 @@ board/views/detail.handlebars
 2. app.js에 핸들러 함수를 만들고 서버를 재기동해 화면을 확인한다.  
 board/app.js  
   
+# **API 만들기**  
+몽고디비를 데이터 저장소로 사용한다. 모든 API는 ascyn await를 사용해 구현한다.  
+  
