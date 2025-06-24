@@ -136,3 +136,10 @@ board/app.js
   
 3. 서버의 코드가 변경되면 서버를 재기동해야 한다. 서버를 재기동한 뒤 테스트한다.  
   
+# **상세페이지 UI 만들기**  
+1. board/views 디렉터리 아래에 detail.handlebars 파일을 생성해 작성한다.  
+board/views/detail.handlebars  
+  
+2. app.js에 핸들러 함수를 만들고 서버를 재기동해 화면을 확인한다.  
+board/app.js  
+  
