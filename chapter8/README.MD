@@ -117,3 +117,11 @@ board/views/home.handlebars
 1. 리스트 페이지는 상단의 타이틀, 검색어, 글쓰기 버튼, 글 목록, 페이징 영역으로 나누어 구현한다.  
 board/views/home.handlebars  
   
+2. 서버를 기동시키기 전에 title을 변경해둔다.  
+board/app.js  
+  
+3. 터미널에서 서버를 기동해 리스트 페이지를 확인한다.  
+node app.js  
+  
+4. 서버가 문제없이 기동되었는지 브라우저로 확인한다.  
+  
