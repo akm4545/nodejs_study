@@ -189,4 +189,18 @@ board/app.js
 handlebars.create() 함수는 handlebars 객체를 만들 때 사용한다. 옵션에서 헬퍼 함수를 추가할 수 있다. helpers: require(...)로 커스텀 헬퍼 
 함수를 추가한다. handlebars 객체에 있는 engine을 설정한다.  
   
+# **nodemon 설정하기**  
+서버 코드를 작성하면서 서버를 재시작하는 경우가 많다. 매번 서버를 껐다가 다시 켜는 것도 많은 코드를 작성할 때면 번거로울 수 있다. 그러므로 코드가 
+저장되면 서버를 재시작시켜주는 도구가 있으면 좋다. 그런 용도로 Node.js에는 nodemon이라는 패키지가 있다.  
+  
+1. npm으로 nodemon 패키지를 설치한다.  
+npm i nodemon@2.0.20  
+  
+설정은 해도 되고 안 해도 되지만 타이핑을 약간 더 줄여주는 효과가 있다.  
+  
+2. package.json의 script 부분에 코드를 추가한다.  
+"start": "npx nodemon app.js"  
+  
+이렇게 하면 npm start 명령어로 서버를 기동시킬 수 있으며 nodemon에서 파일이 저장될 때마다 서버를 재기동시켜준다.  
+  
 
