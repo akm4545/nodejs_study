@@ -1,6 +1,12 @@
 const express = require("express");
 const handlebars = require("express-handlebars");
 const app = express();
+// 서비스 파일 로딩
+const postService = require("./services/post-service");
+
+// req.body와 POST 요청을 해석하기 위한 설정
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 // 몽고디비 연결 함수
 const mongodbConnection = require("./configs/mongodb-connection");
@@ -38,6 +44,16 @@ app.get("/detail/:id", async(req, res) => {
     res.render("detail", {
         title: "테스트 게시판",
     });
+});
+
+// 글쓰기
+app.post("/write", async (req, res) => {
+    const post = req.body;
+    // 글쓰기 후 결과 반환
+    const result = await postService.writePost(collection, post);
+
+    // 생성된 도큐먼트의 _id를 사용해 상세페이지로 이동
+    res.redirect(`/detail/${result.insertedId}`);
 });
 
 let collection;

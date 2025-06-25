@@ -203,4 +203,18 @@ npm i nodemon@2.0.20
   
 이렇게 하면 npm start 명령어로 서버를 기동시킬 수 있으며 nodemon에서 파일이 저장될 때마다 서버를 재기동시켜준다.  
   
-
+# **글쓰기 API 만들기**  
+POST 메서드 사용 시에는 데이터를 req.body로 넘기는데 해당 데이터를 사용하려면 익스프레스에 미들웨어를 설정해야 한다.  
+  
+1. 미들웨어 설정을 추가한다.  
+board/app.js  
+  
+2. 글쓰기 API를 위해 app.js에 라우팅 설정을 하나 더 추가하고 글쓰기 로직을 추가한다.  
+board/app.js  
+  
+저장 결과에는 도큐먼트의 식별자로 사용할 수 있는 insertedId값이 있다.  
+  
+3. 비즈니스 로직은 service 디렉터리 아래에 담는 게 좋다. services/post-service.js 파일을 생성하고 writePost를 작성한다.  
+board/services/post-service.js  
+  
+4. 서버를 띄우고 테스트한다.
