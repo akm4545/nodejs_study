@@ -164,3 +164,8 @@ MongoClient.connect() 함수는 두 번째 인수로 콜백 함수를 받는다.
 2. mongodb-conncetion.js 코드를 app.js에 추가한다. 마지막 줄의 app.listen()의 경우 기존의 코드를 표시한 부분을 따라 수정하면 된다.  
 board/app.js  
   
+만들어둔 몽고디비 연결용 함수를 임포트한다. mongodbConnection(콜백 함수)와 같은 형태로 사용한다. 본문 코드에 콜백이 없으므로 콜백 실행 없이 MongoClient 
+객체를 반환한다. 불러온 함수를 실행하면 결괏값으로 mongoClient 객체를 받을 수 있다. mongoClient에서 db()를 사용해 데이터베이스를 선택하고 
+collection('post)를 사요해 컬렉션을 선택한다. db() 함수에 명시적으로 db('board')를 사용해도 된다. 데이터베이스 설정 파일에서 이미 기본 데이터베이스를 
+board로 넣어두었으므로 여기서는 빈 값을 넣으면 된다. collection 변수는 클로벌 변수이다. mongodb 라이브러리 내부에서 커넥션 풀을 관리하고 있으므로 
+글로벌 변수로 사용해도 문제가 없다.
