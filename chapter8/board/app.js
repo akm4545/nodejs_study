@@ -26,14 +26,32 @@ app.set("view engine", "handlebars");
 app.set("views", __dirname + "/views");
 
 // 라우터 설정
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
     // res.render("home", {
     //     title: "안녕하세요",
     //     message: "만나서 반갑습니다!"
     // });
-    res.render("home", {
-        title: "테스트 게시판"
-    });
+    // res.render("home", {
+    //     title: "테스트 게시판"
+    // });
+
+    // 현재 페이지 데이터
+    const page = parseInt(req.query.page) || 1;
+    // 검색어 데이터
+    const search = req.query.search || "";
+
+    try {
+        // postService.list에서 글 목록과 페이지네이터를 가져옴
+        const [posts, paginator] = await postService.list(collection, page, search);
+
+        // 리스트 페이지 렌더링
+        res.render("home", { title: "테스트 게시판", search, paginator, posts });
+    }catch (error){
+        console.log(error);
+
+        // 에러가 나는 경우는 빈 값으로 렌더링
+        res.render("home", { title: "테스트 게시판" })
+    }
 });
 
 app.get("/write", (req, res) => {
