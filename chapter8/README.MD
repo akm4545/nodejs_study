@@ -257,4 +257,21 @@ lodash를 사용하려면 설치가 필요하다. 터미널에서 npm i lodash�
 1. 리스트 템플릿에 리스트 및 페이지네이션을 추가한다.  
 board/views/home.handlebars  
   
+서버에서는 home.handlebars를 그릴 때 psots 변수에 게시물의 값들을 담아서 보내준다. posts를 반복해서 렌더링하기 위해 each 내장 함수를 사용했다. 
+{{#each posts}}로 시작하고 {{/each}}로 종료한다. each 블록 내부에서는 {{ 변수명 }}으로 post의 객체를 접근할 수 있다. 즉 게시물의 제목을 표시하기 
+위해 {{ posts[0].title }}이 아니라 {{ title }}을 사용한다.  
+  
+with도 내장 헬퍼 함수다. 페이지네이터 내부의 값은 {{ paginator.pageList }} 같은 형태로 사용할 수 있지만 페이지네이터가 가지고 있는 변수가 10개라서 
+일일이 써주기보다는 paginator를 생략할 수 있으면 간단하고 좋다. 이를 가능하게 하는 것이 with 함수다. {{#with 변수 }}로 시작하고 {{/with}}로 
+종료한다. with 블록 안에서는 paginator를 생략하고 바로 페이지네이터의 변수에 접근할 수 있다.  
+  
+@root.search는 with 블록 안에서 {{ search }}를 하는 경우 paginator.search를 참조하게 되므로 서버가 보내준 원본의 값을 참조하기 위해 사용한다.  
+  
+{{#if (eq . @root.paginator.page)}}에서 if 내장 함수를 사용했다. 괄호로 eq . @root.paginator.page가 감싸져 있다. 함수 안에서 함수를 사용하는 
+경우 괄호로 감싼다. eq는 우리가 만든 커스텀 함수다. 두 값이 같은지 검사한다. 여기서 .은 pageList를 반복해서 렌더링할 때의 값이다. pageList 안의 
+페이지 숫자값이 된다. . 대신 this를 사용할 수도 있다. @root.paginator.page는 with문 밑에 each 안에서 서버가 보내준 값을 참조하기 위해 사용했다. 
+즉 코드의 의미는 현재 페이지와 루프로 가져온 페이지가 같으면 다음을 렌더링하라는 뜻이다.  
+  
+2. 브라우저에서 리스트 페이지에 접속해 테스트한다.  
+  
 
