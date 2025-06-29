@@ -300,4 +300,12 @@ board/views/detail.handlebars
   
 4. 작성한 글의 상세페이지에 접속하여 테스트한다.  
   
+# **글 수정 API**  
+## **상세페이지 [수정] 버튼을 눌렀을 때 패스워드 확인**  
+화면을 이동하지 않고 패스워드를 확인하려면 Ajax를 사용해야 한다. 예전에는 Ajax를 사용하려면 jquery 등의 라이브러리가 필수였지만 익스플로러를 제외한 
+최근의 모든 브라우저는 fetch API를 제공한다. 따라서 패스워드 확인 API를 호출하는 부분을 fetch API를 사용한다.  
+  
+1. modifyPost() 함수를 다음과 같이 수정한다.  
+views/detail.handlebars  
+  
 
