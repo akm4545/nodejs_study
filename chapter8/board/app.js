@@ -58,9 +58,20 @@ app.get("/write", (req, res) => {
     res.render("write", { title: "테스트 게시판" });
 });
 
-app.get("/detail/:id", async(req, res) => {
+// app.get("/detail/:id", async(req, res) => {
+//     res.render("detail", {
+//         title: "테스트 게시판",
+//     });
+// });
+
+// 상세페이지로 이동
+app.get("/detail/:id", async (req, res) => {
+    // 게시글 정보 가져오기
+    const result = await postService.getDetailPost(collection, req.params.id);
+
     res.render("detail", {
         title: "테스트 게시판",
+        post: result.value,
     });
 });
 

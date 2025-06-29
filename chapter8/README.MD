@@ -274,4 +274,30 @@ with도 내장 헬퍼 함수다. 페이지네이터 내부의 값은 {{ paginato
   
 2. 브라우저에서 리스트 페이지에 접속해 테스트한다.  
   
+# **상세페이지 API 만들기**  
+1. app.js에 상세페이지 라우터 설정을 추가하고 로직을 추가한다.  
+board/app.js  
+  
+2. 데이터를 가져오는 부분은 postService에 getDetailPost() 함수로 추가한다. 결괏값으로 ModifyResult 객체를 반환하는데 lastErrorObject, ok, value 
+3개의 속성을 가지고 있다. lastErrorObject는 updatedExisting과 n이라는 이름의 속성을 가지고 있으며 각각 업데이트된 문서가 있는지, 있다면 몇 개인지를 
+알려준다. ok는 boolean 타입의 속성으로 게시글 문서의 수정이 성공인지 실패인지를 알 수 있다. 게시글의 데이터는 value에 있으므로 result.value를 템플릿에 
+넣어주면 된다.  
+board/services/post-service.js  
+  
+프로젝션은 투영이라는 뜻이며 데이터베이스에서는 데이터베이스에서 필요한 필드들만 선택해서 가져오는 것을 말한다. 가져와야 하는 항목이 빼는 항목보다 많아서 
+projection: {password:0}과 같이 패스워드만 항목에서 빼는 프로젝션 설정을 했지만 반대로 빼야 하는 항목이 가져와야 하는 항목보다 많은 경우는 projection: 
+{title:1, content:1}과 같은 방식으로 가져와야 하는 데이터만 프로젝션할 수 있다.  
+  
+findOneAndUpdate() 함수 정의는 db.collection.findOneAndUpdate(filter, update, options)다. filter는 원하는 데이터를 가져오고 update는 
+필터를 사용해 찾은 도큐먼트에 갱신할 데이터에 대한 내용을 넣는다. options는 프로젝션, 소팅 등의 항목을 넣을 수 있다.  
+  
+필터는 단순하게 모든 몽고디비 Document가 가지고 있고 id로 사용하는 값인 _id 필드를 id값을 사용해 찾도록 했다. 업데이트 항목은 $inc: {hits: 1} 
+로 되어 있다. $inc는 값을 증가(increase)시키고 싶을 때 사용하는 연산자다. hits: 1은 hist 항목을 1씩 증가시킨다는 의미다. 실무에서는 ip나 device등을 
+체크해 어뷰징을 못하게 하는 방법을 사용한다.  
+  
+3. 템플릿 파일에 본문 내용이 나오도록 변겨한다.  
+board/views/detail.handlebars  
+  
+4. 작성한 글의 상세페이지에 접속하여 테스트한다.  
+  
 
