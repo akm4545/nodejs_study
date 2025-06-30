@@ -308,4 +308,26 @@ board/views/detail.handlebars
 1. modifyPost() 함수를 다음과 같이 수정한다.  
 views/detail.handlebars  
   
+## **패스워드 체크 API 작성**  
+1. [수정] 버튼 클릭 시 사용하는 패스워드 체크 API를 작성한다.  
+board/app.js  
+  
+2. 아직 postService에 getPostByIdAndPassword() 함수를 구현하지 않았다. 추가한다.  
+board/services/post-service.js  
+  
+updateOne() 함수를 사용해 하나의 도큐먼트만 수정한다. 갱신할 데이터는 $set의 속성값으로 넣어주면 된다.  
+  
+## **수정 페이지 이동 API 작성**  
+수정 페이지 템플릿은 글쓰기 페이지 템플릿을 조금 수정해서 만든다.  
+  
+1. 글쓰기와 수정 페이지를 구분하기 위해 페이지에 들어갈 때 mode라는 변수에 각각 create, modify라는 값을 주어서 생성인지 수정인지 판단하도록 한다. 
+app.js에 코드를 수정한다.  
+board/app.js  
+  
+## **글쓰기 페이지를 수정 페이지로 변경하기**  
+1. 글쓰기 페이지의 템플릿 파일을 다음과 같이 수정한다.  
+board/views/write.handlebars  
+  
+2. 상세페이지의 수정을 클릭하여 테스트한다.  
+  
 

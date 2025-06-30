@@ -55,7 +55,7 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/write", (req, res) => {
-    res.render("write", { title: "테스트 게시판" });
+    res.render("write", { title: "테스트 게시판", mode: "create" });
 });
 
 // app.get("/detail/:id", async(req, res) => {
@@ -83,6 +83,50 @@ app.post("/write", async (req, res) => {
 
     // 생성된 도큐먼트의 _id를 사용해 상세페이지로 이동
     res.redirect(`/detail/${result.insertedId}`);
+});
+
+// 패스워드 체크
+// id, passowrd 값을 가져옴
+app.post("/check-password", async (req, res) => {
+    const { id, password } = req.body;
+
+    // postService의 getPostByIdAndPassword() 함수를 사용해 게시글 데이터 확인
+    const post = await postService.getPostByIdAndPassword(collection, { id, password });
+
+    // 데이터가 있으면 isExist true, 없으면 isExist false
+    if(!post){
+        return res.status(404).json({ isExist: false });
+    }else{
+        return res.json({ isExist: true });
+    }
+});
+
+// 수정 페이지로 이동 mode는 modify
+app.get("/modify/:id", async (req, res) => {
+    // getPostById() 함수로 게시글 데이터를 받아옴
+    const post = await postService.getPostById(collection, req.params.id);
+
+    console.log(post);
+
+    res.render("write", { title: "테스트 게시판", mode: "modify", post});
+});
+
+// 게시글 수정 API
+app.post("/modify/", async (req, res) => {
+    const { id, title, writer, password, content } = req.body;
+
+    const post = {
+        title,
+        writer,
+        password,
+        content,
+        createDt: new Date().toISOString(),
+    };
+
+    // 업데이트 결과
+    const result = postService.updatePost(collection, id, post);
+
+    res.redirect(`/detail/${id}`);
 });
 
 let collection;
