@@ -330,4 +330,18 @@ board/views/write.handlebars
   
 2. 상세페이지의 수정을 클릭하여 테스트한다.  
   
+# **글 삭제 API**  
+1. 템플릿에 만들어둔 deletePost() 함수부터 작성한다.  
+board/views/detail.handlebars  
+  
+2. 다음으로 서버 단에서 삭제 작동을 하는 코드를 작성한다.  
+board/app.js  
+  
+deleteOne()은 조건에 맞는 도큐먼트 하나를 삭제한다. deleteOne() 함수의 결과는 DeleteResult 객체인데 acknowledged(boolean 타입), deletedCount
+(숫자 타입)값을 가지고 있다. acknowledged는 삭제가 승인이 되었는지 여부를 알려준다. deleteCount는 삭제한 도큐먼트 개수다. 삭제가 성공이면 값이 1이 
+된다. deleteOne() 함수는 콜백 방식과 async await 방식이 있다.  
+  
+collection.deleteOne() 부분도 post-service로 넣을 수 있지만 함수가 한 줄밖에 되지 않아서 추가하지 않았다. 만약 다른 곳에서 똑같은 코드를 재사용한다면 
+그때 post-service.js로 넣으면 된다.  
+  
 
