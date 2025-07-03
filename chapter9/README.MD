@@ -79,4 +79,19 @@ NestJS는 3가지 방법으로 설치할 수 있다. 첫 번째는 NestJS 구동
   
 마지막은 nest 명령어로 설치하는 저장소를 직접 git clone 명령어로 개발자의 디렉터리에 내려 받은 후 자신에게 맞도록 설정을 변경하는 방법이다.  
   
-nest-cli를 사용하는 방법을 대부분 사용할 예정이지만 설정 파일을 알아두기 위해 첫 번째 방법으로 진행한다.
+nest-cli를 사용하는 방법을 대부분 사용할 예정이지만 설정 파일을 알아두기 위해 첫 번째 방법으로 진행한다.  
+  
+# **의존성 패키지 설치하기**  
+1. 프로젝트 디렉터리를 생성하고 의존성 패키지를 설치한다. 디렉터리명은 hello-nestjs로 한다.  
+- mkdir hello-nestjs  
+  
+2. 디렉터리를 만들었다면 필요한 패키지를 설치한다. 행내림 없이 한 줄로 명령을 작성해 실행한다.  
+- npm i @nestjs/core @nestjs/common @nestjs/platform-express reflect-metadata typescript  
+  
+3. 설치가 완료되었다면 package.json을 열어본다.(버전은 설치 시점에 따라 조금씩 다를 수 있다).  
+  
+![img.png](image/img7.png)  
+  
+@nestjs/common은 실제 프로젝트에서 사용할 대부분의 코드가 들어 있다. 데코레이터(decoretor)로 사용하는 함수들의 클래스들이 대표적이다. @nestjs/core는 
+@nestjs/common에서 사용하는 코드가 들어있다. 가드(guard), 미들웨어(middleware), 파이프(pipe) 등을 만드는 핵심 코드가 있다. @nestjs/platform-express는 
+HTTP 요청/응답 부분을 감싸서 익스프레스의 req, res 객체를 사용하는 라이브러리다.
