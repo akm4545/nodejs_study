@@ -94,4 +94,24 @@ nest-cli를 사용하는 방법을 대부분 사용할 예정이지만 설정 �
   
 @nestjs/common은 실제 프로젝트에서 사용할 대부분의 코드가 들어 있다. 데코레이터(decoretor)로 사용하는 함수들의 클래스들이 대표적이다. @nestjs/core는 
 @nestjs/common에서 사용하는 코드가 들어있다. 가드(guard), 미들웨어(middleware), 파이프(pipe) 등을 만드는 핵심 코드가 있다. @nestjs/platform-express는 
-HTTP 요청/응답 부분을 감싸서 익스프레스의 req, res 객체를 사용하는 라이브러리다.
+HTTP 요청/응답 부분을 감싸서 익스프레스의 req, res 객체를 사용하는 라이브러리다.  
+  
+# **타입스크립트 설정하기**  
+NestJS는 타입스크립트를 완벽히 지원하기 떄문에 타잆크립트를 사용하면 더 편리하게 개발할 수 있다. 그러므로 지금부터는 타입스크립트로 코드를 작성한다. 
+타입스크립트는 자바스크립트에 타입을 추가한 언어라고 생가가하면 되며 자바스크립트로 트랜스파일된다. 그러므로 어떤 식으로 컴파일할지 설정을 추가해야 한다.  
+  
+1. 타입스크립트를 설정한다. 타입스크립트 설정 파일은 tsconfig.json 파일이며 프로젝트의 루트 디렉터리에 위치시키면 된다. tsconfig.json 파일을 만들고 
+작성한다.  
+hello-nestjs/tsconfig.json  
+  
+타입스크립트의 컴파일러 옵션은 compilerOptions에 설정한다. 컴파일 시 모듈 시스템을 선택할 수 있으며 NodeJS의 모듈 시스템은 CommonJS이므로 
+CommonJS로 넣어준다. target에는 컴파일 시 사용할 ECMA 버전을 적어준다. ESNEXT를 설정하면 최신 버전으로 컴파일을 해준다.  
+  
+experimentalDecorators와 emitDecoratorMatadata는 데코레이터 관련 부분이다. NestJS에서는 데코레이터를 매우 매우 많이 사용하므로 꼭 필요한 옵션이라고 
+할 수 있다.  
+  
+experimentalDecorators는 데코레이터를 사용할지 여부다. 타입스크립트 5.0 버전부터 정식으로 지원한다. emitDecoratorMatadata는 타입스크립트를 
+자바스크립트로 컴파일 시 데코레이터가 설정된 클래스, 함수, 변수, 객체의 메타 데이터를 함께 넣어줄지 여부를 선택한다. 메타 데이터에는 데코레이터를 달아준 
+곳이 함수인지, 클래스인지 변수인지에 대한 여부와 매개변수가 있다면 해당 타입, 그리고 결괏값을 포함한다. 메타 데이터를 넣을 때 의존성 패키지로 설치한 
+reflect-metadata가 사용된다. 즉 reflect-metadata와 emitDecoratorMetadata는 함께 설정이 되어야 한다.  
+
