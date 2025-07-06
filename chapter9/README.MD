@@ -141,6 +141,8 @@ hello-nestjs/src/hello.conroller.ts
 hello-nestjs/src/hello.module.ts  
   
 @Module은 모듈을 설정할 때 사용하는 데코레이터다. 몇 가지 설정이 있으나 여기서는 controllers만 설정한다. controllers에는 배열로 모듈에 포함된 컨트롤러들을 
-설정한다.  
+설정한다. controllers에는 배열로 모듈에 포함된 컨트롤러들을 설정한다.  
+  
+
   
 
