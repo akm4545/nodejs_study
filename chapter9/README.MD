@@ -190,5 +190,37 @@ class MovieSeries extends Series {}
   
 ![img.png](image/img9.png)  
   
+# **프로젝트 생성과 설정**  
+지금부터는 nest-cli를 사용해서 프로젝트 설정을 진행한다.  
+  
+1. nest-cli는 CLI(Command Line Interface) 프로그램이므로 global 옵션을 사용해 어디서든지 사용하도록 해야 한다. 명령창에서 다음의 명령어를 
+실행해 nest-cli를 설치해준다.  
+  
+npm install -g @nestjs/cli  
+  
+2. 다음으로는 프로젝트를 생성한다. 프로젝트명은 blog로 한다.  
+nest new blog  
+  
+nest new 명령어 사용 시 에러가 나면 nest 대신 npx @nestjs/cli를 사용한다. blog 프로젝트를 만드는 명령어는 다음과 같다.  
+npx @nestjs/cli new blog  
+  
+3. 명령어를 실행하면 어떤 패키지 매니저를 사용할지 물어보는데 npm을 선택한다. 다른 패키지 매니저가 익숙하다면 선택해도 무방하다.  
+  
+설치가 완료되었다면 프로젝트 디렉터리에 들어가서 어떤 구조인지 살펴보자.  
+  
+![img.png](image/img10.png)  
+  
+.prettierrc는 코드 포매팅 관련 설정 파일이다. 대부분의 IDE에는 자동 포매팅 기능이 있다. VSCode에서 자바스크립트로 개발할 때 거의 필수로 설치하는 
+플러그인이 prettier라는 코드포매팅 플러그인이다. .prettierrc는 코드 포매팅을 어떤 식으로 할지 설정을 하는 파일이다.  
+  
+nest-cli.json 파일은 nest 명령어를 사용해 프로젝트를 생성하거나 파일을 생성할 때 필요에 따라 수정한다. 한 프로젝트 안에 여러 프로젝트를 함께 포함하는 
+모노레포 등의 기능을 사용할 때 설정한다.
 
-
+컨트롤러와 모듈을 각각 하나의 파일에 만들고 서비스 파일도 각각 따로 만들어주는 것이 정석이다.  
+  
+app.controller.spec.ts는 컨트롤러 테스트를 위한 파일이다. NestJS에서는 jest와 supertest를 사용한다.  
+  
+main.ts는 익스프레스에서의 index.js와 같은 서버 기동 시의 시작 파일이 된다.  
+  
+tsconfig.json및 tsconfig.build.json은 타입스크립트를 위한 설정 파일이다.  
+  
