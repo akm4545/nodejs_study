@@ -143,6 +143,22 @@ hello-nestjs/src/hello.module.ts
 @Module은 모듈을 설정할 때 사용하는 데코레이터다. 몇 가지 설정이 있으나 여기서는 controllers만 설정한다. controllers에는 배열로 모듈에 포함된 컨트롤러들을 
 설정한다. controllers에는 배열로 모듈에 포함된 컨트롤러들을 설정한다.  
   
+# **hello-nest 앱 실행시켜보기**  
+1. 컨트롤러와 모듈을 만들었으니 NestJS 앱의 main.js를 만든다.  
+hello-nestjs/src/main.ts  
+  
+어떤 프로그램이든 최초로 실행되는 함수가 필요하다. NestJS의 서버 역시 기동하려면 최초 실행되는 함수, 즉 최초 진입점이 필요하다. NestJS에서는 진입점을 
+bootstrap()으로 이름 짓는 것이 관례다. NestFactory는 사실 NestFactoryStatic 클래스이며 create() 함수에 루트 모듈을 넣어서 NestApplication 객체를 
+생성한다. NestApplication 객체에는 HTTP 부분을 모듈화한 HTTPAdapter가 있다. 기본적으로는 익스프레스가 사용된다.  
+  
+listen() 함수는 HTTP 어댑터로 무엇을 쓰느냐에 따라 다르겠지만 여기서는 기본값인 익스프레스의 app.listen() 함수다. NestJS의 애플리케이션을 실행하는 
+코드가 익스프레스와 같다.  
+  
+2. 타입스크립트로 만든 프로그램을 바로 실행하려면 ts-node-dev라는 패키지가 필요하다. 설치하지 않고 실행하면 설치할지 여부를 물어본다.  
+npx ts-node-dev src/main.ts  
+  
+3. 브라우저를 켜서 테스트 한다.  
+  
 
   
 

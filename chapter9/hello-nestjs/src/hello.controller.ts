@@ -2,7 +2,7 @@
 import { Controller, Get } from "@nestjs/common";
 
 // 컨트롤러 데코레이터
-@Controller
+@Controller()
 // 외부에서 사용하므로 export를 붙인다
 export class HelloController {
     // GET 요청 처리 데코레이터
