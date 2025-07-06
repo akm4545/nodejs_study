@@ -159,6 +159,30 @@ npx ts-node-dev src/main.ts
   
 3. 브라우저를 켜서 테스트 한다.  
   
-
+# **NestJS의 네이밍 규칙**  
+1. 파일명은 .으로 연결한다. 모듈이 둘 이상의 단어로 구성되어 있으면 대시로 연결한다.  
+<모듈명>.<컴포넌트명>.ts  
+hello.controller.ts  
+my-first.controller.ts  
+  
+2. 클래스명은 카멜 케이스를 사용한다.  
+<모듈명><컴포넌트명>  
+HelloController  
+  
+3. 같은 디렉터리에 있는 클래스는 index.ts를 통해서 임포트하는 것을 권장한다.  
+index.ts를 사용하지 않는 경우  
+import { MyFirstController } from './controllers/my-first.controller'  
+import { MySecondController } from './controllers/my-second.controller'  
+  
+index.ts를 사용하는 경우  
+import { MyFirstController, MySecondController } './controllers';  
+  
+4. 타입스크립트에서는 인터페이스를 많이 사용한다. 인터페이스는 타입을 정의하는 데 사용되고 구체적인 내용은 클래스를 만들고 인터페이스를 상속하는 방식으로 
+작성한다. 인터페이스 작명법으로 앞에 I를 붙이는 방법이 있다. 예를 들어 Series라는 타입을 정의할 때 ISeries 처럼 작명한다. 이 방식은 보기에도 어색한 
+부분이 있다. 그래서 NestJS에서는 가능하면 Series 인터페이스를 만들고 그 하위 인터페이스 혹은 클래스를 만든다.  
+  
+interface Series {}  
+interface BookSeries extends Series {}  
+class MovieSeries extends Series {}
   
 
