@@ -224,3 +224,11 @@ main.ts는 익스프레스에서의 index.js와 같은 서버 기동 시의 시�
   
 tsconfig.json및 tsconfig.build.json은 타입스크립트를 위한 설정 파일이다.  
   
+4. 프로젝트가 올바르게 설치되었는지 확인한다.  
+npm install  
+npm run start  
+  
+README.md를 열어서 보면 실행 가능한 명령어들이 나와있다. 개발 시 사용할 서버 기동 명령어로 npm run start, npm run start:dev, npm run start:prod가 있다. 
+npm run start:dev를 사용하면 파일 변경 시 바로 변경을 해주기 때문에 편리하다. npm run start:prod는 프로덕션 환경에서 실행 시 사용한다. 그 외 
+테스트 관련된 명령어들이 있다.  
+  
