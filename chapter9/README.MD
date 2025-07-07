@@ -232,3 +232,23 @@ README.md를 열어서 보면 실행 가능한 명령어들이 나와있다. 개
 npm run start:dev를 사용하면 파일 변경 시 바로 변경을 해주기 때문에 편리하다. npm run start:prod는 프로덕션 환경에서 실행 시 사용한다. 그 외 
 테스트 관련된 명령어들이 있다.  
   
+# **컨트롤러 만들기**  
+NestJS에는 수많은 컴포넌트들이 있다. 그중 컨트롤러는 유저가 보낸 HTTP 요청을 어떤 코드에서 처리할지 정하는 역할을 한다. HTTP 요청 시 헤더, URL 매개변수, 
+쿼리, 바디 등의 정보가 있다. 이 정보를 바탕으로 적절한 데코레이터가 붙어 있는 컨트롤러 코드를 실행시킨다. 익스프레스에서 개발할 때는 개발자가 임의로 
+컨트롤러, 서비스, 데이터 연결 등의 계층을 정해서 개발을 했지만 NestJS에서 컨트롤러는 <모듈명>.controller.ts라는 파일로 만든다.  
+  
+![img.png](image/img11.png)  
+  
+NestJS에서는 모듈 단위로 애플리케이션을 구성한다. 현재는 루트 모듈인 AppModule이 app.module.ts에 정의되어 있다.  
+  
+![img.png](image/img12.png)  
+  
+1. src 디렉터리 밑에 main.ts와 app.module.ts를 제외하고는 모두 삭제하고 다시 만든다. main.ts는 hello-nestjs와 모듈명을 제외하고 완전히 같다.  
+  
+2. app.module.ts 코드를 다음과 같이 수정하고 blog/src 디렉터리 아래에 blog.controller.ts, blog.service.ts 파일을 각각 생성해서 클래스를 만들어둔다.  
+blog/src/app.module.ts  
+blog/src/blog.controller.ts  
+blog/src/blog.service.ts  
+  
+아직까지는 코드가 실행되지 않는다.  
+  
