@@ -252,3 +252,21 @@ blog/src/blog.service.ts
   
 아직까지는 코드가 실행되지 않는다.  
   
+# **블로그 API 작성하기**  
+![img.png](image/img13.png)  
+  
+블로그 API의 기능을 작성하려면 우선 컨트롤러가 있어야 한다. 컨트롤러는 URL 경로와 HTTP 속성들을 확인해 특정 코드를 실행시켜준다. NestJS에서는 
+@Controller 데코레이터를 사용해서 컨트롤러를 만든다. HTTP 메서드나 URL의 속성도 모두 데코레이터로 표현한다.  
+  
+![img.png](image/img14.png)  
+  
+1. blog.controller.ts에 API 함수들을 추가한다.  
+blog/src/blog.controller.ts  
+  
+Controller는 클래스에 붙이는 데코레이터이며 괄호 안의 매개변수로 URL 주소로 사용할 값이 들어간다. Controller('/blog')의 의미는 {서버 주소}/blog 
+이하의 요청을 처리한다는 뜻이다.  
+  
+Get, Post, Delete, Put는 메서드에 붙이며 Controller와 같다.  
+  
+@Body와 @Param은 매개변수에 붙이는 데코레이터다. Body는 함수의 body로 오는 값을 매개변수에 할당한다. @Param은 URL param의 값을 함수 매개변수에 할당한다.  
+  
