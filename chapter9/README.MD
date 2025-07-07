@@ -270,3 +270,18 @@ Get, Post, Delete, Put는 메서드에 붙이며 Controller와 같다.
   
 @Body와 @Param은 매개변수에 붙이는 데코레이터다. Body는 함수의 body로 오는 값을 매개변수에 할당한다. @Param은 URL param의 값을 함수 매개변수에 할당한다.  
   
+# **메모리에 데이터를 저장하는 API 만들기**  
+컨트롤러의 역할은 HTTP 요청을 특정 함수가 실행하는 것이었다. 실제 비즈니스 로직은 service에 작성한다.  
+  
+1. 컨트롤러와 같은 디렉터리에 blog.service.ts 파일을 생성하고 다음과 같이 작성한다. 메서드명은 BlogController와 동일하게 작성한다.  
+blog/src/blog.service.ts  
+  
+2. 블로그 게시글의 타입을 정의한다.  
+blog/src/blog.model.ts  
+  
+타입스크립트에서는 데이터만 가지고 있는 타입을 선언할 때 클래스보다는 인터페이스를 많이 사용한다.  
+  
+3. 작성한 BlogService API를 컨트롤러에서 사용할 수 있게 수정한다. 데코레이터들을 적용해 HTTP 요청을 적절한 메서드가 처리할 수 있게 해주고 변수에 
+값들을 할당한다.  
+blog/src/blog.controller.ts  
+  
