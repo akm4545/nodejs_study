@@ -285,3 +285,12 @@ blog/src/blog.model.ts
 값들을 할당한다.  
 blog/src/blog.controller.ts  
   
+BlogService는 클래스이므로 생성자에서 클래스 멤버 변수인 blogService에 new로 인스턴스를 생성 후 할당해준다. NestJS에서는 의존성 주입을 주로 사용하지만 
+아직 배우지 않았으므로 생성자를 사용했다.  
+  
+블로그 테스트를 위한 HTTP 파일  
+blog/src/blog.http  
+  
+4. 지금까지 작성한 서버는 메모리에 데이터를 가지고 있다. 그래서 서버를 종료하면 데이터가 모두 날아가 버린다. 아직 의존성 주입을 배우지 않았기 때문에 
+메모리에 데이터를 저장할 때 서비스 객체를 직접 생성해서 사용했다. npm run start:dev 명령으로 서버를 실행하고 blog.http 파일을 사용해 테스트한다.  
+  
