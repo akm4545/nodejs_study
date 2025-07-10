@@ -358,6 +358,10 @@ BlogService, BlogFileRepository에 @Injectable을 붙였으므로 프로바이�
   
 3. 의존성 주입을 완료했다. npm run start:dev 명령으로 서버를 띄어서 제대로 동작하는지 blog.http 파일을 이용해 확인한다.  
   
+# **몽고디비 연동하기**  
+NestJS에서 몽고디비를 연동하려면 TypeORM을 사용해 connector를 몽고디비로 사용하거나 Mongoose를 사용하는 방법이 있다. 작업은 의존성 설치 -> 
+스키마 만들기 -> 몽고디비를 사용하는 리포지토리 추가하기 -> 서비스 코드 변경 -> 모듈에 몽고 디비 설정과 프로바이더 설정 추가하기 순서로 진행한다.  
+  
 
 
 
