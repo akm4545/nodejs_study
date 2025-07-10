@@ -380,6 +380,15 @@ blog/src/blog.schema.ts
 만들 수 있도록 @nestjs/mongoose에서 데코레이터를 제공한다. @Prop은 모델의 프로퍼티임을 나타낸다. @Prom({ required: ture }) 등으로 옵션을 추가할 
 수 있다. SchemaFactory.createForClass() 함수를 사용해 스키마를 생성한다. 내부적으로는 mongoose의 new Schema를 사용한다.  
   
+# **몽고디비를 사용하는 리포지토리 추가하기**  
+1. 리포지토리에는 이미 파일을 사용하는 리포지토리 클래스가 있다. 여기에 몽고디비를 위한 BlogMongoRepository를 하나 더 추가한다.  
+blog/src/blog.repository.ts  
+  
+생성자로 게시글을 읽기, 쓰기, 수정, 삭제 메서드를 가지고 있는 모델을 주입받는다. @nestjs/mongoose의 @InjectModel 데코레이터를 사용하면 된다.  
+  
+getAllPost()는 모든 게시글을 읽어오는 함수다. blogModel의 find() 함수를 사용한다. 마찬가지로 생성은 create, 게시글 찾기는 findById와 같은 
+형식으로 사용한다.  
+  
 
 
 
