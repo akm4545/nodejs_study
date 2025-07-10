@@ -362,6 +362,13 @@ BlogService, BlogFileRepository에 @Injectable을 붙였으므로 프로바이�
 NestJS에서 몽고디비를 연동하려면 TypeORM을 사용해 connector를 몽고디비로 사용하거나 Mongoose를 사용하는 방법이 있다. 작업은 의존성 설치 -> 
 스키마 만들기 -> 몽고디비를 사용하는 리포지토리 추가하기 -> 서비스 코드 변경 -> 모듈에 몽고 디비 설정과 프로바이더 설정 추가하기 순서로 진행한다.  
   
+# **의존성 설치**  
+1. 의존성 패키지로 NestJS에서 mongoose를 사용하기 편하게 하는 @nestjs/mongoose를 mongoose와 함께 설치한다.  
+npm install @nestjs/mongoose mongoose  
+  
+설치하고 나면 package.json의 dependencies 항목에 @nestjs/mongoose와 mongoose가 추가된다.  
+  
+
 
 
 
