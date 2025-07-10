@@ -332,4 +332,32 @@ NestJS에서 의존성 주입을 하는 방법은 간단하다. 주입하고 싶
 blog/src/blog.repository.ts  
 bloh/src/blog.service.ts  
   
+클래스의 생성자에 매개변수로 설정된 타입이 프로바이더로 설정된 타입 중 하나라면 NestJS에서 자동으로 필요한 객체를 주입해준다. BlogRepository는 
+인터페이스이므로 클래스를 생성할 수 없다. 따라서 의존성을 주입할 수 없다. 의존성을 주입할 때는 실제로 사용할 클래스를 타입으로 주면 된다.  
+  
+타입스크립트 클래스의 생성자 간단 작성법  
+constructor(private blogRepository: BlogFileRepository){}가 조금 복잡해보이지만 다음 코드를 줄여 쓴 타입스크립트 문법이다. 기능상으로는 같다.  
+  
+private blogRepository: BlogFileRepository;  
+  
+constructor(blogRepository: BlogFileRepository){  
+ 클래스 멤버 변수에 주입받은 blogRepository 할당  
+ this.blogRepository = blogRepository;  
+}  
+  
+BlogFileRepository 타입이며 이름이 blogRepository인 클래스 멤버 변수가 있는데 생성자에서 주입받은 BlogFileRepository 타입의 값을 할당해준다.  
+blog/src/blog.controller.ts  
+  
+기존에 생성자로 되어 있던 부분을 의존성 주입을 받을 수 있도록 모두 변경했다. 다만 이렇게 하면 에러가 난다. 왜냐하면 NestJS에서 의존성 주입을 하는 타입인지 
+모르기 떄문이다.  
+  
+2. 마지막으로 AppModule의 모듈 설정에 Provider 설정을 추가한다.  
+blog/src/app.module.ts  
+  
+BlogService, BlogFileRepository에 @Injectable을 붙였으므로 프로바이더가 되었다. 앱이 실행될 때 의존성 주입을 하도록 클래스 정보를 추가해준다.  
+  
+3. 의존성 주입을 완료했다. npm run start:dev 명령으로 서버를 띄어서 제대로 동작하는지 blog.http 파일을 이용해 확인한다.  
+  
+
+
 

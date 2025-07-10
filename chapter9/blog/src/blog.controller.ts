@@ -5,12 +5,15 @@ import { BlogService } from "./blog.service";
 // 클래스에 붙이는 Controller 데코레이터
 @Controller('blog')
 export class BlogController {
-    blogService: BlogService;
+    // blogService: BlogService;
 
     // 생성자에서 블로그 서비스 생성
-    constructor() {
-        this.blogService = new BlogService();
-    }
+    // constructor() {
+    //     this.blogService = new BlogService();
+    // }
+
+    // blogService 주입
+    constructor(private blogService: BlogService) {}
 
     // GET 요청 처리
     @Get()

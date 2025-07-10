@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 // import { AppService } from './app.service';
 import { BlogController } from './blog.controller';
 import { BlogService } from './blog.service';
+import { BlogFileRepository } from "./blog.repository";
 
 //
 // @Module({
@@ -13,7 +14,8 @@ import { BlogService } from './blog.service';
 @Module({
   imports: [],
   controllers: [BlogController],
-  providers: [BlogService],
+  // 프로바이더 설정
+  providers: [BlogService, BlogFileRepository],
 })
 
 export class AppModule {}
