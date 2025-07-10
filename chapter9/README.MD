@@ -368,6 +368,18 @@ npm install @nestjs/mongoose mongoose
   
 설치하고 나면 package.json의 dependencies 항목에 @nestjs/mongoose와 mongoose가 추가된다.  
   
+# **스키마 만들기**  
+mongoose에서는 스키마라고 부르고 있지만 RDB와 비교한다면 엔티티 객체와 비슷한 역할을 한다. 스키마는 @Schema 데코레이터를 붙여서 만들 수 있다.  
+  
+1. src 밑에 blog.schema.ts 파일을 생성하고 도큐먼트 타입과 스키마를 만든다.  
+blog/src/blog.schema.ts  
+  
+블로그 타입이면서 몽고디비의 도큐먼트로 사용할 수 있는 BlogDocument 타입을 생성한다. 왼쪽에 type <이름> 오른쪽에 두 개의 타이블 &로 연결해 
+교차타입을 만든다. C = A & B로 만들었다면 C는 A와 B의 모든 프로퍼티를 가지고 있어야 한다. 반면 |를 사용하는 유니온 타입이 있다. C = A | B 
+형식은 A 또는 B의 프로퍼티를 가지고 있으면 된다. mongoose를 사용하려면 스키마를 통해 만들어질 모델을 정의해야 한다. @Schema는 그런 모델을 쉽게 
+만들 수 있도록 @nestjs/mongoose에서 데코레이터를 제공한다. @Prop은 모델의 프로퍼티임을 나타낸다. @Prom({ required: ture }) 등으로 옵션을 추가할 
+수 있다. SchemaFactory.createForClass() 함수를 사용해 스키마를 생성한다. 내부적으로는 mongoose의 new Schema를 사용한다.  
+  
 
 
 
