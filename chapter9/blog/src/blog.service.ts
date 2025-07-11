@@ -3,7 +3,8 @@ import { PostDto } from './blog.model';
 import { Injectable } from "@nestjs/common";
 
 // 리포지토리 클래스와 인터페이스 임포트
-import { BlogFileRepository, BlogRepository } from "./blog.repository";
+// import { BlogFileRepository, BlogRepository } from "./blog.repository";
+import { BlogMongoRepository } from "./blog.repository";
 
 @Injectable()
 export class BlogService {
@@ -17,7 +18,8 @@ export class BlogService {
     // }
 
     // 생성자를 통한 의존성 주입
-    constructor(private blogRepository: BlogFileRepository) {}
+    // constructor(private blogRepository: BlogFileRepository) {}
+    constructor(private blogRepository: BlogMongoRepository) {}
 
     // 모든 게시글 가져오기
     async getAllPosts() {

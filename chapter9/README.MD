@@ -389,6 +389,13 @@ blog/src/blog.repository.ts
 getAllPost()는 모든 게시글을 읽어오는 함수다. blogModel의 find() 함수를 사용한다. 마찬가지로 생성은 create, 게시글 찾기는 findById와 같은 
 형식으로 사용한다.  
   
+# **서비스 코드 변경**  
+1. 서비스 코드는 리포지토리 의존성만 변경하면 된다. BlogFileRepository를 사용하는 부분을 이전에 만든 BlogMongoRepository로 변경해주면 된다. 
+인터페이스를 사용했기에 얻은 이득이다. 상세 클래스를 인터페이스에 맞춰서 만들면 인터페이스를 사용하는 코드들은 변경하지 않아도 된다.  
+blog/src/blog.service.ts  
+  
+이제 마지막으로 몽고디비 연결 설정과 프로바이더 설정을 해주면 끝난다.  
+  
 
 
 
