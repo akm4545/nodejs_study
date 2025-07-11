@@ -16,3 +16,10 @@ ConfigModule은 초기화를 해야 하는데 ConfigModule.forRoot() 함수로 �
 옵션의 설정과 병합한 뒤 ConfigService를 초기화한다. ConfigService는 각 모듈에 의존성 주입을 해서 별다른 추가 설정 없이 사용할 수 있다. 
 ConfigService를 사용하는 방법은 쉽고 직관적이다. 반면 설정은 더 신경 쓸 것이 많다.  
   
+# **프로젝트 생성 및 설정하기**  
+1. 환경 설정 파일 테스트용으로 사용할 config-test라는 이름으로 NestJS 프로젝트를 생성하고 의존성 패키지를 설치한다. 다음과 같이 nest-cli를 
+사용해 프로젝트를 생성한다.  
+  
+nest new config-test  
+cd config-test  
+npm i @nestjs/config
