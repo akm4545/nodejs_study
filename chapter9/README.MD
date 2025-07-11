@@ -396,7 +396,16 @@ blog/src/blog.service.ts
   
 이제 마지막으로 몽고디비 연결 설정과 프로바이더 설정을 해주면 끝난다.  
   
-
+# **모듈에 몽고 디비 설정과 프로바이더 설정 추가하기**  
+1. app.module.ts에 몽고디비 연결 설정과 프로바이더 설정을 추가한다.  
+blog/src/app.module.ts  
+  
+MongooseModule.forRoot를 사용해 몽고디비 연결을 설정한다. MongooseModule.forReature로 스키마 설정을 한다. name 항목에 이름을 schema에는 
+만들어둔 BlogSchema를 넣어준다. 몽고디비를 위한 리포지토리를 만들었으므로 프로바이더 설정에 추가해줘야 다른 곳에서 의존성 주입을 사용할 수 있다. 
+BlogMongoRepository를 프로바이더 배열에 추가해준다.  
+  
+2. npm run start:dev 명령으로 실행하고 blog.http를 사용해 테스트한다. 몽고디비에서 id 값은 순차적으로 증가하는 숫자값이 아니라는 것만 주의해서 
+테스트를 진행한다.
 
 
 
