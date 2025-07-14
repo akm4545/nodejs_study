@@ -37,3 +37,16 @@ app.contoller.ts에는 AppController 클래스가 있다. 해당 클래스에 �
 app.module.ts에 설치한 @nestjs/config에 있는 ConfigModule 설정 추가 -> .env 파일 생성 -> app.contoller.ts에 테스트 라우팅 함수 추가 
 순서로 진행된다. 먼저 ConfigModule 설정부터 한다.  
   
+# **app.module.ts에 ConfigModule 설정하기**  
+ConfigModule은 환경 설정에 특화된 기능을 하는 모듈이다. @nestjs/config 패키지에 포함되어 있는 클래스이며 모든 환경 변수 설정은 ConfigModule로부터 
+시작한다고 생각하면 된다. app.module.ts에 ConfigModule을 설정한다.  
+  
+config-test/src/app.module.ts  
+  
+ConfigModule.forRoot() 함수는 많은 옵션이 존재한다. 예제 코드에는 아무런 옵션을 추가하지 않았는데 이는 NestJS에서 환경 변수를 사용하는 데 필요한 
+최소한의 설정이다.  
+  
+![img.png](image/img3.png)  
+  
+isGlobal, cache, envFilePath는 자주 사용한다.  
+  
