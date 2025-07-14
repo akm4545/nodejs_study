@@ -61,3 +61,12 @@ MESSAGE가 키이고 hello nestjs가 값이다. .env 파일의 형태는 키=값
 대문자로 되어 있으므로 대문자로 작성한다. 리눅스 또는 맥OS 기반 운영체제에서는 env 명령어를 실행하면 시스템 환경 변수를 확인해볼 수 있다. 윈도우에서는 
 set 명령어를 터미널에서 실행하면 된다.  
   
+# **app.controller.ts에 코드 추가하기**  
+1. app.controller.ts는 nest-cli로 프로젝트를 생서하면 기본적으로 만들어지는 파일이다. 내부에는 AppController 클래스가 있는데 이 클래스에 핸들러 
+함수 getHello()가 있다. getHello() 함수를 수정해 .env에 있는 환경 변수를 사용한다.  
+  
+config-test/src/app.controller.ts  
+  
+@nestjs/config에 있는 ConfigService를 임포트한다. 생성자에서 ConfigService를 주입하고 getHello() 함수 내에서 configService.get("환경 변수명")을 
+호출해 값을 message에 할당한다.  
+  
