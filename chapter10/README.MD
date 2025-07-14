@@ -22,4 +22,14 @@ ConfigService를 사용하는 방법은 쉽고 직관적이다. 반면 설정은
   
 nest new config-test  
 cd config-test  
-npm i @nestjs/config
+npm i @nestjs/config  
+  
+@nestjs/config는 내부적으로 dotenv를 사용한다. dotenv는 .env라는 이름의 파일에 환경 변수를 설정하고 불러올 수 있게 하는 자바스크립트로 만든 
+라이브러리다. 생성된 프로젝트의 폴더 구조는 다음과 같다.  
+  
+![img.png](image/img2.png)  
+  
+app.contoller.ts에는 AppController 클래스가 있다. 해당 클래스에 환경 변수를 테스트할 핸들러 함수를 추가한다. app.module.ts는 기본적으로 생성되는 
+모듈 파일이다. 여기에 환경 변수 설정에 필요한 모듈인 ConfigModule 설정을 한다. main.ts는 NestJS 서버 기동 시 가장 먼저 실행되는 파일이다. 프로바이더 
+설정 없이 환경 변수를 설정하는 방법을 알아본다.  
+  
