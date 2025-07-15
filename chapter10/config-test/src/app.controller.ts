@@ -18,4 +18,12 @@ export class AppController {
     const message = this.configService.get('MESSAGE');
     return message;
   }
+  
+  // http://localhost:3000/service-url에 경로 진입 시 실행
+
+  @Get('service-url')
+  getServiceUrl(): string {
+    // SERVICE_URL 환경 변수 반환
+    return <string>this.configService.get('SERVICE_URL');
+  }
 }
