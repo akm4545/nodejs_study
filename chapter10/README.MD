@@ -89,3 +89,11 @@ config-test/.env
   
 잘 동작하는 날씨 모듈이 있다고 가정하고 WEATHER_API_URL과 WEATHER_API_KEY 변수를 각각 추가했고 값도 넣어두었다.  
   
+# **weather 모듈 만들기**  
+1. 전역 모듈 설정이 잘 동작하는지 확인하는 데 사용할 weather 모듈을 만든다. Nest CLI에서 다음과 같이 실행하면 weather 모듈과 컨트롤러 클래스가 
+각각 생성된다.  
+  
+실행에 실패하면 nest 대신 npx @nestjs/cli 명령으로 실행한다.
+nest g module weather  
+nest g controller weather --no-spec  
+  
