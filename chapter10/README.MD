@@ -73,3 +73,13 @@ config-test/src/app.controller.ts
 # **테스트하기**  
 1. npm run start:dev를 실행해 서버를 기동 후 http://localhost:3000으로 접속해 테스트한다.  
   
+# **ConfigModule을 전역 모듈로 설정하기**  
+1. 환경 변수를 읽어오려면 ConfigService를 사용할 수 있어야 한다. 그러려면 ConfigModule을 해당 모듈에 설정해야 한다. 이전에 작성한 코드로는 
+AppModule에서만 ConfigService를 사용할 수 있다. 만약에 다른 모듈을 추가한다면 추가한 모듈에도 ConfigService를 설정해야 한다. 모듈이 몇 개 
+안 된다면 별 문제가 없지만 큰 프로젝트는 모듈을 수백 개 사용하므로 효율적인 방법이 필요하다. 이럴 때 isGlobal 옵션을 사용하면 다른 모듈에 ConfigModule을 
+일일이 임포트하지 않아도 된다. isGlobal 옵션을 사용하도록 app.module.ts의 ConfigModule의 설정을 수정한다.  
+  
+config-test/src/app.module.ts  
+  
+isGlobal 옵션을 주면 모듈로 등록되어 다른 모듈에서는 임포트하지 않아도 된다.  
+  

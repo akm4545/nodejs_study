@@ -5,7 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   // ConfigModule 설정
-  imports: [ConfigModule.forRoot()],
+  // 전역 모듈 설정 추가
+  imports: [ConfigModule.forRoot({ isGlobal: true })],
   controllers: [AppController],
   providers: [AppService],
 })
