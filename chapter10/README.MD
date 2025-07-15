@@ -153,5 +153,18 @@ config-test/src/app.controller.ts
   
 2. npm run start, npm run start:dev, npm run start:prod를 각각 실행하고 테스트해본다.  
   
+# **커스컴 환경 설정 파일 사용하기**  
+.env 확장자를 가지는 환경 설정 파일 이외에 .ts를 확장자로 가지는 파일도 환경 설정 파일로 사용할 수 있다. 일반적으로는 .env만으로도 충분하지만 
+복잡한 설정이 필요할 때 .ts 환경 설정 파일을 사용한다. 환경 설정 파일로 .ts 파일을 사용하면 커스텀한 환경 설정을 할 수 있다. 예를 들어 환경 
+변수 파일에 공통적으로 넣을 환경 변수 설정하기, YAML 파일을 환경 변수로 사용하기, 설정에 대한 유효성 검증하기 등을 할 수 있다.  
+  
+핵심은 config.ts파일이다. config.ts는 개발자가 환경 변수를 구성하는 로직을 작성할 수 있다. 다음과 같은 로직을 구현하는 파일을 만든다.  
+  
+![img.png](image/img4.png)  
+  
+process.env.NODE_ENV 환경 변수를 확인해 어떤 환경에서 서버가 실행되고 있는지 확인한다. process.env.NODE_ENV에는 local, dev, prod가 값으로 
+들어갈 수 있으며 local일 때는 local.ts 파일을 읽는다. 공통 환경 변수 파일인 common.ts 파일을 읽어온다. 이전에 읽은 설정들을 병합한 설정값을 
+반환한다.  
+  
 
   
