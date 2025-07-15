@@ -137,5 +137,14 @@ config-test/envs/local.env
 config-test/envs/dev.env  
 config-test/envs/prod.env  
   
+# **환경 변수에 따라서 다른 환경 변수 파일을 사용하도록 설정 수정하기**  
+1. 환경 변수에 따라서 다른 환경 변수 파일을 사용하는 envFilePath를 적용할 수 있게 app.module.ts를 수정한다. envFilePath는 환경 변수 파일의 
+경로를 지정하는 옵션이다.  
+config-test/src/app.module.ts  
+  
+process.cwd()는 현재 디렉터리의 절대 경로를 출력해준다. 이 값을 envFilePath에서 사용한다.  
+  
+${process.cwd()}은 경로이고 뒤에 환경 변수값을 읽어오므로 결국 env 파일의 경로가 된다.  
+  
 
   
