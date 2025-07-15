@@ -83,3 +83,9 @@ config-test/src/app.module.ts
   
 isGlobal 옵션을 주면 모듈로 등록되어 다른 모듈에서는 임포트하지 않아도 된다.  
   
+# **.env에 환경 변수 설정하기**  
+1. .env에 다음과 같이 변수를 추가한다.  
+config-test/.env  
+  
+잘 동작하는 날씨 모듈이 있다고 가정하고 WEATHER_API_URL과 WEATHER_API_KEY 변수를 각각 추가했고 값도 넣어두었다.  
+  
