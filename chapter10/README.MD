@@ -127,3 +127,15 @@ Node.js에서 환경 변수는 process.env.{환경 변수명} 형식을 사용�
   
 3. npm run start:dev로 서버를 기동해 env:dev의 환경 변수가 출력되는지 확인한다.  
   
+# **local, dev, prod 환경 변수 생성**  
+1. 프로젝트 root에 envs라는 디렉터리를 생성한다.  
+  
+2. config-test 서비스 URL이 환경별로 각각 local : http://localhost:3000, dev : http://dev.config-test.com, prod : http://config-test.com 이라고 
+가정하고 local.env, dev.env, prod.env 파일을 생성해 환경 변수를 추가한다.  
+  
+config-test/envs/local.env  
+config-test/envs/dev.env  
+config-test/envs/prod.env  
+  
+
+  
