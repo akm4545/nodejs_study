@@ -70,3 +70,6 @@ config-test/src/app.controller.ts
 @nestjs/config에 있는 ConfigService를 임포트한다. 생성자에서 ConfigService를 주입하고 getHello() 함수 내에서 configService.get("환경 변수명")을 
 호출해 값을 message에 할당한다.  
   
+# **테스트하기**  
+1. npm run start:dev를 실행해 서버를 기동 후 http://localhost:3000으로 접속해 테스트한다.  
+  
