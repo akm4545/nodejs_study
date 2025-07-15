@@ -97,3 +97,14 @@ config-test/.env
 nest g module weather  
 nest g controller weather --no-spec  
   
+# **날씨 API 테스트용 핸들러 함수로 테스트하기**  
+모듈을 만들고 컨트롤러 클래스도 추가했으니 컨트롤러에 날씨 API를 테스트할 핸들러 함수를 추가한다.  
+  
+1. 날씨 API 테스트용 핸들러 함수를 다음과 같이 작성한다.  
+config-test/weather/weather.controller.ts  
+  
+2. npm run start:dev 명령어로 서버를 기동하고 테스트한다.  
+  
+weather 모듈에서 configService를 사용하려면 ConfigModule을 따로 임포트해야 하지만 AppModule에서 ConfigModule을 전역 모듈로 설정했으므로 따로 
+임포트하지 않아도 configService를 사용할 수 있다.  
+  
