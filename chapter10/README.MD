@@ -113,3 +113,17 @@ weather 모듈에서 configService를 사용하려면 ConfigModule을 따로 임
 NODE_ENV 환경 변수에 용도별 환경 변수를 정의해 사용한다. 서버 기동 시 사용하는 명령어를 수정해 NODE_ENV에 값을 할당해 환경별로 서버 설정을 
 다르게 적용한다.  
   
+# **환경별로 서버가 기동되도록 스크립트 수정하기**  
+1. local, dev, prod 환경에서 서버를 기동하려면 package.json의 scripts 항목에 스크립트를 추가해야 한다. 각각 start, start:dev, start:prod를 
+수정해 환경별로 기동하게 스크립트를 수정한다.  
+config-test/package.json  
+  
+NODE_ENV={환경명} 형식으로 서버 기동 시에 NODE_ENV에 값을 할당한다.  
+  
+2. 서버 기동 시에 값이 올바르게 나오는지 console.log()를 추가해 확인한다.  
+config-test/src/app.module.ts  
+  
+Node.js에서 환경 변수는 process.env.{환경 변수명} 형식을 사용한다. process는 내장 객체이므로 따로 import문을 사용하지 않아도 된다.  
+  
+3. npm run start:dev로 서버를 기동해 env:dev의 환경 변수가 출력되는지 확인한다.  
+  
