@@ -108,3 +108,8 @@ config-test/weather/weather.controller.ts
 weather 모듈에서 configService를 사용하려면 ConfigModule을 따로 임포트해야 하지만 AppModule에서 ConfigModule을 전역 모듈로 설정했으므로 따로 
 임포트하지 않아도 configService를 사용할 수 있다.  
   
+# **여러 환경 변수 파일 사용하기**  
+기본 설정으로는 .env 파일을 사용할 수 있지만 현업에서는 dev, qa, beta, prod 등 여러 가지 환경 변수를 사용한다. Node.js에서는 일반적으로 
+NODE_ENV 환경 변수에 용도별 환경 변수를 정의해 사용한다. 서버 기동 시 사용하는 명령어를 수정해 NODE_ENV에 값을 할당해 환경별로 서버 설정을 
+다르게 적용한다.  
+  
