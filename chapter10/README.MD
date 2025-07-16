@@ -185,5 +185,9 @@ config-test/src/configs/config.ts
 스프레드 연산자 ...을 사용해 common과 conf를 합쳐준다. load 옵션에서는 () => ({}) 형태로 값을 주어야 하므로 () => ()로 객체를 한 번 
 감싸준다. Record는 객체를 결괏값으로 받는 함수 타입을 의미한다.  
   
+# C**onfigModule에 load 옵션 추가하기**  
+1. 커스텀 파일 설정을 하려면 load 옵션을 추가해야 한다. app.module.ts의 ConfigModule 설정에 load 옵션을 추가한다.  
+config-test/src/app.module.ts  
+  
 
   
