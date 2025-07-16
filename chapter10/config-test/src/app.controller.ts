@@ -26,4 +26,13 @@ export class AppController {
     // SERVICE_URL 환경 변수 반환
     return <string>this.configService.get('SERVICE_URL');
   }
+
+  // 라우팅 정보
+  @Get('db-info')
+  getTest(): string {
+    console.log(this.configService.get('logLevel'));
+    console.log(this.configService.get('apiVersion'));
+
+    return <string>this.configService.get('dbInfo');
+  }
 }
