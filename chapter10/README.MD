@@ -221,5 +221,11 @@ load옵션이 있다면 load에 있는 환경 변수를 시스템의 환경 변�
 알아두는 것이 좋다. YAML은 문법이 간결하며 JSON에서 표현하는 모든 데이터를 표현할 수 있다. 또한 JSON에서 불가능한 주석도 지원한다. ConfigModule이 
 YAML 파일을 읽으려면 커스텀 환경 설정 파일에 YAML 파일을 읽어오도록 코드를 작성해야 한다. 즉 config.ts를 수정해야 한다.  
   
+# **js-yaml 설치하기**  
+1. npm install 혹은 npm i를 사용해 설치한다. 타입 정보를 저장할 수 있게 @types/js-yaml도 함께 설치해준다. 타입 정보가 있으면 IDE에서 타입 
+정보를 확인해 자동 완성과 컴파일 타임의 타입 체크 등의 기능을 지원해주므로 편리하다.  
+  
+npm i js-yaml  
+npm i -D @types/js-yaml  
 
   
