@@ -195,5 +195,26 @@ config-test/src/app.controller.ts
   
 2. npm run start, npm run start:dev, npm run start:prod로 서버를 기동해 각각 테스트해본다.  
   
+# **서버 기동과 환경 설정 파일 초기화 순서 알아보기**  
+config-test 프로젝트를 기준으로 서버 기동 시 초기화되는 순서를 알아보고 환경 변수는 어떤 순서로 반영되는지 알아본다.  
+  
+서버 기동 시의 초기화 순서는 다음과 같다.  
+  
+![img.png](image/img5.png)  
+  
+npm run start 명령어를 사용해 서버를 기동할 때 먼저 실행되는 파일은 main.ts다. main.ts에는 bootstrap() 함수가 있으며 해당 함수를 실행하는 것으로 
+시작한다. bootstrap() 함수에서는 NestFactory.create()를 실행한다. NestFactory.create()는 설정되어 있는 모듈을 초기화하는 작업을 진행한다.  
+  
+그 후 각 모듈이 초기화될 때 의존성 주입을 해야 하는 부분들을 초기화하고 주입하도록 인스턴스를 생성하는 일을 한다. 실습 프로젝트 기준으로는 
+ConfigModule을 먼저 초기화해 환경 변수를 어떤 모듈에서든지 읽을 수 있는 준비를 해준다. 다음으로 AppModule을 초기화하고 AppModule 하위에 있는 
+WeatherModule을 초기화한다. 모듈 초기화 순서는 프로젝트에 따라 다를 수 있다.  
+  
+AppModule에 설정되어 있는 ConfigModule.forRoot()를 실행해 설정 파일을 읽는다. 아무런 설정이 없으면 .env 파일에서 설정을 읽어온다. envFilePath 
+설정이 있다면 리스트에 담겨 있는 순서대로 설정을 읽어서 저장한다. 다음으로 시스템의 환경 변수인 process.env에 있는 환경 변수를 병합한다. 
+load옵션이 있다면 load에 있는 환경 변수를 시스템의 환경 변수와 합치게 된다.  
+  
+모듈이 모두 초기화되었다면 컨트롤러의 인스턴스를 생성하고 컨트롤러에 있는 핸들러 함수를 URL과 매핑하는 작업을 진행한다. 이 작업이 끝나면 서버는 
+성공적으로 시작된다는 메시지를 보내준다.  
+  
 
   
