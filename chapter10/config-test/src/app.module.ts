@@ -19,6 +19,7 @@ console.log('current working directory : ' + process.cwd());
     envFilePath: `${process.cwd()}/envs/${process.env.NODE_ENV}.env`,
     // 커스텀 설정 파일 설정
     load: [config],
+    cache: true, // 캐시하기
   }), WeatherModule],
   controllers: [AppController],
   providers: [AppService],
