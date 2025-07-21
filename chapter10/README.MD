@@ -266,4 +266,13 @@ config-test/src/app.module.ts
 1. controller.ts의 service-url 핸들러 함수의 내용을 약간 수정해 만들어둔 확장 변수를 잘 읽어오는지 확인한다.  
 config-test/src/app.controller.ts  
   
+# **main.ts에서 환경 변수 사용하기**  
+1. main.ts는 서버 기동 시 가장 먼저 실행되는 파일이다. 익스프레스에서는 index.js와 같은 역할을 하는 파일이다. 가장 먼저 실행이 되므로 해당 파일에서 
+NestFactory.create()를 호출해주기 전에는 ConfigModule이 활성화되지 않는다. 또한 클래스가 아니라 bootstrap() 함수만 있으므로 기존처럼 클래스의 생성자로 
+의존성 주입을 받을 수 없어 다른 방법으로 ConfigService를 사용해야 한다. main.ts에서는 configService 인스턴스를 주입받을 수는 없으므로 app.get() 
+메서드에 ConfigService 클래스를 인수로 주고 반환값을 받는 방식을 사용한다. ConfigService를 추가하고 사용하도록 코드를 수정한다.  
+  
+config-test/scr/main.ts  
+  
+app.get() 메서드에 ConfigService를 넣으면 앱의 환경 변수를 사용할 수 있는 configService 인스턴스를 반환해준다.
 
