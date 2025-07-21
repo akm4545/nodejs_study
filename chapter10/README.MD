@@ -262,4 +262,8 @@ config-test/envs/local.env
 1. 확장 변수를 사용하려면 ConfigModule에 한 가지 더 설정을 해줘야 한다. expandVariables 옵션을 추가한다.  
 config-test/src/app.module.ts  
   
+# **테스트용 핸들러 함수로 테스트하기**  
+1. controller.ts의 service-url 핸들러 함수의 내용을 약간 수정해 만들어둔 확장 변수를 잘 읽어오는지 확인한다.  
+config-test/src/app.controller.ts  
+  
 

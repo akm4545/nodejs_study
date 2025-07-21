@@ -40,4 +40,10 @@ export class AppController {
   getRedisInfo(): string {
     return `${this.configService.get('redis.host')}:${this.configService.get('redis.port')}`;
   }
+  
+  @Get('server-url')
+  getServerUrl(): string {
+    // 확장 변수값 읽기
+    return <string>this.configService.get('SERVER_URL');
+  }
 }
