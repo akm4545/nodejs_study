@@ -251,4 +251,11 @@ config-test/src/app.module.ts
   
 cache:true 옵션을 사용하면 COnfigService의 get() 함수를 사용할 때 캐시에서 먼저 불러오게 되므로 성능상의 이점이 있다.  
   
+# **확장 변수 사용하기**  
+1. 확장 변수(expandable variables)는 이미 선언된 변수를 다른 변수에 ${변수명}으로 할당하는 기능이다. 확장 변수 설정을 추가한다.  
+config-test/envs/local.env  
+  
+환경 변수 SERVER_DOMAIN과 SERVER_PORT의 값을 새로운 변수 SERVER_URL에 할당했다.  
+확장 변수는 내부적으로는 dotenv-expand 패키지를 사용한다.  
+  
 
