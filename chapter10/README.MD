@@ -258,4 +258,8 @@ config-test/envs/local.env
 환경 변수 SERVER_DOMAIN과 SERVER_PORT의 값을 새로운 변수 SERVER_URL에 할당했다.  
 확장 변수는 내부적으로는 dotenv-expand 패키지를 사용한다.  
   
+# **확장 변수를 사용할 수 있게 추가 설정하기**  
+1. 확장 변수를 사용하려면 ConfigModule에 한 가지 더 설정을 해줘야 한다. expandVariables 옵션을 추가한다.  
+config-test/src/app.module.ts  
+  
 

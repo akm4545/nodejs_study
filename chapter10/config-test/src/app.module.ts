@@ -20,6 +20,7 @@ console.log('current working directory : ' + process.cwd());
     // 커스텀 설정 파일 설정
     load: [config],
     cache: true, // 캐시하기
+    expandVariables: true, // 확장 변수 옵션 추가
   }), WeatherModule],
   controllers: [AppController],
   providers: [AppService],
