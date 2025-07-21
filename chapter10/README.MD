@@ -227,5 +227,11 @@ YAML 파일을 읽으려면 커스텀 환경 설정 파일에 YAML 파일을 읽
   
 npm i js-yaml  
 npm i -D @types/js-yaml  
+  
+# **config.yaml 파일 생성하기**  
+1. js-yaml을 설치했으니 js-yaml에서 읽어올 파일을 생성한다. config-test/envs 디렉터리 아래에 config.ts에서 읽어올 config.yaml 파일을 만들고 
+다음과 같이 생성한다.  
+config-test/src/envs/config.yaml  
+  
 
   
