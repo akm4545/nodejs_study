@@ -240,3 +240,8 @@ config-test/src/configs/config.ts
 yaml.load를 사용해 config.yaml 파일을 읽어온다. 이때 반환하는 타입은 Record<string, any>다. 기존의 환경 설정에 yaml.load로 읽어온 설정을 
 덧붙인다.
   
+# **테스트용 핸들러 함수로 테스트하기**  
+1. 설정 파일 추가 및 설정을 완료했으므로 테스트용 핸들러 함수를 추가하고 브라우저에서 테스트를 진행한다.  
+config-test/src/app.controller.ts  
+  
+
