@@ -233,5 +233,10 @@ npm i -D @types/js-yaml
 다음과 같이 생성한다.  
 config-test/src/envs/config.yaml  
   
-
+# **config.ts 수정하기**  
+1. YAML 파일은 커스텀 설정 파일로 취급하므로 이전에 만든 config.ts에 설정을 추가한다.  
+config-test/src/configs/config.ts  
+  
+yaml.load를 사용해 config.yaml 파일을 읽어온다. 이때 반환하는 타입은 Record<string, any>다. 기존의 환경 설정에 yaml.load로 읽어온 설정을 
+덧붙인다.
   
