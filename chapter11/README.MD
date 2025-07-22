@@ -14,4 +14,14 @@ AutModule에는 인증 관련 기능을, UserModule 모듈에는 유저 데이�
 AuthService에는 회원 가입과 회원 유효성을 검증하는 메서드를 추가한다. AuthService의 회원 가입 메서드에서 UserService를 주입해 사용한다. UserService에는 
 회원정보 추가, 수정, 삭제 등의 메서드가 있다.  
   
+# **User 모듈 생성하기**  
+1. 다음 명령을 차례대로 입력하면 nest-cli가 자동으로 기본 코드를 만들어준다.  
+nest g module user  
+nest g controller user --no-spec  
+nest g service user --no-spec  
+  
+이렇게 하면 src 디렉터리 아래에 user 디렉터리가 생기고 user 디렉터리는 명령어로 생성한 module, controller, service 파일이 있다. 유저 정보를 
+저장하려면 리포지토리가 필요하다. 리포지토리는 생성하지 않고 ORM 라이브러리로 TypeORM 라이브러리에서 지원하는 Repository 클래스를 사용한다. 데이터베이스로 SQLite를 
+사용한다.  
+  
 
