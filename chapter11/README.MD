@@ -62,6 +62,11 @@ InjectRepository는 레포짙리 의존성을 주입하는 데코레이터다. R
 ![img.png](image/img3.png)  
 ![img.png](image/img4.png)  
   
-
+# **컨트롤러 만들기**
+1. 유저 컨트롤러는 유저가 요청을 보냈을 때 실행되는 핸들러 메서드를 정의한다. 컨트롤러 코드를 작성한다.  
+nest-auth-test/src/user/user.controller.ts  
+  
+@Controller는 컨트롤러임을 나타내는 데코레이터다. 'user' 문자열은 주소가 user로 시작된다는 것을 말한다. 생성자에서 유저 서비스를 주입받아서 
+userService 객체에 할당한다.
 
 
