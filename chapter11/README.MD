@@ -24,4 +24,23 @@ nest g service user --no-spec
 저장하려면 리포지토리가 필요하다. 리포지토리는 생성하지 않고 ORM 라이브러리로 TypeORM 라이브러리에서 지원하는 Repository 클래스를 사용한다. 데이터베이스로 SQLite를 
 사용한다.  
   
+# **SQLite 데이터베이스 설정하기**  
+1. 먼저 필요한 패키지부터 설치한다. sqlite3와 typeorm 그리고 typeorm을 nest에서 편하게 사용하려면 @nestjs/typeorm이 필요하니 설치한다.  
+  
+npm install sqlite3 typeorm @nestjs/typeorm  
+  
+2. 설치를 완료하고 app.module.ts에 설정을 한다.  
+nest-auth-test/src/app.module.ts  
+  
+TypeOrmModule.forRoot() 메서드는 매우 많은 속성을 가지고 있지만 type, database, entities만 설정해주면 동작한다. type은 데이터베이스의 타입이고 
+database는 데이터베이스 파일명이다. SQLite는 확장자로 sqlite를 사용한다.  
+  
+![img.png](image/img2.png)  
+  
+entities에는 엔티티로 만드는 객체를 넣어주면 된다. synchronize를 true로 하면 서버 기동 시 서버가 엔티티 객체를 읽어서 데이터베이스 스키마를 만들거나 
+변경해준다. synchronize 옵션은 꼭 개발용으로만 사용해야 한다. 프로덕션 서버에서 사용하면 서버 기동 시 의도치 않게 데이터베이스 스키마를 변경할 수도 
+있기 때문이다. logging은 true로 설정 시 SQL 실행 로그를 확인할 수 있다.  
+  
+
+  
 
