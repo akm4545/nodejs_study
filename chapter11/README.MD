@@ -67,6 +67,15 @@ InjectRepository는 레포짙리 의존성을 주입하는 데코레이터다. R
 nest-auth-test/src/user/user.controller.ts  
   
 @Controller는 컨트롤러임을 나타내는 데코레이터다. 'user' 문자열은 주소가 user로 시작된다는 것을 말한다. 생성자에서 유저 서비스를 주입받아서 
-userService 객체에 할당한다.
+userService 객체에 할당한다.  
+  
+# **서비스 만들기**  
+1. 서비스는 컨트롤러와 레포지토리를 이어주는 역할을 한다. 컨트롤러를 작성한다.  
+nest-auth-test/src/user/user.service.ts  
+  
+@Injectable() 데코레이터가 있으면 프로바이더가 된다. 모듈에 설정을 하면 다른 객체에 주입할 수 있다. userRepository.save() 메서드는 업데이트에도 사용한다. 
+getUser()는 유저 한 명을 찾는데 userRepository.findOne() 메서드를 사용한다. where 조건에 email을 넣었으므로 email로 찾는다.  
+  
+
 
 
