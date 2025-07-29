@@ -84,7 +84,11 @@ nest-auth-test/src/user/user.module.ts
 추가한다.  
 nest-auth-test/src/app.module.ts  
   
-
+# **테스트하기**  
+1. 테스트용 HTTP 파일을 만들어 생성, 유저 정보 읽기, 업데이트, 삭제가 모두 잘 동작하는지 확인한다.  
+nest-auth-test/src/user/user.http  
+  
+  
 
   
 
