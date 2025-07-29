@@ -104,6 +104,16 @@ User 엔티티로 바로 사용했지만 클라이언트와 데이터를 주고�
 붙여야 한다. 프로젝트 전체에서 유효성 검증을 제어할 떄는 ValidationPipe + class-transformer를 사용한 방법이 조금 더 유용하다. 반면 개별 메서드에서 
 상세한 유효성 검증 로직이 필요할 때는 @UsePipe와 Joi 라이브러리를 이용하는 방법이 유용하다.  
   
+# **전역 ValidationPipe 설정하기**  
+1. 유효성 검증을 하려면 ValidationPipe를 main.ts에 설정해야 한다. ValidationPipe 추가는 간단하다. 의존성을 설치하고 임포트를 하고 전역 파이프 
+설정에 ValidationPipe 객체를 생성해 넣으면 끝이다.  
+  
+ValidationPipe 의존성 설치  
+npm install class-validator class-transformer  
+  
+ValidationPipe 설정  
+nest-auth-test/src/main.ts  
+  
 
 
   
