@@ -88,7 +88,23 @@ nest-auth-test/src/app.module.ts
 1. 테스트용 HTTP 파일을 만들어 생성, 유저 정보 읽기, 업데이트, 삭제가 모두 잘 동작하는지 확인한다.  
 nest-auth-test/src/user/user.http  
   
+# **파이프로 유효성 검증하기**    
+익스프레스에서는 컨트롤러 역할을 하는 곳 또는 별도의 라이브러리를 사용해 검증을 진행하지만 NestJS에서는 파이프(pipe)를 사용해서 유효성 검증을 한다.  
   
+![img.png](image/img5.png)  
+  
+다양한 파이프들이 있으며 직접 만들 수도 있지만 여기서는 가장 사용하기 간편한 ValidationPipe를 사용한다. ValidationPipe를 사용하려면 class-validator와 
+class-transformer를 설치해야 한다.  
+  
+class-transformer는 JSON 정보를 클래스 객체로 변경한다. 받은 요청(payload)을 변환한 클래스가 컨트롤러의 핸들러 메서드의 매개변수에 선언되어 있는 
+클래스와 같다면 유효성 검증을 한다. class-validator는 데코레이터를 사용해 간편하게 유효성 검증을 하는 라이브러리다. 유저 관련 로직을 작성할 때는 타입을 
+User 엔티티로 바로 사용했지만 클라이언트와 데이터를 주고받을 때는 보통 데이터 전송 객체(DTO)를 따로 만들어 사용한다.  
+  
+유효성 검증으로 @UsePipes 데코레이터와 Joi 라이브러리를 사용하는 방법도 있지만 스키마를 만들어야 하고 메서드마다 @UsePipes 데코레이터를 일일이 
+붙여야 한다. 프로젝트 전체에서 유효성 검증을 제어할 떄는 ValidationPipe + class-transformer를 사용한 방법이 조금 더 유용하다. 반면 개별 메서드에서 
+상세한 유효성 검증 로직이 필요할 때는 @UsePipe와 Joi 라이브러리를 이용하는 방법이 유용하다.  
+  
+
 
   
 
