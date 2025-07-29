@@ -114,7 +114,17 @@ npm install class-validator class-transformer
 ValidationPipe 설정  
 nest-auth-test/src/main.ts  
   
+# **UserDto 만들기**  
+1. 유저 디렉터리에 UserDto 객체를 만든다. 생성 시와 수정 시 검사 항목이 다르기 때문에 CreateUserDto와 UpdateUserDto를 따로 만든다.  
+nest-auth-test/src/user/user.dto.ts  
+  
+email 필드에는 @IsEmail을 붙여서 이메일인지 검증하고 그 외에는 IsString을 붙여서 문자열이 들어갈 수 있게 해준다.  
+  
+![img.png](image/img6.png)  
+![img.png](image/img7.png)  
+  
 
+  
 
   
 
