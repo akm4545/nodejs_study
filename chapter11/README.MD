@@ -150,7 +150,24 @@ nest-auth-test/src/user/user.module.ts
 3. 다음으로 AuthModule에 UserModule의 import 설정을 추가한다.  
 nest-auth-test/src/auth/auth.module.ts  
   
-
+# **회원 가입 메서드 만들기**  
+1. UserService 클래스의 createUser를 사용해도 되지만 비밀번호 같은 민감 정보는 무조건 암호화해야 한다. 기존 코드로는 패스워드가 암호화되어서 
+저장되지 않으므로 암호화 코드를 추가한다. 암호화 모듈로 bcrypt를 사용한다. bcrypt를 설치한다.  
+  
+npm install bcrypt  
+npm install -D @types/bcrypt  
+  
+2. auth.service.ts에 코드를 작성한다.  
+nest-auth-test/src/auth/auth.service.ts  
+  
+bcrypt를 사용해 패스워드를 암호화한다. hashSync의 첫 번째 매개변수는 암호화할 문자열이고 뒤에 있는 10은 암호화 처리를 10번 하곘다는 의미다. 숫자가 
+올라갈수록 해시값(암호화된 문자열)을 얻는 데 시간이 오래 걸린다.  
+  
+3. 다음으로 controller를 만든다.  
+nest-auth-test/src/auth/auth.controller.ts  
+  
+# **테스트하기**  
+1. 다음으로
   
 
 
