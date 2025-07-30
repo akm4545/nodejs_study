@@ -167,7 +167,12 @@ bcrypt를 사용해 패스워드를 암호화한다. hashSync의 첫 번째 매�
 nest-auth-test/src/auth/auth.controller.ts  
   
 # **테스트하기**  
-1. 다음으로
+1. src/auth 아래에 auth.http 파일을 만들어서 테스트한다.  
+nest-auth-test/src/auth/auth.http  
+  
+npm run start:dev로 서버를 기동시키고 테스트를 진행한다.  
+  
+
   
 
 
