@@ -133,6 +133,25 @@ email 필드에는 @IsEmail을 붙여서 이메일인지 검증하고 그 외에
   
 토큰은 OAuth를 사용한 소셜 로그인에서 사용할 예정이므로 먼저 쿠키를 사용해 인증을 구현한다.  
   
+# **인증 모듈 만들기 및 설정하기**  
+1. 인증 모듈을 만든다. 다음의 명령어를 nest-auth-test 디렉터리에서 실행해 인증 모듈 및 service와 controller를 만든다.  
+nest g module auth  
+nest g service auth --no-spec  
+nest g controller auth --no-spec  
+  
+--no-spec은 테스트 파일을 만들지 않는다는 의미다.  
+  
+2. UserService를 AuthService에서 주입받을 수 있도록 user.module.ts에 exports 설정을 추가한다.  
+nest-auth-test/src/user/user.module.ts  
+  
+인증 모듈의 AuthService에서는 회원 가입이나 로그인/로그아웃 처리에 UserService를 이용한다. @Injectable()이 붙어 있는 프로바이더의 경우 같은 
+모듈의 다른 클래스에서 주입해 사용할 수 있다. 다만 다른 모듈에서 사용하려면 @Module 데코레이터의 속성으로 exports에 프로바이더를 넣어주어야 한다.  
+  
+3. 다음으로 AuthModule에 UserModule의 import 설정을 추가한다.  
+nest-auth-test/src/auth/auth.module.ts  
+  
+
+  
 
 
   
