@@ -172,6 +172,14 @@ nest-auth-test/src/auth/auth.http
   
 npm run start:dev로 서버를 기동시키고 테스트를 진행한다.  
   
+# **SQLite 익스텐션으로 테이블 확인하기**  
+1. SQLite를 사용해 데이터베이스(ser/nest-auth-test.sqlite 파일)에 저장했으니 SQLite 클라이언트를 사용해 테이블 내용을 확인한다. VSCode의 
+커맨드 팔레트(Ctrl + Shift + P)에서 SQLite를 입력하면 Open Database가 보인다. 여기서 SQLite: Open Database를 선택한다.  
+  
+2. 다음으로 nest-auth-test.sqlite 파일을 선택한다.  
+  
+3. 그러면 왼쪽 아래에 SQLite EXPLORE가 나온다. 재생 버튼을 클릭하면 테이블의 내용을 확인할 수 있다.  
+  
 
   
 
