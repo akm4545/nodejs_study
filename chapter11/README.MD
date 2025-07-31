@@ -206,6 +206,27 @@ login() 메서드는 Request와 Response를 모두 사용해야 하므로 @Body�
 1. auth.http에 쿠키 정보가 원하는 대로 반환되는지 테스트해본다.  
 nest-auth-test/src/auth/auth.http  
   
+# **가드를 사용해 인증됐는지 검사하기**  
+Nest.js에는 인증할 때 가드라는 미들웨어를 보편적으로 사용한다. 가드는 @Injectable() 데코레이터가 붙어 있고 CanActivate 인터페이스를 구현한 클래스다. 
+@UserGuard 데코레이터로 가드를 사용할 수 있다. 클라이언트의 요청을 @Get, @Post 등이 붙어 있는 핸드러 메서드에 넘기기 전에 인증에 관련된 처리를 
+할 수 있다. CanActivate 인터페이스를 구현하려면 canActivate() 메서드를 구현해야 한다.canActivate() 메서드는 boolean 또는 Promise<boolean>을 
+반환하며 true인 경우 핸들러 메서드를 실행하고 false이면 403 Forbidden 에러를 준다.  
+  
+![img.png](image/img10.png)  
+  
+1. 서버 측에는 HTTP 요청의 헤더이 있는 쿠키를 읽는 코드가 필요하다. 쿠키를 읽어 유저의 인증 정보를 확인한다. HTTP 헤더에서 쿠키를 읽으려면 cookie-parser 
+패키지를 설치하고 설정을 해야 한다. 먼저 cookie-parser 패키지를 설치한다.  
+npm install cookie-parser  
+  
+2. 이번에는 HTTP 요청의 헤더에서 쿠키를 읽어올 수 있도록 NestApplication의 설정을 변경한다.  
+nest-auth-test/src/main.ts  
+  
+쿠키 파서는 쿠키를 Request 객체에서 읽어오는 데 사용하는 미들웨어다. cookieParser()로 추가한다. NestFactory.create로 만든 NestApplication의 
+객체인 app에서 use() 함수를 사용해 미들웨어를 사용하도록 한 줄만 추가하면 끝이다.  
+  
+3. 다음으로 authService의 validateUser를 사용해 가드를 만든다. src/auth 아래에 auth.guard.ts 파일을 생성하고 작성한다.  
+nest-auth/src/auth/auth.guard.ts  
+  
 
   
 
