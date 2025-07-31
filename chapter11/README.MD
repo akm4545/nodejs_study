@@ -187,6 +187,21 @@ npm run start:dev로 서버를 기동시키고 테스트를 진행한다.
 NestJS에서 인증을 구현할 때는 보통 인증용 미들웨어인 가드(Guard)를 함께 사용한다. 가드는 특정 상황(권한, 롤, 액세스 컨트롤)에서 받은 요청을 가드를 추가한 
 라우트 메서드에서 처리할지 말지를 결정하는 역할을 한다.  
   
+# **AuthService에 이메일과 패스워드 검증 로직 만들기**  
+1. 쿠키에 데이터를 추가히 전에 유저의 데이터가 맞는지 검증하는 로직이 필요하다. 그래서 쿠키 정보를 저장하는 로직보다 유저의 이메일과 패스워드 검증 
+로직을 먼저 만든다.  
+nest-auth-test/src/auth/auth.service.ts  
+  
+bycrept.compareSync(data, encrypted) 함수에서 data는 입력받은 패스워드값을 넣고 두 번째에는 패스워드 해시값을 넣어주면 바르게 암호화된 경우 
+userInfo를 반환한다.  
+  
+2. validateUser() 메서드를 AuthController에서 사용해 인증 결과를 쿠키에 추가한다.  
+nest-auth-test/src/auth/auth.controller.ts  
+  
+login() 메서드는 Request와 Response를 모두 사용해야 하므로 @Body나 @Param이 아닌 @Request를 직접 사용한다. httpOnly를 true로 설정하면 브라우저에서 
+쿠키를 읽지 못한다. 브라우저에서 쿠키를 읽을 수 있다면 XSS(Cross Site Scripting)등의 공격으로 쿠키가 탈취되는 상황이 발생한다. 쿠키 정보를 
+브라우저에서 읽지 않아도 된다면(자바스크립트의 Document.cookie API를 통해 쿠키를 사용하는 것이 아니라면) true로 설정하는 편이 보안에 더 유리하다.  
+  
 
   
 
