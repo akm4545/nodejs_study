@@ -202,6 +202,10 @@ login() 메서드는 Request와 Response를 모두 사용해야 하므로 @Body�
 쿠키를 읽지 못한다. 브라우저에서 쿠키를 읽을 수 있다면 XSS(Cross Site Scripting)등의 공격으로 쿠키가 탈취되는 상황이 발생한다. 쿠키 정보를 
 브라우저에서 읽지 않아도 된다면(자바스크립트의 Document.cookie API를 통해 쿠키를 사용하는 것이 아니라면) true로 설정하는 편이 보안에 더 유리하다.  
   
+# **테스트하기**  
+1. auth.http에 쿠키 정보가 원하는 대로 반환되는지 테스트해본다.  
+nest-auth-test/src/auth/auth.http  
+  
 
   
 
