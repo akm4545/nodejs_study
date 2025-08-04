@@ -227,6 +227,19 @@ nest-auth-test/src/main.ts
 3. 다음으로 authService의 validateUser를 사용해 가드를 만든다. src/auth 아래에 auth.guard.ts 파일을 생성하고 작성한다.  
 nest-auth/src/auth/auth.guard.ts  
   
+CanActivate를 구현했으므로 가드다. canActivate() 메서드는 CanActivate의 추상 메서드이므로 사용할 클래스에서 구현해야 한다. 반환 타입으로 boolean 
+또는 Promise<boolean>을 줘야 하는데 async await 구문을 사용하므로 여기서는 Promise<boolean>을 반환 타입으로 사용한다. true이면 인증이 됐다는 
+의미고 false는 인증이 되지 않았다는 의미다. false에는 403 에러를 보내준다. context는 ExecuteContext 타입으로 주로 Request나 Response 객체를 
+얻어오는 데 사용한다.  
+  
+주의할 점으로 가드 내에서 응답에 쿠키를 설정할 수 없다. 또한 가드는 모든 미들웨어의 실행이 끝난 다음 실행되며 filter나 pipe보다는 먼저 실행된다.  
+  
+4. 컨트롤러에 LoginGuard 로직을 붙인다.  
+nest-auth-test/src/auth/auth.controller.ts  
+  
+가드를 사용 시에는 @UseGuards 데코레이터를 사용한다. 괄호 안에 만들어둔 LoginGuard를 넣어주면 된다. LoginGuard에서 인증에 성공 시 request.user에 
+user 정보를 할당했다. 쿠키 정보가 없으나 user 정보가 있는 경우 로그인 프로세스를 진행한 것으로 보고 쿠키를 설정한다.  
+  
 
   
 
