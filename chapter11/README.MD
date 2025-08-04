@@ -261,6 +261,22 @@ nest-auth-test/src/auth/auth.http
 가드를 통과한 요청은 스트래티지에 전달되어 사용자 신원 검증을 한다. 스트래티지는 세션 정보를 읽기 위해 세션 시리얼라이저 세션에 있는 인증 정보를 요청한다. 
 세션 시리얼라이저는 세션에 있는 인증 정보를 스트래티지에 돌려준다. 스트래티지는 세션에 있는 인증 정보를 확인해 사용자 인증 유무를 가드에 결괏값으로 반환한다.  
   
+# **라이브러리 설치 및 설정하기**  
+1. passport 라이브러리를 설치한다. 유저 아이디와 패스워드로 인증할 때 스트래티지는 passport-local을 사용한다. passport-local은 username과 
+password로 인증할 수 있는 전략을 사용하는 모듈이다. 세션 저장에는 express-session을 사용한다. @types/passport-local @types/express-session은 
+타입스크립트의 타입 정보를 담고 있는 라이브러리들이다. 개발할 때 유용하므로 개발 환경 패키지를 설치하는 -D 옵션을 주어 설치한다.  
+  
+npm i @nestjs/passport passport passport-local express-session  
+npm i -D @types/passport-local @types/express-session  
+  
+2. 세션을 사용하려면 main.ts 파일에 설정을 추가해야 한다.  
+nest-auth-test/src/main.ts  
+  
+내부적으로 secret은 암호화를 하는 데 사용하는 키다. 절대 유출되지 않도록 관리해야 한다. resave는 세션을 항상 저장할지 여부를 나타낸다. HTTP 요청이 
+올 때마다 세션을 새로 저장하면 효율이 떨어질 수 있으므로 false로 해둔다. saveUninitialized 옵션은 세션이 저장되기 전에 빈 값을 저장할지 여부를 
+나타낸다. 인증이 되지 않은 사용자 정보도 빈 값으로 저장하므로 false로 설정해 불필요한 공간을 차지하지 않게 한다. 쿠키 설정은 세션을 찾는 데 사용할 
+키값을 쿠키에 설정한다. 마지막으로 패스포트 초기화 및 세션 저장소를 초기화한다. 세션의 저장소를 따로 지정하지 않았으므로 서버의 메모리에 저장된다.  
+  
 
 
 
