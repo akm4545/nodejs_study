@@ -240,8 +240,11 @@ nest-auth-test/src/auth/auth.controller.ts
 가드를 사용 시에는 @UseGuards 데코레이터를 사용한다. 괄호 안에 만들어둔 LoginGuard를 넣어주면 된다. LoginGuard에서 인증에 성공 시 request.user에 
 user 정보를 할당했다. 쿠키 정보가 없으나 user 정보가 있는 경우 로그인 프로세스를 진행한 것으로 보고 쿠키를 설정한다.  
   
-
+# **테스트하기**  
+1. auth.http에 다른 유저로 로그인과 가드 로직 테스트 두 가지 항목을 더 추가해 테스트를 진행한다.  
+nest-auth-test/src/auth/auth.http  
   
+
 
 
   
