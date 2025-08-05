@@ -277,6 +277,23 @@ nest-auth-test/src/main.ts
 나타낸다. 인증이 되지 않은 사용자 정보도 빈 값으로 저장하므로 false로 설정해 불필요한 공간을 차지하지 않게 한다. 쿠키 설정은 세션을 찾는 데 사용할 
 키값을 쿠키에 설정한다. 마지막으로 패스포트 초기화 및 세션 저장소를 초기화한다. 세션의 저장소를 따로 지정하지 않았으므로 서버의 메모리에 저장된다.  
   
+# **로그인과 인증에 사용할 가드 구현하기**  
+1. 이전에는 가드를 하나만 만들어서 로그인과 인증 모두에 사용했다. 이번에는 로그인에 사용할 가드와 로그인 후 인증에 사용할 가드를 별개로 만들어서 사용한다. 
+로그인 가드는 HTTP 요청으로 받은 email과 password 정보로 유효한 user 정보가 있는지 확인해 유효할 경우 유저의 정보를 세션에 저장한다. 인증 가드는 HTTP 
+요청에 있는 쿠키를 찾아 쿠키에 있는 정보로 세션을 확인해 로그인이 완료된 사용자인지 판별한다. LoginAuthGuard와 AuthenticatedGuard 가드를 auth.guard.ts에 
+추가한다.  
+  
+nest-auth-test/src/auth/auth.guard.ts  
+  
+NestJS에서는 패스포트를 편하게 사용할 수 있도록 @nestjs/passport를 제공한다. 패스포트 인증에 가드를 사용할 수 있도록 감싸둔 AuthGuard를 제공하는 
+라이브러리다. 패스포트는 인증 로직을 스트래티지라는 개념으로 구현한다. id, password로 인증을 처리할 때는 passport-local을 사용한다. AuthGuard('local')은 
+로컬 스트래티지를 사용한다. 이외의 스트래티지로 passport-jwt와 passport-google-oauth20등이 있다. 가드를 사용하려면 canActivate를 구현해야 한다. 
+AuthGuard를 상속받았으니 super.canActivate() 에서는 passport-local의 로직을 구현한 메서드를 실행한다. 해당 메서드를 아직 구현하지 않았다. 
+local.strategy.ts 파일에 LocalStrategy 클래스를 생성한 후 validate() 메서드를 구현할 것이다. super.logIn() 에서는 로그인 처리를 하는데 여기서는 
+세션을 저장한다. 세션을 저장하고 꺼내오는 방법은 session.serializer.ts 파일에 작성한다. AuthenticatedGuard는 로그인 후 인증이 되었는지 확인할 
+때 사용한다. 세션에 데이터를 저장하고 돌려주는 응답값에 connect.sid라는 이름의 쿠키를 만들게 된다. 이후의 요청에 해당 쿠키값을 같이 전송하면 세션에 
+있는 값을 읽어서 인증 여부를 확인할 때 사용하는 가드다.  
+  
 
 
 
