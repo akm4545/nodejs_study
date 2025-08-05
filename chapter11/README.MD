@@ -329,7 +329,11 @@ PassportStrategy(Strategy)는 믹스인이라고 불리는 방법이다. 컴포�
 믹스인(mixin)/트레잇(trait)은 클래스에 새로운 기능을 추가하기 위해 필요한 메서드를 가지고 있는 작은 클래스들을 결합해 기능을 추가하는 방법을 말한다.  
   
 local-strategy에는 인증 시 사용하는 필드명이 username, password로 정해져 있다. 우리는 username이 아니라 email, password로 인증하게 되므로 
-usernameField 이름을 email로 바꿔주는 설정을 추가했다. validate() 메서드에서는 전달한 email과 password가 올바른지 검증한다. 
+usernameField 이름을 email로 바꿔주는 설정을 추가했다. validate() 메서드에서는 전달한 email과 password가 올바른지 검증한다.  
+  
+# **auth.module.ts에 설정 추가하기**  
+1. 만들어둔 LocalStrategy, SessionSerializer를 다른 클래스에서 사용할 수 있게 프로바이더에 등록해준다. 또한 PassportModule에 세션을 사용하도록 
+설정을 추가한다. 
 
 
   

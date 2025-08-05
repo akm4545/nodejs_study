@@ -8,7 +8,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     // PassportStrategy 믹스인
     constructor(private authService: AuthService) {
         // 기본값이 username이므로 email로 변경해줌
-        super({ usernameField: 'email' });
+        super({ usernameField: 'email' } as any);
     }
 
     // 유저 정보의 유효성 검증
