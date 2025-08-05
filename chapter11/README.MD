@@ -313,7 +313,23 @@ serializeUser()는 세션에 정보를 저장할 때 사용한다. user 정보�
   
 유저 정보가 없으면 매개변수로 받은 done() 메서드에 Error를 전달한다. 세션 정보가 없으면 곧바로 403 에러를 발생시킨다.  
   
-
+# **email, password 인증 로직이 있는 LocalStrategy 파일 작성하기**  
+인증 방법은 다양하다. 다양한 방법을 패키지 하나에 담을 필요는 없기 때문에 패스포트에서는 이를 strategy라는 별개의 패키지로 모두 분리해 담는다. 
+이중 id, password로 인증하는 기능은 passport-local 패키지에서 제공한다.  
+  
+![img.png](image/img12.png)  
+  
+1. NestJS에서는 PassportStrategy(Strategy)를 상속받은 클래스에 인증 로직을 작성한다. eamil, password 인증 로직이 있는 LocalStategy 파일을 
+작성한다.  
+nest-auth-test/src/auth/local.strategy.ts  
+  
+PassportStrategy(Strategy)는 믹스인이라고 불리는 방법이다. 컴포넌트를 재사용할 때 상속을 많이 사용하지만 해달 클래스의 모든 것을 재사용해야 하는 
+불편함이 있다. 클래스의 일부분만 확장하고 싶을 때는 믹스인을 사용한다.  
+  
+믹스인(mixin)/트레잇(trait)은 클래스에 새로운 기능을 추가하기 위해 필요한 메서드를 가지고 있는 작은 클래스들을 결합해 기능을 추가하는 방법을 말한다.  
+  
+local-strategy에는 인증 시 사용하는 필드명이 username, password로 정해져 있다. 우리는 username이 아니라 email, password로 인증하게 되므로 
+usernameField 이름을 email로 바꿔주는 설정을 추가했다. validate() 메서드에서는 전달한 email과 password가 올바른지 검증한다. 
 
 
   
