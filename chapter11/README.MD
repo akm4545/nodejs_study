@@ -294,6 +294,25 @@ local.strategy.ts 파일에 LocalStrategy 클래스를 생성한 후 validate() 
 때 사용한다. 세션에 데이터를 저장하고 돌려주는 응답값에 connect.sid라는 이름의 쿠키를 만들게 된다. 이후의 요청에 해당 쿠키값을 같이 전송하면 세션에 
 있는 값을 읽어서 인증 여부를 확인할 때 사용하는 가드다.  
   
+# **세션에 정보를 저장하고 읽는 세션 시리얼라이저 구현하기**  
+1. 직전에 작성한 request.isAuthenticated() 함수는 세션에서 정보를 읽어온다. 아직은 세션에 정보 저장과 정보 읽기 기능을 구현하지 않았으므로 올바르게 
+동작하지 않는다. 해당 로직을 추가한다.  
+nest-auth-test/src/auth/session.serializer.ts  
+  
+SessionSerializer는 PassportSerializer를 상속받는다. PassportSerializer는 serializeUser(), deserializeUser(), getPassportInstance()를 
+제공한다.  
+  
+- serializeUser(): 세션에 정보를 저장한다.  
+- deserializeUser(): 세션에서 가져온 정보로 유저 정보를 반환한다.  
+- getPassportInstance(): 패스포트 인스턴스를 가져온다. 패스포트 인스턴스의 데이터가 필요한 경우 사용한다.  
+  
+세션에는 유저를 식별하는 데 사용할 최소한의 정보인 email만 저장한다. UserService에서 email로 유저 정보를 가져와야 하므로 UserService를 주입한다. 
+serializeUser()는 세션에 정보를 저장할 때 사용한다. user 정보는 LocalAuthGuard의 canActivate() 메서드에서 super.logIn(request)를 호출할 
+때 내부적으로 request에 있는 user 정보를 꺼내서 전달하면서 serializeUser()를 실행한다. deserializeUser()는 인증이 되었는지 세션에 있는 정보를 
+가지고 검증할 때 사용한다. payload는 세션에서 꺼내온 값이다. serializeUser()에서 email만 저장했기 때문에 해당 정보가 payload로 전달된다.  
+  
+유저 정보가 없으면 매개변수로 받은 done() 메서드에 Error를 전달한다. 세션 정보가 없으면 곧바로 403 에러를 발생시킨다.  
+  
 
 
 
