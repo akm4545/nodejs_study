@@ -47,12 +47,12 @@ export class LoginGuard implements CanActivate {
 // AuthGuard 상속
 export class LocalAuthGuard extends AuthGuard('local') {
     async canActivate(context: any): Promise<boolean> {
+        // 로컬 스트래티지 실행
         const result = (await super.canActivate(context)) as boolean;
 
-        // 로컬 스트래티지 실행
         const request = context.switchToHttp().getRequest();
 
-        // 세션 저장
+        // 세션 저장 - request 객체
         await super.logIn(request);
 
         return result;

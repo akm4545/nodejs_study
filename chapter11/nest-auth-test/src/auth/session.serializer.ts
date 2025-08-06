@@ -16,6 +16,8 @@ export class SessionSerializer extends PassportSerializer {
         done(null, user.email)
     }
 
+    // Nest + Passport가 세션 쿠키를 읽고 →
+    // passport.deserializeUser() 실행 → req.user를 자동으로 설정
     // 세션에서 정보를 꺼내올 때 사용
     async deserializeUser(
         payload: any,

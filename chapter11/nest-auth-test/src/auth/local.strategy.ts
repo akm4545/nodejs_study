@@ -20,6 +20,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
             return null;
         }
 
+        // validate()에서 리턴한 사용자 객체는 request.user에 자동으로 저장됨
         return user;
     }
 }

@@ -340,11 +340,10 @@ PassportModule의 기본 설정은 세션 설정이 false로 되어 있다. { se
 모두 다른 곳에서 사용하는 클래스들이므로 프로바이더로 등록해야 한다. 명시적으로 LocalStrategy와 SessionSerializer를 주입하는 코드가 없지만 사용하려면 
 등록을 해야 한다. 등록하지 않으면 클래스를 찾지 못해서 에러가 나게 된다.  
   
-
-
+# **테스트하기**  
+1. auth.http에 코드를 추가한다.  
+nest-auth-test/src/auth/auth.http  
   
-
+2. 테스트를 수행하기 위해 AuthController에 라우팅 메서드들을 추가한다.  
+nest-auth-test/src/auth/auth.controller.ts  
   
-
-
-
