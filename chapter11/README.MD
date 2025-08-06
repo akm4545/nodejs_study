@@ -333,7 +333,13 @@ usernameField 이름을 email로 바꿔주는 설정을 추가했다. validate()
   
 # **auth.module.ts에 설정 추가하기**  
 1. 만들어둔 LocalStrategy, SessionSerializer를 다른 클래스에서 사용할 수 있게 프로바이더에 등록해준다. 또한 PassportModule에 세션을 사용하도록 
-설정을 추가한다. 
+설정을 추가한다.  
+nest-auth-test/src/auth.module.ts  
+  
+PassportModule의 기본 설정은 세션 설정이 false로 되어 있다. { session: true }를 사용해 세션을 사용할 수 있게 해준다. LocalStrategy와 SessionSerializer 
+모두 다른 곳에서 사용하는 클래스들이므로 프로바이더로 등록해야 한다. 명시적으로 LocalStrategy와 SessionSerializer를 주입하는 코드가 없지만 사용하려면 
+등록을 해야 한다. 등록하지 않으면 클래스를 찾지 못해서 에러가 나게 된다.  
+  
 
 
   
