@@ -347,3 +347,5 @@ nest-auth-test/src/auth/auth.http
 2. 테스트를 수행하기 위해 AuthController에 라우팅 메서드들을 추가한다.  
 nest-auth-test/src/auth/auth.controller.ts  
   
+# **로그인과 세션 저장까지 순서**  
+![img.png](image/img13.png)  
