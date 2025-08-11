@@ -109,3 +109,22 @@ id, name, emails 속성이 있다. id는 프로바이더 ID로서 해당 프로�
 3. Strategy는 프로바이더이므로 등록을 해야 한다. AuthModule에 등록을 해준다.  
 nest-auth-test/src/auth/auth.module.ts  
   
+# **GoogleAuthGuard 만들기**  
+1. auth.guard.ts에 GoogleAuthGuard 클래스를 추가한다.  
+nest-auth-test/src/auth/auth.guard.ts  
+  
+AuthGuard는 @nestjs/passport의 클래스다. passport의 Strategy를 쉽게 사용하기 위한 클래스로 생성자의 매개변수에 사용할 스트래티지를 문자열로 
+넣으면 된다. 이름으로 구분하므로 이름을 잘 넣어주어야 한다. super.canActivate() 메서드에서 GoogleStrategy의 validate() 메서드를 실행한다. 
+실행 결과가 null 혹은 false이면 401 에러가 난다.  
+  
+nestjs에서는 context에서 리퀘스트 객체를 꺼낼 수 있다.  
+  
+![img.png](image/img5.png)  
+  
+클라이언트가 /auth/to-google을 호출하면 구글로 리다이렉트된다. 로그인을 하면 /auth/google이 호출된다. /auth/google 호출 시 GooglaAuthGuard가 
+실행된다. GoogleAuthGuard의 canActivate() 메서드가 실행되며 내부 로직에서 GoogleStrategy를 실행한다. GoogleStrategy의 validate() 메서드에서 
+인증이 문제가 없는 경우 true를 반환한다. GoogleAuthGuard의 canActivate() 메서드에서 SessionSerializer를 실행한다.  
+  
+SessionSerializer는 세션에 유저의 인증 정보를 저장한다. 인증 및 세션 저장이 완료되면 클라이언트에 세션 정보 조회를 위한 쿠키를 포함해 응답을 
+전송한다.  
+  
