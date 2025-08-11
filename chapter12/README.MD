@@ -73,3 +73,15 @@ GoogleStrategy 설정 시 민감한 정보가 들어가므로 NestJS config도 �
   
 ![img.png](image/img4.png)  
   
+# **NestJS 환경 설정 파일 추가하기**  
+1. 의존성 패키지를 설치한다. 다음의 명령어를 입력해 @nestjs/config를 설치한다.  
+npm i @nestjs/config  
+  
+2. 구글 OAuth용 환경 설정 파일을 만들고 값을 설정한다.  
+nest-auth-test/.env  
+  
+3. NestJS config를 활성화하려면 ConfigModule을 설정해야 한다. app.module.ts에 설정을 추가한다.  
+nest-auth-test/src/app.module.ts  
+  
+@nestjs/config를 설정하고 .env 설정 파일을 만들어도 ConfigModule.forRoot()를 임포트하지 않으면 활성화되지 않는다.  
+  

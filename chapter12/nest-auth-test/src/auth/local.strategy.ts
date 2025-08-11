@@ -1,0 +1,26 @@
+import {Injectable} from "@nestjs/common";
+import {PassportStrategy} from "@nestjs/passport";
+import {Strategy} from "passport-local";
+import {AuthService} from "./auth.service";
+
+@Injectable()
+export class LocalStrategy extends PassportStrategy(Strategy) {
+    // PassportStrategy 믹스인
+    constructor(private authService: AuthService) {
+        // 기본값이 username이므로 email로 변경해줌
+        super({ usernameField: 'email' } as any);
+    }
+
+    // 유저 정보의 유효성 검증
+    async validate(email: string, password: string): Promise<any> {
+        const user = await this.authService.validateUser(email, password);
+
+        if(!user){
+            // null이면 401 에러 발생
+            return null;
+        }
+
+        // validate()에서 리턴한 사용자 객체는 request.user에 자동으로 저장됨
+        return user;
+    }
+}
