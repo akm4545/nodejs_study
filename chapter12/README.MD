@@ -85,3 +85,27 @@ nest-auth-test/src/app.module.ts
   
 @nestjs/config를 설정하고 .env 설정 파일을 만들어도 ConfigModule.forRoot()를 임포트하지 않으면 활성화되지 않는다.  
   
+# **구글 OAuth 스트래티지 만들기**  
+구글 OAuth 스트래티지를 만든다. 스트래티지는 구글 OAuth 인증의 핵심 로직을 추가하는 곳이다. 구글에서 인증을 마치고 콜백을 받는 메서드를 작성한다.  
+  
+1. 구글 OAuth 스트래티지를 지원하는 의존성 패키지 passport-google-oauth20을 설치한다.  
+npm i passport-google-oauth20  
+npm i -D @types/passport-google-oauth20  
+  
+2. 다음으로 strategy 클래스를 만든다. src/auth 디렉터리 아래에 google.strategy.ts를 다음과 같이 작성한다.  
+nest-auth-test/src/auth/google.strategy.ts  
+  
+Strategy 클래스는 인증 시에 사용하는 로직을 추가하는 메서드다. 구글 OAuth 인증을 지원하는 클래스는 passport-google-oauth20 패키지에 있다. 
+여기서는 Strategy에 @nestjs/passport의 클래스인 PassportStrategy의 메서드 validate()를 추가할 목적으로 사용했다. PassportStrategy는 
+NestJS에서 패스포트를 사용하는 방법을 일원화하는 데 사용하는 믹스인이다. 인증의 유효성 검증 시 validate() 메서드를 사용할 것이라는 것을 쉽게 유추할 
+수 있다.  
+  
+부모 클래스의 생성자를 호출하여 매개변수로 clientID, clientSecret, callbackURL, scope를 받는다.  
+  
+구글 인증이 끝나고 콜백 URL 에서는 access_token, refresh_token, profile을 받는다. 최초 인증 시 유저 데이터를 데이터베이스에 저장하기 때문에 
+이후에는 구글의 리소스 서버에 인증을 요청하지 않아도 된다. profile은 passport-google-oauth20에 있는 Profile 타입의 인스턴스다. Profile에는 
+id, name, emails 속성이 있다. id는 프로바이더 ID로서 해당 프로바이더 내에서 유일한 값이다.  
+  
+3. Strategy는 프로바이더이므로 등록을 해야 한다. AuthModule에 등록을 해준다.  
+nest-auth-test/src/auth/auth.module.ts  
+  
