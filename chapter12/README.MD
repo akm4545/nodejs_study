@@ -137,3 +137,9 @@ googleAuthRedirect() 메서드는 구글 로그인 성공 시 실행하는 라�
 다음에 googleAuthRedirect() 메서드를 실행한다. googleAuthRedirect() 메서드에서는 request에서 user 정보를 뽑아낸 다음 res.send() 메서드를 실행해 
 화면에 뿌리는 역할을 한다.  
   
+# **테스트하기**  
+1. npm run start:dev를 실행해 서버를 기동한다. 서버가 기동되었으면 브라우저에서 http://localhost:3000/auth/to-google에 접속한다.  
+  
+2. 본인의 계정을 선택해 로그인한다. 로그인 후에는 구글 콘솔에서 입력한 URL인 http://localhost:3000/auth/google로 이동하며 Profile 정보가 나온다.  
+  
+
