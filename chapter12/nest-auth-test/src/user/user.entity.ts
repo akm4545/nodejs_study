@@ -9,7 +9,8 @@ export class User {
     @Column({ unique: true })
     email: string; // email은 유니크한 값
 
-    @Column()
+    // 패스워드 빈 값 허용
+    @Column({ nullable: true })
     password: string;
 
     @Column()
@@ -18,4 +19,9 @@ export class User {
     @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
     // 기본값을 넣어줌
     createDt: Date = new Date();
+    
+    // providerId 빈 값 허용
+    @Column({ nullable: true })
+    // providerId 추가
+    providerId: string;
 }

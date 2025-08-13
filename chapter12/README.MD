@@ -142,4 +142,11 @@ googleAuthRedirect() 메서드는 구글 로그인 성공 시 실행하는 라�
   
 2. 본인의 계정을 선택해 로그인한다. 로그인 후에는 구글 콘솔에서 입력한 URL인 http://localhost:3000/auth/google로 이동하며 Profile 정보가 나온다.  
   
+# **User 엔티티 파일 수정하기**  
+1. user.entity.ts 파일에서는 두 가지 수정을 진행한다. password가 없는 떄도 데이터를 저장하는 기능과 구글 인증 시의 식별자인 providerId를 
+추가한다.  
+nest-auth-test/src/user/user.entity.ts  
+  
+{nullable: true}로 설정하면 빈 값을 허용한다는 뜻이다.  
+  
 
