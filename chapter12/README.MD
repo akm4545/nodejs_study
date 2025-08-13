@@ -149,4 +149,19 @@ nest-auth-test/src/user/user.entity.ts
   
 {nullable: true}로 설정하면 빈 값을 허용한다는 뜻이다.  
   
+# **UserService에 구글 유저 검색 및 저장 메서드 추가하기**  
+1. 구글 OAuth 인증의 정보를 기반으로 회원 가입을 시켜주는 메서드가 필요하다. 동시에 이미 회원 정보가 있다면 회원 정보를 반환하는 메서드도 필요하다. 
+구글은 providerId로 찾지만 우리가 만드는 애플리케이션에서는 이메일이 회원을 구분하는 단위다. 따라서 이메일로 기존 가입 여부를 확인해 가입되어 있으면 
+유저 정보를 반환하고 아니면 회원 정보를 유저 테이블에 저장하는 코드를 작성한다.  
+nest-auth-test/src/user/user.service.ts  
+  
+# **GoogleStrategy에 구글 유저 저장하는 메서드 적용하기**  
+1. GoogleStrategy의 validate() 메서드에서 구글 유저 정보가 있다면 정보를 데이터베이스에서 가져오고 없다면 저장해야 하므로 findByEmailOrSave() 
+메서드를 GoogleStrategy에 적용한다. validate() 메서드에서 profile 정보의 id, name, email을 디비에 저장하도록 User 엔티티에 맞춰서 넘겨준다.  
+nest-auth-test/src/auth/google.strategy.ts
+
+현재 세션에서 유저 정보를 다룰 때 userEntity를 사용한다. OAuth 정보를 담은 User 엔티티를 사용하도록 수정했으므로 이제 세션을 사용할 수 있다.  
+  
+
+  
 

@@ -47,4 +47,25 @@ export class UserService {
     deleteUser(email: any) {
         return this.userRepository.delete({ email });
     }
+    
+    async findByEmailOrSave(email, username, providerId): Promise<User> {
+        // 이메일로 유저를 찾음
+        const foundUser = await this.getUser(email);
+        
+        // 존재하면
+        if(foundUser){
+            // 유저 정보 반환
+            return foundUser;
+        }
+        
+        // 유저 정보 없으면 저장
+        const newUser = await this.userRepository.save({
+            email,
+            username,
+            providerId
+        });
+        
+        // 저장 후 유저 정보 반환
+        return newUser;
+    }
 }
