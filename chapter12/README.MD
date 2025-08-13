@@ -169,6 +169,10 @@ nest-auth-test/src/auth/auth.guard.ts
   
 부모 클래스의 login(request)를 실행한다. 세션 기능이 활성화되어 있다면 SessionSerializer를 실행해 request.user의 값을 세션에 저장한다.  
   
+# **테스트하기**  
+1. http://localhost:3000/auth/to-google로 가서 구글 로그인을 진행한다.  
+2. 세션이 잘 동작하는지 확인하기 위해 http://localhost:3000/auth/test-guard2로 이동한다.  
+  
 
   
 
