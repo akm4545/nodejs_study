@@ -173,6 +173,12 @@ nest-auth-test/src/auth/auth.guard.ts
 1. http://localhost:3000/auth/to-google로 가서 구글 로그인을 진행한다.  
 2. 세션이 잘 동작하는지 확인하기 위해 http://localhost:3000/auth/test-guard2로 이동한다.  
   
+# **학습 마무리**  
+# **용어 설명**  
+1. OAuth는 2006년에 구글과 트위터가 만든 개방형 인가의 표준이다. 소셜 로그인 구현에 많이 사용한다. 1.0, 2.0, 2.1 버전이 있으며 2.0이 가장 많이 
+사용된다.  
+2. providerId는 리소스 소유자, 즉 유저의 자원을 소유한 리소스 서버의 고유한 식별자를 뜻한다.  
+  
 
   
 
