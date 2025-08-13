@@ -162,6 +162,13 @@ nest-auth-test/src/auth/google.strategy.ts
 
 현재 세션에서 유저 정보를 다룰 때 userEntity를 사용한다. OAuth 정보를 담은 User 엔티티를 사용하도록 수정했으므로 이제 세션을 사용할 수 있다.  
   
+# **GoogleAuthGuard에 세션을 사용하도록 변경하기**  
+1. 지금까지 구현한 코드들은 클라이언트에서 HTTP 요청 시마다 구글 OAuth 인증을 해야 한다. 유저의 로그인 상태를 파악하는 쿠키나 세션 같은 장치가 
+없기 떄문이다. 로그인 시에만 구글 OAuth 요청을 하고 그 뒤로는 세션에 저장된 데이터로 인증을 확인하도록 코드를 변경한다.  
+nest-auth-test/src/auth/auth.guard.ts  
+  
+부모 클래스의 login(request)를 실행한다. 세션 기능이 활성화되어 있다면 SessionSerializer를 실행해 request.user의 값을 세션에 저장한다.  
+  
 
   
 
