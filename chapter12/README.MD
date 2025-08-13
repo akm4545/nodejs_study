@@ -128,3 +128,12 @@ nestjs에서는 context에서 리퀘스트 객체를 꺼낼 수 있다.
 SessionSerializer는 세션에 유저의 인증 정보를 저장한다. 인증 및 세션 저장이 완료되면 클라이언트에 세션 정보 조회를 위한 쿠키를 포함해 응답을 
 전송한다.  
   
+# **컨트롤러에 핸들러 메서드 추가하기**  
+1. 스트래티지와 가드를 만들었으면 유저의 요청을 받아줄 컨트롤러의 핸들러 메서드가 필요하다. Auth 컨트롤러에 구글 OAuth 확인(인증)에 사용할 
+핸들러 메서드를 추가한다.  
+nest-auth-test/src/auth/auth.controller.ts  
+  
+googleAuthRedirect() 메서드는 구글 로그인 성공 시 실행하는 라우터 메서드다. GoogleAuthGuard에서 GoogleStrategy의 validate() 메서드를 실행한 
+다음에 googleAuthRedirect() 메서드를 실행한다. googleAuthRedirect() 메서드에서는 request에서 user 정보를 뽑아낸 다음 res.send() 메서드를 실행해 
+화면에 뿌리는 역할을 한다.  
+  

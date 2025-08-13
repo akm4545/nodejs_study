@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Post, Request, Response, UseGuards} from '@nestjs/common';
 import {AuthService} from "./auth.service";
 import {CreateUserDto} from "../user/user.dto";
-import {AuthenticatedGuard, LocalAuthGuard, LoginGuard} from "./auth.guard";
+import {AuthenticatedGuard, GoogleAuthGuard, LocalAuthGuard, LoginGuard} from "./auth.guard";
 
 // 컨트롤러 생성
 @Controller('auth')
@@ -69,5 +69,19 @@ export class AuthController {
     @Get('test-guard2')
     testGuardWithSession(@Request() req) {
         return req.user;
+    }
+
+    // 구글 로그인으로 이동하는 라우터 메서드
+    @Get('to-google')
+    @UseGuards(GoogleAuthGuard)
+    async googleAuth(@Request() req) {}
+
+    // 구글 로그인 후 콜백 실행 후 이동 시 실행되는 라우터 메서드
+    @Get('google')
+    @UseGuards(GoogleAuthGuard)
+    async googleAuthRedirect(@Request() req, @Response() res){
+        const { user } = req;
+
+        return res.send(user);
     }
 }
