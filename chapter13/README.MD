@@ -71,3 +71,27 @@ multer의 옵션은 객체 형태로 만들어준다. 디스크에 파일을 저
   
 로컬에서 빌드 시 dist에 소스가 들어갈 것이므로 최상단의 바로 아래에 디렉터리를 만들어주어야 경로를 찾아가기가 쉽다.  
   
+# **테스트하기**  
+1. npm run start:dev를 실행해 서버를 재시작하고 다시 파일 업로드 테스트를 진행한다.  
+  
+# **정적 파일 서비스하기**  
+1. 한 번 저장되면 변경되지 않는 파일을 정적 파일(static file)이라고 부른다. NestJS에서 정적 파일을 서비스하려면 @nestjs/serve-static을 설치하고 
+설정해야 한다.  
+npm i @nsetjs/serve-static  
+  
+2. 설치한 @nestjs/serve-static에는 ServeStaticModule이 있다. 해당 모듈을 초기화하면 정적 파일 서비스가 가능하다. 초기화 시에는 forRoot() 
+함수를 사용해 초기화하면 된다. app.module.ts에 설정을 추가한다.  
+nest-file-upload/src/app.module.ts  
+  
+ServeStaticModule.forRoot() 함수를 실행하면 정적 파일을 서비스하는 ServeStaticModule이 초기화된다. app.module.ts의 @Module 데코레이터 내의 
+imports 옵션에 추가한다.  
+  
+rootPath 옵션은 업로드한 파일이 저장되어 있는 경로를 설정한다.  
+  
+serveRoot 옵션이 없으면 업로드한 파일에 localhost:3000/{파일명}으로 접근할 수 있다. 이 경우 파일명과 API의 경로가 같다면 문제가 발생할 수 있다. 
+serveRoot 옵션에 경로명을 추가해 localhost:3000/uploads/{파일명}으로 접근하도록 한다.  
+  
+3. file-upload.http에 코드를 추가한다. 테스트를 위해 nest-file-upload/src 디렉터리 아래에 cat.jpg 이미지 파일을 저장한다.  
+nest-file-upload/src/file-upload.http  
+  
+

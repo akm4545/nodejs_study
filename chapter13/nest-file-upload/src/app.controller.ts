@@ -1,6 +1,7 @@
 import {Controller, Get, Post, UploadedFile, UseInterceptors} from '@nestjs/common';
 import { AppService } from './app.service';
 import {FileInterceptor} from "@nestjs/platform-express";
+import {multerOptions} from "./multer.options";
 
 @Controller()
 export class AppController {
@@ -14,7 +15,7 @@ export class AppController {
   // POST 메서드로 localhost:3000/file-upload 호출 시 동작
   @Post('file-upload')
   // 파일 인터셉터
-  @UseInterceptors(FileInterceptor('file', multerOption))
+  @UseInterceptors(FileInterceptor('file', multerOptions))
   // 인터셉터에서 준 파일을 받음
   fileUpload(@UploadedFile() file: Express.Multer.File)
   {
