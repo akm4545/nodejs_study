@@ -47,3 +47,27 @@ nest-file-upload/src/file-upload.http
   
 4. 방금 작성한 http 코드를 실행한다.  
   
+# **업로드한 파일을 특정한 경로에 저장하기**  
+FileInterceptor에는 첫 번째 인수로 폼 필드의 이름을 넣는다. 이전에는 첫 번째 인수만 사용했지만 두 번째 인수에는 어디에 저장할지, 어떤 파일의 형식을 
+허용할지, 파일명은 변경할지, 크기는 얼마까지 혀용할지 등의 옵션을 제공한다. 해당 옵션은 NestJS의 기능은 아니고 multer에서 제공하는 기능이다.  
+  
+![img.png](image/img2.png)  
+  
+1. 디스크에 파일을 저장해야 하므로 storage를 사용해야 한다. storage의 타입에는 디스크에 저장하는 diskStorage()와 메모리에 저장하는 memoryStorage()가 
+있다. 아무것도 설정하지 않은 상태에서는 memoryStorage()를 사용하며 이때 파일 속성은 buffer다. 따라서 메모리가 기본값이다. 디스크를 사용하는 
+diskStorage()를 사용해야 한다. diskStorage()는 buffer 속성을 가지고 있지 않으므로 제거해야 한다. 디스크에 저장하는 옵션을 활성화하고 메모리를 사용하는 
+코드를 핸들러 함수에서 뺀다.  
+nest-file-upload/src/app.controller.ts  
+  
+2. diskStorage()의 옵션으로는 destination(문자열 속성)과 filename(함수)이 있다. destination은 파일이 저장될 장소를 지정하는 것이며 filename은 
+destination에 저장될 때의 파일명을 말한다. 보안을 위해서 파일을 저장할 때는 랜덤한 값으로 변경해 저장하는 것이 좋다. src 디렉터리 아래에 multer.options.ts라는 
+파일을 생성하고 옵션을 설정한다.  
+nest-file-upload/src/multer.options.ts  
+  
+multer의 옵션은 객체 형태로 만들어준다. 디스크에 파일을 저장하도록 diskStorage 타입의 객체를 만든다. 파일의 저장 경로는 최상단 경로의 uploads 디렉터리다. 
+파일명은 randomUUID() 함수로 랜덤한 이름을 지어주고 extname() 함수를 사용해 파일의 확장자를 붙여준다.  
+  
+파일을 업로드할 디렉터리인 uploads를 해당 디렉터리에 생성한다.  
+  
+로컬에서 빌드 시 dist에 소스가 들어갈 것이므로 최상단의 바로 아래에 디렉터리를 만들어주어야 경로를 찾아가기가 쉽다.  
+  
