@@ -66,3 +66,10 @@ Sec-WebSocket-Accept는 클라이언트로부터 받은 키를 사용해 계산�
 # **메아리 애플리케이션 만들기: 웹소켓**  
 클라이언트에서 메시지를 보내면 서버에서 같은 메시지를 반환하는 프로그램이다.  
   
+# **ws 패키지 설치하기**  
+1. ws는 Node.js에서 웹소켓 서버를 구동하는 라이브러리다. 먼저 프로젝트 디렉터리를 생성하고 패키지를 설치한다. echo-websocket 디렉터리를 프로젝트 
+디렉터리로 생성한다.  
+npm install ws  
+  
+echo-websocket 디렉터리 아래에 package.json과 package-lock.json 파일, node_modules 디렉터리가 생성된다.  
+  
