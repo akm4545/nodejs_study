@@ -146,3 +146,12 @@ nest new nest-chat --skip-git
   
 test 디렉터리와 src/app.controller.spec.ts는 사용하지 않으므로 삭제한다.  
   
+# **패키지 설치하기**  
+양방향 통신 애플리케이션을 작성하려면 @nestjs/websockets과 @nestjs/platform-socket.io 패키지가 필요하다. 첫 번째 @nestjs/websockets 패키지는 
+웹소켓 프로토콜 기반의 프로그램 작성 시에는 꼭 필요하다. @nestjs/platform-socket.io는 @nestjs/platform-ws로 변경할 수도 있다. @nestjs/platform-ws를 
+사용하면 socket.io가 아닌 웹소켓을 사용한다. 우리는 socket.io를 사용하므로 @nestjs/platform-socket.io를 설치한다. 또한 개발 시 타입 정보를 편하게 
+가져오기 위해 @types/socket.io도 개발용 패키지로 설치한다.  
+  
+npm i @nestjs/websockets @nestjs/platform-socket.io  
+npm i -D @types/socket.io  
+  
