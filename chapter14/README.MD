@@ -73,3 +73,24 @@ npm install ws
   
 echo-websocket 디렉터리 아래에 package.json과 package-lock.json 파일, node_modules 디렉터리가 생성된다.  
   
+# **서버 측 구축하기: server.js 파일 작성 및 서버 구동**  
+ws 패키지를 설치했으니 이제 웹소켓 서버를 Node.js를 사용해 구동할 수 있다. 웹소켓은 서버와 클라이언트가 양방향으로 통신하는 프로토콜이므로 서버와 
+클라이언트를 모두 작성해야 한다. 서버는 Node.js를, 클라이언트는 웹브라우저를 사용한다.  
+  
+1. 먼저 서버를 구동하기 위해 server.js 파일을 생성하고 다음과 같이 작성한다.  
+echo-websocket/server.js  
+  
+ws의 Server() 함수를 사용해 서버 인스턴스를 생성하고 server 변수에 저장한다. server는 WebSocketServer 클래스의 인스턴스다. 웹소켓 서버(server 변수)의 
+on() 함수는 이벤트를 받는 함수다. 첫 번째 인수로 이벤트 유형을 받는다. connection은 클라이언트가 접속 시 발생하는 이벤트다. 두 번째 인수로 
+이벤트 발생 시 실행할 콜백 함수를 인수로 설정한다. 콜백 함수의 인수로 ws를 받는데 WebSocket 클래스의 인스턴스다.  
+  
+![img.png](image/img10.png)  
+  
+ws.on() 함수는 클라이언트에서 이벤트가 발생할 때 실행하는 함수다. WebSocketServer의 on() 함수처럼 첫 번째는 이벤트 타입, 두 번째는 콜백 함수를 
+인수로 사용한다. ws.on('message')는 클라이언트로부터 메시지가 서버로 발송되었을 때 실행한다.  
+  
+![img.png](image/img11.png)  
+  
+ws.on('close', 콜백 함수)는 클라이언트가 접속을 종료했을 때 실행한다.  
+  
+
