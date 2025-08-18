@@ -48,6 +48,18 @@ nest-file-upload/src/file-upload.http
 4. 방금 작성한 http 코드를 실행한다.  
   
 # **업로드한 파일을 특정한 경로에 저장하기**  
+FileInterceptor에는 첫 번째 인수로 폼 필드의 이름을 넣는다. 두 번째 인수에는 어디에 저장할지, 어떤 파일의 형식을 허용할지, 파일명은 변경할지, 
+크기는 얼마까지 허용할지 등의 옵션을 제공한다. 해당 옵션은 NestJS의 기능은 아니고 multer에서 제공하는 기능이다.  
+  
+![img.png](image/img2.png)  
+  
+1. 디스크에 파일을 저장해야 하므로 storage를 사용해야 한다. storage의 타입에는 디스크에 저장하는 diskStorage()와 메모리에 저장하는 memoryStorage()가 
+있다. 아무것도 설정하지 않은 상태에서는 memoryStorage()를 사용하며 이떄 파일 속성은 buffer다. 따라서 메모리가 기본값이다. 디스크를 사용하는 
+diskStorage()를 사용해야 한다. diskStorage()는 buffer 속성을 가지고 있지 않으므로 제거해야 한다. 디스크에 저장하는 옵션을 활성화하고 메모리를 
+사용하는 코드를 핸들러 함수에서 빼둔다.  
+nest-file-upload-src/app.controller.ts  
+  
+# **업로드한 파일을 특정한 경로에 저장하기**  
 FileInterceptor에는 첫 번째 인수로 폼 필드의 이름을 넣는다. 이전에는 첫 번째 인수만 사용했지만 두 번째 인수에는 어디에 저장할지, 어떤 파일의 형식을 
 허용할지, 파일명은 변경할지, 크기는 얼마까지 혀용할지 등의 옵션을 제공한다. 해당 옵션은 NestJS의 기능은 아니고 multer에서 제공하는 기능이다.  
   
@@ -94,4 +106,23 @@ serveRoot 옵션에 경로명을 추가해 localhost:3000/uploads/{파일명}으
 3. file-upload.http에 코드를 추가한다. 테스트를 위해 nest-file-upload/src 디렉터리 아래에 cat.jpg 이미지 파일을 저장한다.  
 nest-file-upload/src/file-upload.http  
   
-
+# **HTML 폼으로 업로드하기**  
+NestJS에서 HTML 파일을 볼 수 있게 하려면 스태틱 에셋 설정이 필요하다. main.ts 파일을 수정해 정적 파일을 서비스할 수 있게 한다. HTML 파일을 
+생성 후 컨트롤러를 수정한 다음 테스트를 진행한다.  
+  
+1. main.ts 파일은 다음과 같이 수정한다.  
+nest-file-upload/src/main.ts  
+  
+useStaticAssets()에 경로만 지정해주면 NestJS에서 정적 파일 서비스가 가능하다. useStaticAssets() 미들웨어는 익스프레스에 있기 떄문에 NestExpressApplication 
+타입으로 app 인스턴스를 생성한다. 익스프레스의 미들웨어를 사용하려면 app 인스턴스를 만들 때 제네릭 타입으로 NestExpressApplication을 선언해 주어야 
+한다. nest-file-upload 바로 아래에 static 디렉터리에 정적 파일을 위치시키면 된다.  
+  
+2. static 디렉터리를 생성한다.  
+  
+3. HTML 파일을 만들고 코드를 작성한다.  
+nest-file-upload/static/form.html  
+  
+4. 다음으로 컨트롤러를 조금만 수정한다.  
+nest-file-upload/src/app.controller.ts  
+  
+5. 서버를 재기동하고 테스트를 진행한다.
