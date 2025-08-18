@@ -125,4 +125,13 @@ nest-file-upload/static/form.html
 4. 다음으로 컨트롤러를 조금만 수정한다.  
 nest-file-upload/src/app.controller.ts  
   
-5. 서버를 재기동하고 테스트를 진행한다.
+5. 서버를 재기동하고 테스트를 진행한다.  
+  
+# **학습 마무리**  
+# **핵심 용어 설명**  
+1. multer는 파일 업로드에 사용되는 multipart/form-data를 다루는 Node.js 라이브러리다.  
+2. 인터셉터는 클라이언트와 서버 사이의 통신에 로직을 추가할 수 있는 미들웨어다.  
+3. Content-Disposition은 multipart/form-data로 데이터를 전송할 때 각 하위 부분에 대한 정보를 제공하는 헤더값이다. 본문에서는 필드명과 파일 
+이름을 사용했다.  
+  
+
