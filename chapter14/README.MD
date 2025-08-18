@@ -155,3 +155,18 @@ test 디렉터리와 src/app.controller.spec.ts는 사용하지 않으므로 삭
 npm i @nestjs/websockets @nestjs/platform-socket.io  
 npm i -D @types/socket.io  
   
+# **html 파일을 불러오도록 main.ts 설정하기**  
+프레임워크를 사용하지 않았을 때는 .html 파일을 직접 열어서 테스트했다. NestJS에서는 정적 파일을 불러오는 기능을 제공한다. 이전에는 server-static 패키지를 
+설치했지만 이번에는 익스프레스를 사용해서 정적 파일을 서비스할 수 있게 설정을 추가한다. 설정이 간단할 때는 익스프레스, 정밀한 설정을 원할 때는 server-static을 
+사용하면 된다.  
+nest-chat/src/main.ts  
+  
+NestFactory.create() 메서드에 NestExpressApplication으로 반환값의 타입을 지정했다. NestExpressApplication에는 useStaticAssets() 
+메서드가 있다. 해당 메서드는 정적 파일의 경로를 지정하는 데 사용한다.  
+  
+useStaticAssets()에 정적 파일의 경로를 지정한다.  
+  
+다음으로 static 디렉터리 아래에 index.html 파일을 생성한다. index.html로 하면 URL 경로와 파일명을 모두 적지 않고 경로만 적어도 index.html을 
+불러오기 떄문에 테스트가 편하다. 잘 불러오는지만 테스트하는 용도이므로 간단히 코드를 작성한다.  
+nest-chat/static/index.html  
+  
