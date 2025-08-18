@@ -170,3 +170,35 @@ useStaticAssets()에 정적 파일의 경로를 지정한다.
 불러오기 떄문에 테스트가 편하다. 잘 불러오는지만 테스트하는 용도이므로 간단히 코드를 작성한다.  
 nest-chat/static/index.html  
   
+# **서버 측 작업을 위한 게이트웨이 만들기**  
+NestJS에서는 웹소켓을 사용한 통신을 받아주는 클래스를 게이트웨이라고 부른다. 컨트롤러 클래스와 같은 개념이라고 생각하면 된다. 게이트웨이를 사용하면 
+의존성 주입, 데코레이터, 필터, 가드 등의 NestJS 기능을 사용할 수 있다. 단순하게 말하자면 프로토콜이 HTTP라면 컨트롤러로부터 요청을 받고 프로토콜이 
+ws라면 게이트웨이로부터 요청을 받는 차이다. 진입점이 다르고 사용하는 데코레이터가 약간 달라진다.  
+  
+![img.png](image/img12.png)  
+  
+게이트웨이를 만드는 방법은 쉽다. @WebSocketGateway() 데코레이터를 클래스에 붙이면 해당 클래스는 게이트웨이 역할을 한다. nest-cli 명령어로 만들 
+수 있지만 불필요한 디렉터리가 생성된다. 그러므로 수동으로 작성한다.  
+cli -> nest g gateway chat -> src/chat/chat.gateway.ts  
+  
+게이트웨이 파일을 다음과 같이 작성한다.  
+nest-chat/src/app.gateway.ts  
+  
+@WebSocketGateway() 데코레이터는 게이트웨이 설정을 위한 데코레이터다. 내부적으로는 socket.io 서버를 생성하는 것과 같고 생성 시의 옵션도 동일하게 
+줄 수 있다. socket.io 서버 옵션 중 자주 사용하는 옵션은 네임스페이스(namespace)가 있다. 다른 옵션들은 저수준의 옵션이 많으니 크게 사용할 일이 
+많지는 않다.  
+  
+![img.png](image/img13.png)  
+  
+@WebSocketServer()는 웹소켓 서버 인스턴스에 접근하는 데코레이터다. 직접 웹소켓 서버의 인스턴스를 생성하는 것이 아니기에 웹소켓 인스턴스 접근은 
+@WebSocketServer() 데코레이터를 사용해야 한다.  
+  
+@SubscribeMessage('message')는 'message'라는 이벤트를 구독하는 리스너다. 클라이언트에서 message라는 이벤트로 데이터가 전송되는 경우 data 인수에 
+데이터가 담겨 있다. socket: Socket은 하나의 웹소켓 연결에 대한 인스턴스다. @SubcribeMessage() 데코레이터가 붙어 있는 메서드는 socket과 data 
+두 가지 인수를 사용할 수 있는데 필요 없는 떄는 생략할 수 있다. 다만 생략하면 매개변수의 순서를 변경할 때 별도의 데코레이터를 붙여주어야 한다. 
+data는 @MessageBody() 데코레이터가 필요하며 socket에는 @ConnectedSocket() 데코레이터가 필요하다. socket이 필요 없는 함수라면 handleMessage(@MessageBody() data)와 
+같은 형태로 사용할 수 있다.  
+  
+웹소켓 서버 인스턴스의 emit() 메서드를 사용해 클라이언트 전체에 메시지를 보낸다. 첫 번쨰 인수인 message는 이벤트명, 두 번째 인수는 보내주는 
+데이터다. socket.io에서는 모든 클라이언트 인스턴스에 임의의 id 값을 준다. id에는 무작위 문자열이 저장되어 있다.  
+  
