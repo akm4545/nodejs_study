@@ -2,7 +2,8 @@ import {SubscribeMessage, WebSocketGateway, WebSocketServer} from "@nestjs/webso
 import { Server, Socket } from 'socket.io';
 
 // 웹소켓 서버 설정 데코레이터
-@WebSocketGateway()
+// 네임스페이스 추가
+@WebSocketGateway({ namespace: 'chat'})
 export class ChatGateway {
     // 웹소켓 서버 인스턴스 선언
     @WebSocketServer() server: Server;
