@@ -28,5 +28,10 @@
         socket.on('connect', () => {
             console.log('connected');
         });
+
+        // 서버에서 message 이벤트 발생 시 처리
+        socket.on('message', (message) => {
+           $('#chat').append(`<div>${message}</div>`);
+        });
     </script>
 </html>

@@ -214,4 +214,12 @@ nest-chat/src/app.module.ts
 다음과 같이 수정한다.  
 nest-chat/static/index.html  
   
+emit 함수를 실행하면 message 이벤트로 설정해 놓은 이벤트에 message 값을 실어서 보낸다. emit() 함수는 특정 이벤트로 데이터를 보내는 데 사용한다. 
+socket.on() 함수로 데이터를 받는다. connect는 socket.io에서 제공하는 이벤트다. 최초로 서버 접속이 성공했을 때 실행된다.  
+  
+# **테스트하기**  
+1. npm run start:dev로 서버를 기동시키고 브라우저 3개를 켜서 모두 http://localhost:3000에 접속한다.  
+  
+2. 3개의 브라우저에서 각각 입력 메시지를 적어 전송 버튼을 누른다. 채팅이 잘되면 성공이다.  
+  
 
