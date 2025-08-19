@@ -11,7 +11,11 @@ export class ChatGateway {
     // message 이벤트 구독
     @SubscribeMessage('message')
     handleMessage(socket: Socket, data: any): void {
+        // 메시지이ㅘ 닉네임을 데이터에서 추출
+        const { message, nickname } = data;
+        
         // 접속한 클라이언트들에 메시지 전송
-        this.server.emit('message', `client-${socket.id.substring(0, 4)} : ${data}` as any,);
+        // 닉네임을 포함한 메시지 전송
+        socket.broadcast.emit('message', `${nickname}: ${message}` as any,);
     }
 }
