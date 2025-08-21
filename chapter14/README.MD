@@ -263,6 +263,29 @@ socket.broadcast.emit() 함수를 사용하면 전송을 요청한 클라이언�
 이후 같은 방식으로 테스트를 진행한다.  
   
 # **채팅방 생성하기**  
-socket.io의 room 기능을 사용해 채팅방을 구현할 수 있다.  
+socket.io의 room 기능을 사용해 채팅방을 구현할 수 있다. 채팅방 생성 및 입장 기능을 만든다.  
+  
+1. index.html을 수정한다. 채팅방 목록을 보여주는 기능과 채팅방 추가 기능을 구현한다. 채팅방 추가 버튼을 클릭하면 동작하는 함수는 script.js에 
+작성한다.  
+nest-chat/static/index.html  
+  
+2. createRoom() 함수는 script.js에 추가한다.  
+nest-chat/static/script.js  
+  
+room이라는 채팅방용 네임스페이스를 하나 더 만들어서 채팅방용 이벤트만 처리하는 용도로 사용한다. 서버 측에서는 게이트웨이 클래스를 하나 더 추가해야 
+한다. 채팅방 생성 버튼 클릭 시 방 이름과 nickname을 createRoom 이벤트로 보내준다. roomSocket.on("rooms")는 서버에서 createRoom 이벤트 처리 후 다시 
+클라이언트로 데이터를 송신할 때 해당 데이터를 받아주는 이벤트 핸들러다.  
+  
+3. 게이트웨이 추가 및 추가한 게이트웨이를 프로바이더로 모듈에 등록한다.  
+nest-chat/src/app.gateway.ts  
+  
+room 이라는 네임스페이스를 사용하는 RoomGateway 클래스를 새로 추가한다. @WebSocketServer() 데코레이터는 서버 인스턴스 접근을 위해 사용한다. 
+server 변수를 통해 socket.io 서버 인스턴스에 접근해 서버의 메서드를 사용할 수 있다. createRoom 이벤트를 처리하는 핸들러 메서드는 소켓을 따로 
+사용하지 않으므로 data만 있다. 그러므로 @MessageBody() 데코레이터가 필요하다.  
+  
+게이트웨이를 프로바이더로 등록  
+src/app.module.ts  
+  
+
   
 
