@@ -4,6 +4,9 @@ const socket = io('http://localhost:3000/chat');
 // 채팅방용 네임스페이스 생성
 const roomSocket = io('http://localhost:3000/room');
 
+// 채팅방 조깃값
+let currentRoom = '';
+
 // 닉네임 입력하기
 const nickname = prompt('닉네임을 입력해주세요.');
 
@@ -33,6 +36,11 @@ function createRoom() {
     roomSocket.emit('createRoom', { room, nickname });
 }
 
+// notice 이벤트를 받아서 처리
+socket.on('notice', (data) => {
+    $('#notice').append(`<div>${data.message}</div>`);
+});
+
 // 클라이언트 측에서 채팅방 추가하는 함수
 roomSocket.on("rooms", (data) => {
     console.log(data);
@@ -43,4 +51,12 @@ roomSocket.on("rooms", (data) => {
     data.forEach((room) => {
         $('#rooms').append(`<li>${room} <button onclick="joinRoom(`${room}`)">join</button><li>`);
     });
-}) ;
+});
+
+// 방에 들어갈 떄 기존에 있던 방에서는 나가기
+function joinRoom(room) {
+    // 서버 측의 joinRoom 이벤트를 발생시킴
+    roomSocket.emit('joinRoom', { room, nickname, toLeaveRoom: currentRoom });
+    // 현재 들어 있는 방의 값을 변경
+    currentRoom = room;
+}
