@@ -305,4 +305,7 @@ ChatGateway를 RoomGateway에 의존성을 주입해 사용할 수 있게 했다
 handleJoinRoom() 메서드는 joinRoom 이벤트를 처리하는 이벤트 핸들러 메서드다. 기존의 방에서 나가야만 다른 방에 입장이 가능하므로 다른 방에 입장 시 
 먼저 나가는 함수를 실행한다. 채팅방에 입장하는 법은 socket.join(채팅방)을 사용하면 되며 나가는 방법은 socket.leave(채팅방)을 사용하면 된다.
   
-
+# **채팅방에서 대화 나누기 구현하기**  
+1. 전송 버튼 클릭 시에 채팅방으로 메시지가 가도록 script.js 파일과 RoomGateway에 핸들러 함수를 추가해야 한다.  
+nest-chat/static/sciprt.js  
+  
