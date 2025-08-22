@@ -12,12 +12,21 @@ const nickname = prompt('닉네임을 입력해주세요.');
 
 // 전송 버튼 클릭 시 입력된 글을 message 이벤트로 보냄
 function sendMessage() {
+    // 선택된 방이 없으면 에러
+    if(currentRoom === '') {
+        alert('방을 선택해주세요.');
+        return;
+    }
+
     const message = $('#message').val();
+    const data = { message, nickname, room: currentRoom };
     // 내가 보낸 메시지 바로 추가
     $('#chat').append(`<div>나 : ${message}</div>`);
     // 메시지 보낼 때 닉네임 같이 전송
-    socket.emit('message', { message, nickname });
-    
+    // RoomGateway로 메시지를 보내기
+    roomSocket.emit('message', data);
+
+    return false;
 }
 
 // 서버 접속 확인을 위한 이벤트
@@ -41,6 +50,12 @@ socket.on('notice', (data) => {
     $('#notice').append(`<div>${data.message}</div>`);
 });
 
+// 채팅방 내에서 대화를 나눌 때 사용하는 이벤트
+roomSocket.on('message', (data) => {
+    console.log(data);
+    $('#chat').append(`<div>${data.message}</div>`);
+});
+
 // 클라이언트 측에서 채팅방 추가하는 함수
 roomSocket.on("rooms", (data) => {
     console.log(data);
@@ -57,6 +72,8 @@ roomSocket.on("rooms", (data) => {
 function joinRoom(room) {
     // 서버 측의 joinRoom 이벤트를 발생시킴
     roomSocket.emit('joinRoom', { room, nickname, toLeaveRoom: currentRoom });
+    // 채팅방 이동 시 기존 메시지 삭제
+    $('#chat').html('');
     // 현재 들어 있는 방의 값을 변경
     currentRoom = room;
 }
